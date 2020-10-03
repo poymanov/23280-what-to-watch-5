@@ -42,6 +42,10 @@ const Settings = {
 };
 
 ReactDOM.render(
-    <App promoMovie={Settings.promoMovie} genres={Settings.genres} movies={Settings.movies} />,
+    <App
+      promoMovie={Settings.promoMovie}
+      genres={Settings.genres}
+      movies={Settings.movies}
+    />,
     document.querySelector(`#root`)
 );

@@ -8,7 +8,7 @@ const Main = (props) => {
     <Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src={promoMovie.preview} alt={promoMovie.title} />
+          <img src={promoMovie.preview} alt={promoMovie.title}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -69,11 +69,11 @@ const Main = (props) => {
             <li className="catalog__genres-item catalog__genres-item--active">
               <a href="#" className="catalog__genres-link">All genres</a>
             </li>
-            {genres.map((genre) => {
-              return (<li key={genre.id} className="catalog__genres-item">
+            {genres.map((genre) => (
+              <li key={genre.id} className="catalog__genres-item">
                 <a href="#" className="catalog__genres-link">{genre.title}</a>
-              </li>);
-            })}
+              </li>)
+            )}
           </ul>
 
           <div className="catalog__movies-list">
