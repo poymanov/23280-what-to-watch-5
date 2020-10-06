@@ -39,6 +39,23 @@ const Settings = {
     {id: 19, title: `Mindhunter`, image: `img/mindhunter.jpg`},
     {id: 20, title: `Midnight Special`, image: `img/midnight-special.jpg`},
   ],
+  relatedMovies: [
+    {id: 1, title: `Fantastic Beasts: The Crimes of Grindelwald`, image: `/img/fantastic-beasts-the-crimes-of-grindelwald.jpg`},
+    {id: 2, title: `Bohemian Rhapsody`, image: `/img/bohemian-rhapsody.jpg`},
+    {id: 3, title: `Macbeth`, image: `/img/macbeth.jpg`},
+    {id: 4, title: `Aviator`, image: `/img/aviator.jpg`},
+  ],
+  userMovies: [
+    {id: 1, title: `Fantastic Beasts: The Crimes of Grindelwald`, image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`},
+    {id: 2, title: `Bohemian Rhapsody`, image: `img/bohemian-rhapsody.jpg`},
+    {id: 3, title: `Macbeth`, image: `img/macbeth.jpg`},
+    {id: 4, title: `Aviator`, image: `img/aviator.jpg`},
+    {id: 5, title: `We need to talk about Kevin`, image: `img/we-need-to-talk-about-kevin.jpg`},
+    {id: 6, title: `What We Do in the Shadows`, image: `img/what-we-do-in-the-shadows.jpg`},
+    {id: 7, title: `Revenant`, image: `img/revenant.jpg`},
+    {id: 8, title: `Johnny English`, image: `img/johnny-english.jpg`},
+    {id: 9, title: `Shutter Island`, image: `img/shutter-island.jpg`},
+  ],
 };
 
 ReactDOM.render(
@@ -46,6 +63,8 @@ ReactDOM.render(
       promoMovie={Settings.promoMovie}
       genres={Settings.genres}
       movies={Settings.movies}
+      relatedMovies={Settings.relatedMovies}
+      userMovies={Settings.userMovies}
     />,
     document.querySelector(`#root`)
 );

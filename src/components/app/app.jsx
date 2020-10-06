@@ -9,22 +9,26 @@ import AddReview from "../addReview/addReview";
 import Player from "../player/player";
 
 const App = (props) => {
-  const {promoMovie, genres, movies} = props;
+  const {promoMovie, genres, movies, relatedMovies, userMovies} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <Main promoMovie={promoMovie} genres={genres} movies={movies} />
+          <Main
+            promoMovie={promoMovie}
+            genres={genres}
+            movies={movies}
+          />
         </Route>
         <Route path="/login" exact>
           <SignIn />
         </Route>
         <Route path="/mylist" exact>
-          <MyList />
+          <MyList userMovies={userMovies} />
         </Route>
         <Route path="/films/:id" exact>
-          <Film />
+          <Film relatedMovies={relatedMovies} />
         </Route>
         <Route path="/films/:id/review" exact>
           <AddReview />
@@ -57,7 +61,21 @@ App.propTypes = {
         title: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired
       })
-  ).isRequired
+  ).isRequired,
+  relatedMovies: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired
+      })
+  ).isRequired,
+  userMovies: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired
+      })
+  ).isRequired,
 };
 
 export default App;
