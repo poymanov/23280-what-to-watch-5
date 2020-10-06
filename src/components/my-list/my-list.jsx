@@ -1,6 +1,7 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
+import MovieList from "../movie-list/movie-list";
+import MovieTypes from "../../types/movies";
 
 const MyList = (props) => {
   const {userMovies} = props;
@@ -26,21 +27,7 @@ const MyList = (props) => {
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-        <div className="catalog__movies-list">
-          {userMovies.map((movie) => {
-            return (
-              <article key={movie.id} className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src={movie.image} alt={movie.title} width="280" height="175"/>
-                </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href={movie.image}>{movie.title}</a>
-                </h3>
-              </article>
-            );
-          })}
-        </div>
+        <MovieList movies={userMovies} />
       </section>
 
       <footer className="page-footer">
@@ -61,13 +48,7 @@ const MyList = (props) => {
 };
 
 MyList.propTypes = {
-  userMovies: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired
-      })
-  ).isRequired,
+  userMovies: MovieTypes.movieList,
 };
 
 export default MyList;

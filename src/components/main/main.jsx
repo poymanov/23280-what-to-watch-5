@@ -1,5 +1,7 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
+import MovieList from "../movie-list/movie-list";
+import MovieTypes from "../../types/movies";
 
 const Main = (props) => {
   const {promoMovie, genres, movies} = props;
@@ -75,22 +77,7 @@ const Main = (props) => {
               </li>)
             )}
           </ul>
-
-          <div className="catalog__movies-list">
-            {movies.map((movie) => {
-              return (
-                <article key={movie.id} className="small-movie-card catalog__movies-card">
-                  <div className="small-movie-card__image">
-                    <img src={movie.image} alt={movie.title} width="280" height="175"/>
-                  </div>
-                  <h3 className="small-movie-card__title">
-                    <a className="small-movie-card__link" href={movie.image}>{movie.title}</a>
-                  </h3>
-                </article>
-              );
-            })}
-          </div>
-
+          <MovieList movies={movies} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
@@ -115,26 +102,14 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  promoMovie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired
-  }).isRequired,
+  promoMovie: MovieTypes.promoMovie,
   genres: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired
       })
   ).isRequired,
-  movies: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired
-      })
-  ).isRequired
+  movies: MovieTypes.movieList
 };
 
 export default Main;

@@ -7,6 +7,7 @@ import MyList from "../my-list/my-list";
 import Film from "../film/film";
 import AddReview from "../add-review/add-review";
 import Player from "../player/player";
+import MovieTypes from "../../types/movies";
 
 const App = (props) => {
   const {promoMovie, genres, movies, relatedMovies, userMovies} = props;
@@ -42,40 +43,16 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  promoMovie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired
-  }).isRequired,
+  promoMovie: MovieTypes.promoMovie,
   genres: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired
       })
   ).isRequired,
-  movies: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired
-      })
-  ).isRequired,
-  relatedMovies: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired
-      })
-  ).isRequired,
-  userMovies: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired
-      })
-  ).isRequired,
+  movies: MovieTypes.movieList,
+  relatedMovies: MovieTypes.movieList,
+  userMovies: MovieTypes.movieList,
 };
 
 export default App;
