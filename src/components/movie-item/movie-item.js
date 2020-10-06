@@ -1,6 +1,7 @@
 import React from "react";
 import MovieTypes from "../../types/movies";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const MovieItem = (props) => {
   const {movie, onMovieHover, onMovieLeave} = props;
@@ -10,7 +11,7 @@ const MovieItem = (props) => {
         <img src={movie.image} alt={movie.title} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href={movie.image}>{movie.title}</a>
+        <Link to={`/films/` + movie.id} className="small-movie-card__link">{movie.title}</Link>
       </h3>
     </article>
   );

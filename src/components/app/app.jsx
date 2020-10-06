@@ -15,22 +15,26 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact>
+        <Route path="/" exact render={({history}) => (
           <Main
             promoMovie={promoMovie}
             genres={genres}
             movies={movies}
+            onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)}
           />
-        </Route>
+        )} />
         <Route path="/login" exact>
           <SignIn />
         </Route>
         <Route path="/my-list" exact>
           <MyList userMovies={userMovies} />
         </Route>
-        <Route path="/films/:id" exact>
-          <Film relatedMovies={relatedMovies} />
-        </Route>
+        <Route path="/films/:id" exact render={({history}) => (
+          <Film
+            relatedMovies={relatedMovies}
+            onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)}
+          />
+        )} />
         <Route path="/films/:id/review" exact>
           <AddReview />
         </Route>

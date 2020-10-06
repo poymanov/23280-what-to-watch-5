@@ -3,9 +3,11 @@ import MovieList from "../movie-list/movie-list";
 import MovieTypes from "../../types/movies";
 import GenreTypes from "../../types/genres";
 import GenreList from "../genre-list/genre-list";
+import Header from "../header/header";
+import PropTypes from 'prop-types';
 
 const Main = (props) => {
-  const {promoMovie, genres, movies} = props;
+  const {promoMovie, genres, movies, onPlayButtonClick} = props;
 
   return (
     <Fragment>
@@ -16,21 +18,7 @@ const Main = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
-          </div>
-        </header>
+        <Header />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -46,7 +34,7 @@ const Main = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button" onClick={() => onPlayButtonClick(1)}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use href="#play-s" />
                   </svg>
@@ -97,7 +85,8 @@ const Main = (props) => {
 Main.propTypes = {
   promoMovie: MovieTypes.promoItem,
   genres: GenreTypes.list,
-  movies: MovieTypes.list
+  movies: MovieTypes.list,
+  onPlayButtonClick: PropTypes.func.isRequired
 };
 
 export default Main;

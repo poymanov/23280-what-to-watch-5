@@ -1,10 +1,12 @@
 import React, {Fragment} from "react";
-import {Link} from "react-router-dom";
 import MovieList from "../movie-list/movie-list";
 import MovieTypes from "../../types/movies";
+import Header from "../header/header";
+import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Film = (props) => {
-  const {relatedMovies} = props;
+  const {relatedMovies, onPlayButtonClick} = props;
   return (
     <Fragment>
       <section className="movie-card movie-card--full">
@@ -15,21 +17,7 @@ const Film = (props) => {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <header className="page-header movie-card__head">
-            <div className="logo">
-              <Link to='/' className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </Link>
-            </div>
-
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </div>
-          </header>
+          <Header />
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -40,7 +28,7 @@ const Film = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button" onClick={() => onPlayButtonClick(1)}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use href="#play-s" />
                   </svg>
@@ -52,7 +40,7 @@ const Film = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                <Link to="/films/1/review" className="btn movie-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -127,6 +115,7 @@ const Film = (props) => {
 
 Film.propTypes = {
   relatedMovies: MovieTypes.list,
+  onPlayButtonClick: PropTypes.func.isRequired
 };
 
 export default Film;
