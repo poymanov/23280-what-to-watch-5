@@ -1,7 +1,8 @@
 import React, {Fragment} from "react";
-import PropTypes from "prop-types";
 import MovieList from "../movie-list/movie-list";
 import MovieTypes from "../../types/movies";
+import GenreTypes from "../../types/genres";
+import GenreList from "../genre-list/genre-list";
 
 const Main = (props) => {
   const {promoMovie, genres, movies} = props;
@@ -67,16 +68,8 @@ const Main = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            {genres.map((genre) => (
-              <li key={genre.id} className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">{genre.title}</a>
-              </li>)
-            )}
-          </ul>
+          <GenreList genres={genres}/>
+
           <MovieList movies={movies} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -103,12 +96,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   promoMovie: MovieTypes.promoMovie,
-  genres: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired
-      })
-  ).isRequired,
+  genres: GenreTypes.list,
   movies: MovieTypes.movieList
 };
 
