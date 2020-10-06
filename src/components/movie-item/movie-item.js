@@ -17,7 +17,7 @@ const MovieItem = (props) => {
 };
 
 MovieItem.propTypes = {
-  movie: MovieTypes.movie,
+  movie: MovieTypes.item,
   onMovieHover: PropTypes.func.isRequired,
   onMovieLeave: PropTypes.func.isRequired,
 };

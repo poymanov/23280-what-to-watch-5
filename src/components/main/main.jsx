@@ -95,9 +95,9 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  promoMovie: MovieTypes.promoMovie,
+  promoMovie: MovieTypes.promoItem,
   genres: GenreTypes.list,
-  movies: MovieTypes.movieList
+  movies: MovieTypes.list
 };
 
 export default Main;

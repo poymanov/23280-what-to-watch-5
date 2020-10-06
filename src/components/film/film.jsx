@@ -126,7 +126,7 @@ const Film = (props) => {
 };
 
 Film.propTypes = {
-  relatedMovies: MovieTypes.movieList,
+  relatedMovies: MovieTypes.list,
 };
 
 export default Film;

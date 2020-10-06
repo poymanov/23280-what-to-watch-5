@@ -33,7 +33,7 @@ class MovieList extends PureComponent {
 }
 
 MovieList.propTypes = {
-  movies: MovieTypes.movieList
+  movies: MovieTypes.list
 };
 
 export default MovieList;

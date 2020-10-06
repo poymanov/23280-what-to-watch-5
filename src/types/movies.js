@@ -15,9 +15,9 @@ const promoMovie = PropTypes.shape({
 }).isRequired;
 
 const MovieTypes = {
-  movie,
-  promoMovie,
-  movieList: PropTypes.arrayOf(movie).isRequired
+  item: movie,
+  promoItem: promoMovie,
+  list: PropTypes.arrayOf(movie).isRequired
 };
 
 export default MovieTypes;

@@ -43,16 +43,16 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  promoMovie: MovieTypes.promoMovie,
+  promoMovie: MovieTypes.promoItem,
   genres: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired
       })
   ).isRequired,
-  movies: MovieTypes.movieList,
-  relatedMovies: MovieTypes.movieList,
-  userMovies: MovieTypes.movieList,
+  movies: MovieTypes.list,
+  relatedMovies: MovieTypes.list,
+  userMovies: MovieTypes.list,
 };
 
 export default App;

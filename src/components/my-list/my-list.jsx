@@ -48,7 +48,7 @@ const MyList = (props) => {
 };
 
 MyList.propTypes = {
-  userMovies: MovieTypes.movieList,
+  userMovies: MovieTypes.list,
 };
 
 export default MyList;
