@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Main from "../main/main";
-import SignIn from "../signIn/signIn";
-import MyList from "../myList/myList";
+import SignIn from "../sign-in/sign-in";
+import MyList from "../my-list/my-list";
 import Film from "../film/film";
-import AddReview from "../addReview/addReview";
+import AddReview from "../add-review/add-review";
 import Player from "../player/player";
 
 const App = (props) => {
@@ -24,7 +24,7 @@ const App = (props) => {
         <Route path="/login" exact>
           <SignIn />
         </Route>
-        <Route path="/mylist" exact>
+        <Route path="/my-list" exact>
           <MyList userMovies={userMovies} />
         </Route>
         <Route path="/films/:id" exact>
