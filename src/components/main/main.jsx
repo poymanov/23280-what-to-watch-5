@@ -1,8 +1,13 @@
 import React, {Fragment} from "react";
-import PropTypes from "prop-types";
+import MovieList from "../movie-list/movie-list";
+import MovieTypes from "../../types/movies";
+import GenreTypes from "../../types/genres";
+import GenreList from "../genre-list/genre-list";
+import Header from "../header/header";
+import PropTypes from 'prop-types';
 
 const Main = (props) => {
-  const {promoMovie, genres, movies} = props;
+  const {promoMovie, genres, movies, onPlayButtonClick} = props;
 
   return (
     <Fragment>
@@ -13,21 +18,7 @@ const Main = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
-          </div>
-        </header>
+        <Header />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -43,15 +34,15 @@ const Main = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button" onClick={() => onPlayButtonClick(1)}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use href="#play-s"></use>
+                    <use href="#play-s" />
                   </svg>
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use href="#add"></use>
+                    <use href="#add" />
                   </svg>
                   <span>My list</span>
                 </button>
@@ -65,32 +56,9 @@ const Main = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            {genres.map((genre) => (
-              <li key={genre.id} className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">{genre.title}</a>
-              </li>)
-            )}
-          </ul>
+          <GenreList genres={genres}/>
 
-          <div className="catalog__movies-list">
-            {movies.map((movie) => {
-              return (
-                <article key={movie.id} className="small-movie-card catalog__movies-card">
-                  <div className="small-movie-card__image">
-                    <img src={movie.image} alt="{movie.title}" width="280" height="175"/>
-                  </div>
-                  <h3 className="small-movie-card__title">
-                    <a className="small-movie-card__link" href={movie.image}>{movie.title}</a>
-                  </h3>
-                </article>
-              );
-            })}
-          </div>
-
+          <MovieList movies={movies} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
@@ -115,26 +83,10 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  promoMovie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired
-  }).isRequired,
-  genres: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired
-      })
-  ).isRequired,
-  movies: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired
-      })
-  ).isRequired
+  promoMovie: MovieTypes.promoItem,
+  genres: GenreTypes.list,
+  movies: MovieTypes.list,
+  onPlayButtonClick: PropTypes.func.isRequired
 };
 
 export default Main;
