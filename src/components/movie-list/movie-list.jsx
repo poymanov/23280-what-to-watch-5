@@ -7,7 +7,7 @@ class MovieList extends PureComponent {
     super(props);
 
     this.state = {
-      activeMovieId: null,
+      activeMovieId: -1,
     };
 
     this.handleActiveMovie = this.handleActiveMovie.bind(this);
@@ -19,14 +19,14 @@ class MovieList extends PureComponent {
   }
 
   handleDeactivateMovie() {
-    this.setState({activeMovieId: null});
+    this.setState({activeMovieId: -1});
   }
 
   render() {
     const {movies} = this.props;
     return (
       <div className="catalog__movies-list">
-        {movies.map((movie) => <MovieItem key={movie.id} movie={movie} onMovieHover={this.handleActiveMovie} onMovieLeave={this.handleDeactivateMovie}/>)}
+        {movies.map((movie) => <MovieItem key={movie.id} movie={movie} onMovieHover={this.handleActiveMovie} onMovieLeave={this.handleDeactivateMovie} isShowTrailer={this.state.activeMovieId === movie.id} />)}
       </div>
     );
   }
