@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
 import MyList from "../my-list/my-list";
-import Film from "../film/film";
+import Movie from "../movie/movie";
 import AddReview from "../add-review/add-review";
 import Player from "../player/player";
 import MovieTypes from "../../types/movies";
@@ -30,7 +30,8 @@ const App = (props) => {
           <MyList userMovies={userMovies} />
         </Route>
         <Route path="/films/:id" exact render={({history}) => (
-          <Film
+          <Movie
+            movie={movies[0]}
             relatedMovies={relatedMovies}
             onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)}
           />
