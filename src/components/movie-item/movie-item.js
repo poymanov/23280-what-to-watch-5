@@ -2,14 +2,23 @@ import React from "react";
 import MovieTypes from "../../types/movies";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import PreviewPlayer from "../preview-player/preview-player";
+
+function getMovieCover(movie, isShowTrailer) {
+  if (isShowTrailer) {
+    return <PreviewPlayer movie={movie} />;
+  } else {
+    return <div className="small-movie-card__image">
+      <img src={movie.image} alt={movie.title} width="280" height="175"/>
+    </div>;
+  }
+}
 
 const MovieItem = (props) => {
-  const {movie, onMovieHover, onMovieLeave} = props;
+  const {movie, onMovieHover, onMovieLeave, isShowTrailer} = props;
   return (
     <article key={movie.id} className="small-movie-card catalog__movies-card" onMouseEnter={() => onMovieHover(movie.id)} onMouseLeave={() => onMovieLeave(movie.id)}>
-      <div className="small-movie-card__image">
-        <img src={movie.image} alt={movie.title} width="280" height="175"/>
-      </div>
+      {getMovieCover(movie, isShowTrailer)}
       <h3 className="small-movie-card__title">
         <Link to={`/films/` + movie.id} className="small-movie-card__link">{movie.title}</Link>
       </h3>
@@ -21,6 +30,7 @@ MovieItem.propTypes = {
   movie: MovieTypes.item,
   onMovieHover: PropTypes.func.isRequired,
   onMovieLeave: PropTypes.func.isRequired,
+  isShowTrailer: PropTypes.bool.isRequired,
 };
 
 export default MovieItem;

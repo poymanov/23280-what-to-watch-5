@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 const movie = PropTypes.shape({
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired
+  image: PropTypes.string.isRequired,
+  trailer: PropTypes.string.isRequired,
 }).isRequired;
 
 const promoMovie = PropTypes.shape({
