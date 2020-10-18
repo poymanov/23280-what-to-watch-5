@@ -18,13 +18,13 @@ class Tabs extends PureComponent {
     this.renderTab = this.renderTab.bind(this);
   }
 
-  handleClickTab(tab) {
+  handleClickTab(evt, tab) {
+    evt.preventDefault();
     this.setState({activeTab: tab});
   }
 
   renderTab() {
-    const movie = this.state.movie;
-    const activeTab = this.state.activeTab;
+    const {movie, activeTab} = this.state;
 
     switch (activeTab) {
       case TabsData.OVERVIEW:
@@ -39,16 +39,12 @@ class Tabs extends PureComponent {
   }
 
   render() {
-    const handleClickTab = this.handleClickTab;
     return (
       <Fragment>
         <nav className="movie-nav movie-card__nav">
           <ul className="movie-nav__list">
             {TabsList.map((tab) => <li key={tab.alias} className={`movie-nav__item ` + (this.state.activeTab === tab.alias ? `movie-nav__item--active` : ``)}>
-              <a href="#" className="movie-nav__link" onClick={function (evt) {
-                evt.preventDefault();
-                handleClickTab(tab.alias);
-              }}>{tab.title}</a>
+              <a href="#" className="movie-nav__link" onClick={(evt) => this.handleClickTab(evt, tab.alias)}>{tab.title}</a>
             </li>)}
           </ul>
         </nav>

@@ -1,13 +1,13 @@
 import React, {Fragment} from "react";
+import {connect} from "react-redux";
 import MovieList from "../movie-list/movie-list";
 import MovieTypes from "../../types/movies";
-import GenreTypes from "../../types/genres";
 import GenreList from "../genre-list/genre-list";
 import Header from "../header/header";
 import PropTypes from 'prop-types';
 
 const Main = (props) => {
-  const {promoMovie, genres, movies, onPlayButtonClick} = props;
+  const {promoMovie, movies, onPlayButtonClick} = props;
 
   return (
     <Fragment>
@@ -55,9 +55,7 @@ const Main = (props) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <GenreList genres={genres}/>
-
+          <GenreList/>
           <MovieList movies={movies} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -84,9 +82,13 @@ const Main = (props) => {
 
 Main.propTypes = {
   promoMovie: MovieTypes.promoItem,
-  genres: GenreTypes.list,
   movies: MovieTypes.list,
   onPlayButtonClick: PropTypes.func.isRequired
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  movies: state.moviesByGenre,
+});
+
+export {Main};
+export default connect(mapStateToProps)(Main);
