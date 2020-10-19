@@ -18,7 +18,13 @@ const promoMovie = PropTypes.shape({
 const MovieTypes = {
   item: movie,
   promoItem: promoMovie,
-  list: PropTypes.arrayOf(movie).isRequired
+  list: PropTypes.shape({
+    items: PropTypes.arrayOf(movie).isRequired,
+    pagination: PropTypes.shape({
+      lastItemId: PropTypes.number.isRequired,
+      hasNext: PropTypes.bool.isRequired,
+    }).isRequired,
+  }),
 };
 
 export default MovieTypes;
