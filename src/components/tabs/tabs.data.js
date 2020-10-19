@@ -6,16 +6,16 @@ const TabsData = {
 
 const TabsList = [
   {
-    'alias': TabsData.OVERVIEW,
-    'title': `Overview`,
+    alias: TabsData.OVERVIEW,
+    title: `Overview`,
   },
   {
-    'alias': TabsData.DETAILS,
-    'title': `Details`,
+    alias: TabsData.DETAILS,
+    title: `Details`,
   },
   {
-    'alias': TabsData.REVIEWS,
-    'title': `Reviews`,
+    alias: TabsData.REVIEWS,
+    title: `Reviews`,
   },
 ];
 

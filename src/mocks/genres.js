@@ -1,5 +1,9 @@
 export default [
   {
+    id: 0,
+    title: `All genres`
+  },
+  {
     id: 1,
     title: `Comedies`
   },

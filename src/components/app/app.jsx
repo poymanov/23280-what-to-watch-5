@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
@@ -8,9 +7,10 @@ import Movie from "../movie/movie";
 import AddReview from "../add-review/add-review";
 import Player from "../player/player";
 import MovieTypes from "../../types/movies";
+import movies from "../../mocks/movies";
 
 const App = (props) => {
-  const {promoMovie, genres, movies, relatedMovies, userMovies} = props;
+  const {promoMovie, relatedMovies, userMovies} = props;
 
   return (
     <BrowserRouter>
@@ -18,8 +18,6 @@ const App = (props) => {
         <Route path="/" exact render={({history}) => (
           <Main
             promoMovie={promoMovie}
-            genres={genres}
-            movies={movies}
             onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)}
           />
         )} />
@@ -49,13 +47,6 @@ const App = (props) => {
 
 App.propTypes = {
   promoMovie: MovieTypes.promoItem,
-  genres: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired
-      })
-  ).isRequired,
-  movies: MovieTypes.list,
   relatedMovies: MovieTypes.list,
   userMovies: MovieTypes.list,
 };
