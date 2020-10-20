@@ -4,14 +4,9 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 
 const ShowMoreMovies = ({nextItemId, currentGenreId, showMore}) => {
-  function handleClick(evt) {
-    evt.preventDefault();
-    showMore(currentGenreId, nextItemId);
-  }
-
   return (
     <div className="catalog__more">
-      <button className="catalog__button" type="button" onClick={(evt) => handleClick(evt)}>Show more</button>
+      <button className="catalog__button" type="button" onClick={() => showMore(currentGenreId, nextItemId)}>Show more</button>
     </div>
   );
 };

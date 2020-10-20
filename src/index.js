@@ -5,7 +5,7 @@ import {Provider} from "react-redux";
 import App from "./components/app/app";
 import movies from "./mocks/movies";
 import {reducer} from "./store/reducer";
-import {filterMoviesByGenreId} from "./movies";
+import {paginateMovies} from "./movies";
 
 
 const store = createStore(
@@ -16,9 +16,9 @@ const store = createStore(
 ReactDOM.render(
     <Provider store={store}>
       <App
-        promoMovie={filterMoviesByGenreId(movies, 0, 0).items[0]}
-        relatedMovies={filterMoviesByGenreId(movies, 0, 0)}
-        userMovies={filterMoviesByGenreId(movies, 0, 0)}
+        promoMovie={movies[0]}
+        relatedMovies={paginateMovies(movies, 0)}
+        userMovies={paginateMovies(movies, 0)}
       />
     </Provider>,
     document.querySelector(`#root`)
