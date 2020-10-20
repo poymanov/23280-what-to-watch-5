@@ -2,11 +2,12 @@ import {extend} from "../utils";
 import {ActionType} from "./action";
 import genres from "../mocks/genres";
 import movies from "../mocks/movies";
+import {filterMoviesByGenreId} from "../movies";
 
 const initialState = {
   filterGenreId: 0,
   genres,
-  moviesByGenre: movies
+  moviesByGenre: filterMoviesByGenreId(movies, 0, 0)
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,6 +17,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         filterGenreId: payload.genreId,
         moviesByGenre: payload.filteredMovies
+      });
+    case ActionType.SHOW_MORE_MOVIES:
+      return extend(state, {
+        moviesByGenre: action.payload.nextMovies
       });
   }
 

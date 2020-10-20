@@ -1,6 +1,7 @@
-import React, {PureComponent} from "react";
+import React, {PureComponent, Fragment} from "react";
 import MovieItem from "../movie-item/movie-item";
 import MovieTypes from "../../types/movies";
+import ShowMoreMovies from "../show-more-movies/show-more-movies";
 
 class MovieList extends PureComponent {
   constructor(props) {
@@ -24,10 +25,19 @@ class MovieList extends PureComponent {
 
   render() {
     const {movies} = this.props;
+    let showMore = null;
+
+    if (movies.pagination.hasNext) {
+      showMore = <ShowMoreMovies nextItemId={movies.pagination.lastItemId} />;
+    }
+
     return (
-      <div className="catalog__movies-list">
-        {movies.map((movie) => <MovieItem key={movie.id} movie={movie} onMovieHover={this.handleActiveMovie} onMovieLeave={this.handleDeactivateMovie} isShowTrailer={this.state.activeMovieId === movie.id} />)}
-      </div>
+      <Fragment>
+        <div className="catalog__movies-list">
+          {movies.items.map((movie) => <MovieItem key={movie.id} movie={movie} onMovieHover={this.handleActiveMovie} onMovieLeave={this.handleDeactivateMovie} isShowTrailer={this.state.activeMovieId === movie.id} />)}
+        </div>
+        {showMore}
+      </Fragment>
     );
   }
 }
