@@ -37,9 +37,9 @@ const App = (props) => {
         <Route path="/films/:id/review" exact>
           <AddReview />
         </Route>
-        <Route path="/player/:id" exact>
-          <Player />
-        </Route>
+        <Route path="/player/:id" exact render={({history}) => (
+          <Player movie={movies[0]} onPlayerClose={() => history.goBack()}/>
+        )} />
       </Switch>
     </BrowserRouter>
   );
