@@ -2,12 +2,12 @@ import {extend} from "../utils";
 import {ActionType} from "./action";
 import genres from "../mocks/genres";
 import movies from "../mocks/movies";
-import {filterMoviesByGenreId} from "../movies";
+import {filterMoviesByGenreId, paginateMovies} from "../movies";
 
 const initialState = {
   filterGenreId: 0,
   genres,
-  moviesByGenre: filterMoviesByGenreId(movies, 0, 0)
+  moviesByGenre: paginateMovies(filterMoviesByGenreId(movies, 0), 0)
 };
 
 const reducer = (state = initialState, action) => {
