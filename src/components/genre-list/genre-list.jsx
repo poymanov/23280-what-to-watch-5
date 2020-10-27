@@ -16,13 +16,13 @@ const GenreList = (props) => {
 
 GenreList.propTypes = {
   genres: GenreTypes.list,
-  activeGenreId: PropTypes.number.isRequired,
+  activeGenreId: PropTypes.string.isRequired,
   changeGenre: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  activeGenreId: state.filterGenreId,
-  genres: state.genres,
+const mapStateToProps = ({OLD, GENRES}) => ({
+  activeGenreId: OLD.filterGenreId,
+  genres: GENRES.genres,
 });
 
 const mapDispatchToProps = (dispatch) => ({

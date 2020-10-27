@@ -13,12 +13,12 @@ const ShowMoreMovies = ({nextItemId, currentGenreId, showMore}) => {
 
 ShowMoreMovies.propTypes = {
   nextItemId: PropTypes.number.isRequired,
-  currentGenreId: PropTypes.number.isRequired,
+  currentGenreId: PropTypes.string.isRequired,
   showMore: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentGenreId: state.filterGenreId,
+const mapStateToProps = ({OLD}) => ({
+  currentGenreId: OLD.filterGenreId,
 });
 
 const mapDispatchToProps = (dispatch) => ({

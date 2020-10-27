@@ -83,8 +83,8 @@ Main.propTypes = {
   onPlayButtonClick: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  movies: state.moviesByGenre,
+const mapStateToProps = ({OLD}) => ({
+  movies: OLD.moviesByGenre,
 });
 
 export {Main};

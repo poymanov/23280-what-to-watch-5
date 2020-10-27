@@ -1,7 +1,7 @@
 const MOVIES_PER_PAGE = 8;
 
 export const filterMoviesByGenreId = (movies, genreId) => {
-  return genreId === 0 ? movies : movies.filter((movie) => movie.genreId === genreId);
+  return genreId === `all` ? movies : movies.filter((movie) => movie.genreId === genreId);
 };
 
 export const paginateMovies = (movies, currentItem) => {
