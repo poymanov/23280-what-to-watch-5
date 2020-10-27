@@ -52,7 +52,7 @@ class Player extends PureComponent {
 }
 
 Player.propTypes = {
-  movie: MovieTypes.item,
+  movie: MovieTypes.oldItem,
   isPlaying: PropTypes.bool.isRequired,
   initVideo: PropTypes.func.isRequired,
   handleTimeUpdate: PropTypes.func.isRequired,

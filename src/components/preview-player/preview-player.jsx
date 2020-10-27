@@ -9,7 +9,7 @@ const PreviewPlayer = (props) => {
 };
 
 PreviewPlayer.propTypes = {
-  movie: MovieTypes.item,
+  movie: MovieTypes.oldItem,
 };
 
 export default PreviewPlayer;

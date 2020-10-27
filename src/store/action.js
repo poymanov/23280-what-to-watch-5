@@ -5,7 +5,8 @@ export const ActionType = {
   CHANGE_MOVIES_FILTER: `CHANGE_MOVIES_FILTER`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   LOAD_MOVIES: `LOAD_MOVIES`,
-  LOAD_GENRES: `LOAD_GENRES`
+  LOAD_GENRES: `LOAD_GENRES`,
+  LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`
 };
 
 export const ActionCreator = {
@@ -33,4 +34,9 @@ export const loadMovies = (movies) => ({
 export const loadGenres = (movies) => ({
   type: ActionType.LOAD_GENRES,
   payload: movies,
+});
+
+export const loadPromoMovie = (movie) => ({
+  type: ActionType.LOAD_PROMO_MOVIE,
+  payload: movie,
 });

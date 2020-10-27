@@ -19,7 +19,7 @@ const MovieItem = (props) => {
 };
 
 MovieItem.propTypes = {
-  movie: MovieTypes.item,
+  movie: MovieTypes.oldItem,
   onMovieHover: PropTypes.func.isRequired,
   onMovieLeave: PropTypes.func.isRequired,
   isShowTrailer: PropTypes.bool.isRequired,

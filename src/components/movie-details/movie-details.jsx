@@ -46,7 +46,7 @@ const MovieDetails = () => {
 };
 
 MovieDetails.propTypes = {
-  movie: MovieTypes.item,
+  movie: MovieTypes.oldItem,
 };
 
 export default MovieDetails;

@@ -14,3 +14,25 @@ export const paginateMovies = (movies, currentItem) => {
     pagination: {lastItemId, hasNext},
   };
 };
+
+export const buildMovie = (movieData) => {
+  return {
+    id: movieData.id,
+    name: movieData.name,
+    posterImage: movieData.poster_image,
+    previewImage: movieData.preview_image,
+    backgroundImage: movieData.background_image,
+    backgroundColor: movieData.background_color,
+    videoLink: movieData.video_link,
+    previewVideoLink: movieData.preview_video_link,
+    description: movieData.description,
+    rating: movieData.rating,
+    scoresCount: movieData.scores_count,
+    director: movieData.director,
+    starring: movieData.starring,
+    runTime: movieData.run_time,
+    genre: movieData.genre,
+    released: movieData.released,
+    isFavorite: movieData.is_favorite
+  };
+};

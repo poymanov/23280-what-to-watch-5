@@ -36,7 +36,7 @@ const withActiveItem = (Component) => {
   }
 
   WithActiveItem.propTypes = {
-    movie: MovieTypes.item
+    movie: MovieTypes.oldItem
   };
 
   return WithActiveItem;

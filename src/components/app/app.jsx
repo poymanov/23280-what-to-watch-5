@@ -12,14 +12,13 @@ import withFullscreen from "../../hocs/with-fullscreen";
 import withPlayerControls from "../../hocs/with-player-controls";
 
 const App = (props) => {
-  const {promoMovie, relatedMovies, userMovies} = props;
+  const {relatedMovies, userMovies} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact render={({history}) => (
           <Main
-            promoMovie={promoMovie}
             onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)}
           />
         )} />
@@ -53,7 +52,6 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  promoMovie: MovieTypes.promoItem,
   relatedMovies: MovieTypes.list,
   userMovies: MovieTypes.list,
 };

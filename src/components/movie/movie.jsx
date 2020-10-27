@@ -85,7 +85,7 @@ const Movie = (props) => {
 };
 
 Movie.propTypes = {
-  movie: MovieTypes.item,
+  movie: MovieTypes.oldItem,
   relatedMovies: MovieTypes.list,
   onPlayButtonClick: PropTypes.func.isRequired
 };

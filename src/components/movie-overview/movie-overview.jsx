@@ -25,7 +25,7 @@ const MovieOverview = () => {
 };
 
 MovieOverview.propTypes = {
-  movie: MovieTypes.item,
+  movie: MovieTypes.oldItem,
 };
 
 export default MovieOverview;

@@ -150,7 +150,7 @@ const withPlayerControls = (Component) => {
   }
 
   WithPlayerControls.propTypes = {
-    movie: MovieTypes.item,
+    movie: MovieTypes.oldItem,
     onChangeFullscreen: PropTypes.func.isRequired,
     onPlayerClose: PropTypes.func.isRequired
   };

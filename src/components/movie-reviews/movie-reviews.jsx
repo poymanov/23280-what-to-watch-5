@@ -89,7 +89,7 @@ const MovieReviews = () => {
 };
 
 MovieReviews.propTypes = {
-  movie: MovieTypes.item,
+  movie: MovieTypes.oldItem,
 };
 
 export default MovieReviews;
