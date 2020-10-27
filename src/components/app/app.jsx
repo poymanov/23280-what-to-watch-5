@@ -8,6 +8,8 @@ import AddReview from "../add-review/add-review";
 import Player from "../player/player";
 import MovieTypes from "../../types/movies";
 import movies from "../../mocks/movies";
+import withFullscreen from "../../hocs/with-fullscreen";
+import withPlayerControls from "../../hocs/with-player-controls";
 
 const App = (props) => {
   const {promoMovie, relatedMovies, userMovies} = props;
@@ -37,9 +39,14 @@ const App = (props) => {
         <Route path="/films/:id/review" exact>
           <AddReview />
         </Route>
-        <Route path="/player/:id" exact render={({history}) => (
-          <Player movie={movies[0]} onPlayerClose={() => history.goBack()}/>
-        )} />
+        <Route path="/player/:id" exact render={({history}) => {
+          const PlayerWrapped = withFullscreen(withPlayerControls(Player));
+
+          return <PlayerWrapped
+            movie={movies[0]}
+            onPlayerClose={() => history.goBack()}
+          />;
+        }} />
       </Switch>
     </BrowserRouter>
   );
