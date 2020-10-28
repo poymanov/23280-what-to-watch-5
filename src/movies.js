@@ -1,7 +1,7 @@
 const MOVIES_PER_PAGE = 8;
 
-export const filterMoviesByGenreId = (movies, genreId) => {
-  return genreId === `all` ? movies : movies.filter((movie) => movie.genreId === genreId);
+export const filterMoviesByGenreId = (movies, genre) => {
+  return genre === `All` ? movies : movies.filter((movie) => movie.genre === genre);
 };
 
 export const paginateMovies = (movies, currentItem) => {
@@ -34,5 +34,24 @@ export const buildMovie = (movieData) => {
     genre: movieData.genre,
     released: movieData.released,
     isFavorite: movieData.is_favorite
+  };
+};
+
+export const buildMovies = (moviesData) => {
+  const movies = [];
+
+  moviesData.forEach((item) => {
+    movies.push(buildMovie(item));
+  });
+
+  return movies;
+};
+
+export const initPagination = (moviesData) => {
+  const hasNext = moviesData.length > MOVIES_PER_PAGE;
+  const lastPosition = hasNext ? MOVIES_PER_PAGE : 0;
+
+  return {
+    hasNext, lastPosition
   };
 };

@@ -4,9 +4,7 @@ import {createStore, applyMiddleware} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {Provider} from "react-redux";
 import App from "./components/app/app";
-import movies from "./mocks/movies";
 import rootReducer from "./store/reducers/root-reducer";
-import {paginateMovies} from "./movies";
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import {fetchMoviesList, fetchPromoMovie} from "./store/api-actions";
@@ -26,10 +24,7 @@ Promise.all([
 ]).then(() => {
   ReactDOM.render(
       <Provider store={store}>
-        <App
-          relatedMovies={paginateMovies(movies, 0)}
-          userMovies={paginateMovies(movies, 0)}
-        />
+        <App />
       </Provider>,
       document.querySelector(`#root`)
   );

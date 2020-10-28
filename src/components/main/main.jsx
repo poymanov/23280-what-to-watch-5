@@ -6,6 +6,7 @@ import GenreList from "../genre-list/genre-list";
 import Header from "../header/header";
 import PropTypes from 'prop-types';
 import PromoMovie from "../promo-movie/promo-movie";
+import {mainMoviesSelector} from "../../store/selectors";
 
 const Main = (props) => {
   const {movies, onPlayButtonClick} = props;
@@ -44,12 +45,12 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  movies: MovieTypes.list,
+  movies: MovieTypes.listWithPagination,
   onPlayButtonClick: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({OLD}) => ({
-  movies: OLD.moviesByGenre,
+const mapStateToProps = (state) => ({
+  movies: mainMoviesSelector(state),
 });
 
 export {Main};

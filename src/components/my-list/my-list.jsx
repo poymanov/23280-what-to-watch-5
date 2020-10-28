@@ -1,10 +1,12 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 import MovieList from "../movie-list/movie-list";
 import MovieTypes from "../../types/movies";
+import {myListMoviesSelector} from "../../store/selectors";
 
 const MyList = (props) => {
-  const {userMovies} = props;
+  const {movies} = props;
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -27,7 +29,7 @@ const MyList = (props) => {
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <MovieList movies={userMovies} />
+        <MovieList movies={movies} />
       </section>
 
       <footer className="page-footer">
@@ -48,7 +50,12 @@ const MyList = (props) => {
 };
 
 MyList.propTypes = {
-  userMovies: MovieTypes.list,
+  movies: MovieTypes.listWithPagination,
 };
 
-export default MyList;
+const mapStateToProps = (state) => ({
+  movies: myListMoviesSelector(state),
+});
+
+export {MyList};
+export default connect(mapStateToProps)(MyList);

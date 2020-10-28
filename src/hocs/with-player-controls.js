@@ -119,7 +119,7 @@ const withPlayerControls = (Component) => {
         </div>
         <div className="player__controls-row">
           {this.renderPlayingControls()}
-          <div className="player__name">{movie.title}</div>
+          <div className="player__name">{movie.name}</div>
           <button type="button" className="player__full-screen" onClick={() => onChangeFullscreen(true)}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use href="#full-screen" />
@@ -150,7 +150,7 @@ const withPlayerControls = (Component) => {
   }
 
   WithPlayerControls.propTypes = {
-    movie: MovieTypes.oldItem,
+    movie: MovieTypes.item,
     onChangeFullscreen: PropTypes.func.isRequired,
     onPlayerClose: PropTypes.func.isRequired
   };

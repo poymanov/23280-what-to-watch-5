@@ -6,13 +6,14 @@ import MyList from "../my-list/my-list";
 import Movie from "../movie/movie";
 import AddReview from "../add-review/add-review";
 import Player from "../player/player";
-import MovieTypes from "../../types/movies";
-import movies from "../../mocks/movies";
 import withFullscreen from "../../hocs/with-fullscreen";
 import withPlayerControls from "../../hocs/with-player-controls";
+import {connect} from "react-redux";
+import {promoMovieSelector} from "../../store/selectors";
+import MovieTypes from "../../types/movies";
 
 const App = (props) => {
-  const {relatedMovies, userMovies} = props;
+  const {movie} = props;
 
   return (
     <BrowserRouter>
@@ -26,14 +27,10 @@ const App = (props) => {
           <SignIn />
         </Route>
         <Route path="/my-list" exact>
-          <MyList userMovies={userMovies} />
+          <MyList />
         </Route>
         <Route path="/films/:id" exact render={({history}) => (
-          <Movie
-            movie={movies[0]}
-            relatedMovies={relatedMovies}
-            onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)}
-          />
+          <Movie onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)} />
         )} />
         <Route path="/films/:id/review" exact>
           <AddReview />
@@ -42,7 +39,7 @@ const App = (props) => {
           const PlayerWrapped = withFullscreen(withPlayerControls(Player));
 
           return <PlayerWrapped
-            movie={movies[0]}
+            movie={movie}
             onPlayerClose={() => history.goBack()}
           />;
         }} />
@@ -52,8 +49,12 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  relatedMovies: MovieTypes.list,
-  userMovies: MovieTypes.list,
+  movie: MovieTypes.item,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  movie: promoMovieSelector(state)
+});
+
+export {App};
+export default connect(mapStateToProps)(App);

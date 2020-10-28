@@ -3,7 +3,7 @@ import {extend} from "../../../utils";
 import {getByMovies} from "../../../genres";
 
 const initialState = {
-  genres: [],
+  genres: []
 };
 
 const genresData = (state = initialState, action) => {

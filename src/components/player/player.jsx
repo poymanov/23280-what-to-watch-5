@@ -23,8 +23,8 @@ class Player extends PureComponent {
     const {movie, initVideo} = this.props;
     const player = this.videoRef.current;
 
-    player.src = movie.trailer;
-    player.poster = movie.poster;
+    player.src = movie.videoLink;
+    player.poster = movie.previewImage;
 
     player.oncanplaythrough = () => {
       initVideo(player);
@@ -52,7 +52,7 @@ class Player extends PureComponent {
 }
 
 Player.propTypes = {
-  movie: MovieTypes.oldItem,
+  movie: MovieTypes.item,
   isPlaying: PropTypes.bool.isRequired,
   initVideo: PropTypes.func.isRequired,
   handleTimeUpdate: PropTypes.func.isRequired,

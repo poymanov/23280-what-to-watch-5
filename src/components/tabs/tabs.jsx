@@ -55,7 +55,7 @@ class Tabs extends PureComponent {
 }
 
 Tabs.propTypes = {
-  movie: MovieTypes.oldItem,
+  movie: MovieTypes.item,
 };
 
 export default Tabs;

@@ -1,6 +1,6 @@
 export const getByMovies = (movies) => {
   const allGenres = [];
-  const genres = [{id: `all`, title: `All genres`}];
+  const genres = [{id: `All`, title: `All genres`}];
 
   movies.forEach((item) => {
     allGenres.push(item.genre);
@@ -11,7 +11,7 @@ export const getByMovies = (movies) => {
 
   uniqGenres.forEach((item) => {
     genres.push({
-      id: item.toLowerCase(),
+      id: item,
       title: item
     });
   });

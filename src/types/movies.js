@@ -20,19 +20,12 @@ const movie = PropTypes.shape({
   isFavorite: PropTypes.bool.isRequired,
 }).isRequired;
 
-const oldMovie = PropTypes.shape({
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  trailer: PropTypes.string.isRequired,
-}).isRequired;
-
 const MovieTypes = {
   item: movie,
-  oldItem: oldMovie,
   promo: movie,
-  list: PropTypes.shape({
-    items: PropTypes.arrayOf(oldMovie).isRequired,
+  list: PropTypes.arrayOf(movie).isRequired,
+  listWithPagination: PropTypes.shape({
+    items: PropTypes.arrayOf(movie).isRequired,
     pagination: PropTypes.shape({
       lastItemId: PropTypes.number.isRequired,
       hasNext: PropTypes.bool.isRequired,
