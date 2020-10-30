@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
+import {showMoreMovies} from "../../store/action";
+import {currentFilterIdSelector} from "../../store/selectors";
 
 const ShowMoreMovies = ({nextItemId, currentGenreId, showMore}) => {
   return (
@@ -13,17 +14,17 @@ const ShowMoreMovies = ({nextItemId, currentGenreId, showMore}) => {
 
 ShowMoreMovies.propTypes = {
   nextItemId: PropTypes.number.isRequired,
-  currentGenreId: PropTypes.number.isRequired,
+  currentGenreId: PropTypes.string.isRequired,
   showMore: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  currentGenreId: state.filterGenreId,
+  currentGenreId: currentFilterIdSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   showMore(genreId, nextItemId) {
-    dispatch(ActionCreator.showMoreMovies(genreId, nextItemId));
+    dispatch(showMoreMovies(genreId, nextItemId));
   },
 });
 

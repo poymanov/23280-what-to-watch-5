@@ -24,7 +24,7 @@ const MovieList = ({movies}) => {
 };
 
 MovieList.propTypes = {
-  movies: MovieTypes.list
+  movies: MovieTypes.listWithPagination
 };
 
 export default MovieList;

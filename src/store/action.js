@@ -1,24 +1,33 @@
-import {filterMoviesByGenreId, paginateMovies} from "../movies";
-import movies from "../mocks/movies";
-
 export const ActionType = {
-  CHANGE_MOVIES_FILTER: `CHANGE_MOVIES_FILTER`,
+  LOAD_MOVIES: `LOAD_MOVIES`,
+  LOAD_GENRES: `LOAD_GENRES`,
+  LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
+  LOAD_MOVIES_PAGINATION: `LOAD_MOVIES_PAGINATION`,
+  CHANGE_GENRE_FILTER: `CHANGE_GENRE_FILTER`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
 };
 
-export const ActionCreator = {
-  changeMoviesFilter: (genreId) => {
-    const filteredMovies = paginateMovies(filterMoviesByGenreId(movies, genreId), 0);
-    return {
-      type: ActionType.CHANGE_MOVIES_FILTER,
-      payload: {genreId, filteredMovies},
-    };
-  },
-  showMoreMovies: (genreId, nextItemId) => {
-    const nextMovies = paginateMovies(filterMoviesByGenreId(movies, genreId), nextItemId);
-    return {
-      type: ActionType.SHOW_MORE_MOVIES,
-      payload: {nextMovies},
-    };
-  }
-};
+export const loadMovies = (movies) => ({
+  type: ActionType.LOAD_MOVIES,
+  payload: movies,
+});
+
+export const loadGenres = (movies) => ({
+  type: ActionType.LOAD_GENRES,
+  payload: movies,
+});
+
+export const loadPromoMovie = (movie) => ({
+  type: ActionType.LOAD_PROMO_MOVIE,
+  payload: movie,
+});
+
+export const changeGenreFilter = (genreId) => ({
+  type: ActionType.CHANGE_GENRE_FILTER,
+  payload: genreId,
+});
+
+export const showMoreMovies = (genreId, nextItemId) => ({
+  type: ActionType.SHOW_MORE_MOVIES,
+  payload: {genreId, nextItemId}
+});

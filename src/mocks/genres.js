@@ -1,42 +1,42 @@
 export default [
   {
-    id: 0,
+    id: `all`, // 0
     title: `All genres`
   },
   {
-    id: 1,
+    id: `comedies`, // 1
     title: `Comedies`
   },
   {
-    id: 2,
+    id: `crime`, // 2
     title: `Crime`
   },
   {
-    id: 3,
+    id: `documentary`, // 3
     title: `Documentary`
   },
   {
-    id: 4,
+    id: `dramas`, // 4
     title: `Dramas`
   },
   {
-    id: 5,
+    id: `horror`, // 5
     title: `Horror`
   },
   {
-    id: 6,
+    id: `kids & family`, // 6
     title: `Kids & Family`
   },
   {
-    id: 7,
+    id: `romance`, // 7
     title: `Romance`
   },
   {
-    id: 8,
+    id: `sci-fi`, // 8
     title: `Sci-Fi`
   },
   {
-    id: 9,
+    id: `thrillers`, // 9
     title: `Thrillers`
   },
 ];

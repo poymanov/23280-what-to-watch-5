@@ -5,6 +5,8 @@ import Header from "../header/header";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs";
+import {connect} from "react-redux";
+import {relatedMoviesSelector, promoMovieSelector} from "../../store/selectors";
 
 const Movie = (props) => {
   const {relatedMovies, onPlayButtonClick, movie} = props;
@@ -12,8 +14,8 @@ const Movie = (props) => {
     <Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
-          <div className="movie-card__bg">
-            <img src="/img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+          <div className="movie-card__bg" style={{backgroundColor: movie.backgroundColor}}>
+            <img src={movie.backgroundImage} alt={movie.name}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -22,10 +24,10 @@ const Movie = (props) => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{movie.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{movie.genre}</span>
+                <span className="movie-card__year">{movie.released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -50,7 +52,7 @@ const Movie = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src="/img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+              <img src={movie.posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
             </div>
 
             <div className="movie-card__desc">
@@ -86,8 +88,14 @@ const Movie = (props) => {
 
 Movie.propTypes = {
   movie: MovieTypes.item,
-  relatedMovies: MovieTypes.list,
+  relatedMovies: MovieTypes.listWithPagination,
   onPlayButtonClick: PropTypes.func.isRequired
 };
 
-export default Movie;
+const mapStateToProps = (state) => ({
+  relatedMovies: relatedMoviesSelector(state),
+  movie: promoMovieSelector(state)
+});
+
+export {Movie};
+export default connect(mapStateToProps)(Movie);

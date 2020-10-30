@@ -6,18 +6,20 @@ import MyList from "../my-list/my-list";
 import Movie from "../movie/movie";
 import AddReview from "../add-review/add-review";
 import Player from "../player/player";
+import withFullscreen from "../../hocs/with-fullscreen";
+import withPlayerControls from "../../hocs/with-player-controls";
+import {connect} from "react-redux";
+import {promoMovieSelector} from "../../store/selectors";
 import MovieTypes from "../../types/movies";
-import movies from "../../mocks/movies";
 
 const App = (props) => {
-  const {promoMovie, relatedMovies, userMovies} = props;
+  const {movie} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact render={({history}) => (
           <Main
-            promoMovie={promoMovie}
             onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)}
           />
         )} />
@@ -25,30 +27,34 @@ const App = (props) => {
           <SignIn />
         </Route>
         <Route path="/my-list" exact>
-          <MyList userMovies={userMovies} />
+          <MyList />
         </Route>
         <Route path="/films/:id" exact render={({history}) => (
-          <Movie
-            movie={movies[0]}
-            relatedMovies={relatedMovies}
-            onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)}
-          />
+          <Movie onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)} />
         )} />
         <Route path="/films/:id/review" exact>
           <AddReview />
         </Route>
-        <Route path="/player/:id" exact render={({history}) => (
-          <Player movie={movies[0]} onPlayerClose={() => history.goBack()}/>
-        )} />
+        <Route path="/player/:id" exact render={({history}) => {
+          const PlayerWrapped = withFullscreen(withPlayerControls(Player));
+
+          return <PlayerWrapped
+            movie={movie}
+            onPlayerClose={() => history.goBack()}
+          />;
+        }} />
       </Switch>
     </BrowserRouter>
   );
 };
 
 App.propTypes = {
-  promoMovie: MovieTypes.promoItem,
-  relatedMovies: MovieTypes.list,
-  userMovies: MovieTypes.list,
+  movie: MovieTypes.item,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  movie: promoMovieSelector(state)
+});
+
+export {App};
+export default connect(mapStateToProps)(App);
