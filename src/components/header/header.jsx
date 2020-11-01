@@ -1,37 +1,56 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import UserTypes from "../../types/user";
 import AuthUser from "../auth-user/auth-user";
 import NotAuthUser from "../not-auth-user/not-auth-user";
 import {Link} from "react-router-dom";
+import {checkAuth} from "../../store/api-actions";
+import PropTypes from "prop-types";
 
-const Header = (props) => {
-  const {currentUser} = props;
+class Header extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
 
-  const userBlock = currentUser ? <AuthUser currentUser={currentUser} /> : <NotAuthUser />;
+  componentDidMount() {
+    this.props.checkAuth();
+  }
 
-  return (
-    <header className="page-header movie-card__head">
-      <div className="logo">
-        <Link to="/" className="logo__link">
-          <span className="logo__letter logo__letter--1">W</span>
-          <span className="logo__letter logo__letter--2">T</span>
-          <span className="logo__letter logo__letter--3">W</span>
-        </Link>
-      </div>
+  render() {
+    const {currentUser} = this.props;
 
-      {userBlock}
-    </header>
-  );
-};
+    const userBlock = currentUser ? <AuthUser currentUser={currentUser}/> : <NotAuthUser/>;
+
+    return (
+      <header className="page-header movie-card__head">
+        <div className="logo">
+          <Link to="/" className="logo__link">
+            <span className="logo__letter logo__letter--1">W</span>
+            <span className="logo__letter logo__letter--2">T</span>
+            <span className="logo__letter logo__letter--3">W</span>
+          </Link>
+        </div>
+
+        {userBlock}
+      </header>
+    );
+  }
+}
 
 Header.propTypes = {
-  currentUser: UserTypes.currentUser
+  currentUser: UserTypes.currentUser,
+  checkAuth: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   currentUser: state.USER.currentUser,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  checkAuth() {
+    dispatch(checkAuth());
+  },
+});
+
 export {Header};
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

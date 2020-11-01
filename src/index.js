@@ -7,7 +7,7 @@ import App from "./components/app/app";
 import rootReducer from "./store/reducers/root-reducer";
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
-import {fetchMoviesList, fetchPromoMovie, checkAuth} from "./store/api-actions";
+
 import {requireAuthorization} from "./store/action";
 import {AuthorizationStatus} from "./const";
 import {redirect} from "./store/middlewares/redirect";
@@ -24,15 +24,9 @@ const store = createStore(
     )
 );
 
-Promise.all([
-  store.dispatch(fetchMoviesList()),
-  store.dispatch(fetchPromoMovie()),
-  store.dispatch(checkAuth()),
-]).then(() => {
-  ReactDOM.render(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-      document.querySelector(`#root`)
-  );
-});
+ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.querySelector(`#root`)
+);
