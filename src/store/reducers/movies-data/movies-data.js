@@ -20,14 +20,14 @@ const moviesData = (state = initialState, action) => {
         list: buildMovies(action.payload),
       });
     case ActionType.CHANGE_GENRE_FILTER:
-      const genreId = action.payload;
+      const filterGenreId = action.payload;
       return extend(state, {
-        filterGenreId: genreId,
-        main: paginateMovies(filterMoviesByGenreId(state.list, genreId), 0)
+        filterGenreId,
+        main: paginateMovies(filterMoviesByGenreId(state.list, filterGenreId), 0)
       });
     case ActionType.SHOW_MORE_MOVIES:
-      const payload = action.payload;
-      const nextMovies = paginateMovies(filterMoviesByGenreId(state.list, payload.genreId), payload.nextItemId);
+      const {genreId, nextItemId} = action.payload;
+      const nextMovies = paginateMovies(filterMoviesByGenreId(state.list, genreId), nextItemId);
 
       return extend(state, {
         main: nextMovies
