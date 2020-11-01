@@ -7,20 +7,27 @@ import App from "./components/app/app";
 import rootReducer from "./store/reducers/root-reducer";
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
-import {fetchMoviesList, fetchPromoMovie} from "./store/api-actions";
+import {fetchMoviesList, fetchPromoMovie, checkAuth} from "./store/api-actions";
+import {requireAuthorization} from "./store/action";
+import {AuthorizationStatus} from "./const";
+import {redirect} from "./store/middlewares/redirect";
 
-const api = createAPI();
+const api = createAPI(
+    () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
+);
 
 const store = createStore(
     rootReducer,
     composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     )
 );
 
 Promise.all([
   store.dispatch(fetchMoviesList()),
-  store.dispatch(fetchPromoMovie())
+  store.dispatch(fetchPromoMovie()),
+  store.dispatch(checkAuth()),
 ]).then(() => {
   ReactDOM.render(
       <Provider store={store}>

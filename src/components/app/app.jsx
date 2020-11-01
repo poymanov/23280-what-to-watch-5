@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Route, Switch, Router as BrowserRouter} from "react-router-dom";
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
 import MyList from "../my-list/my-list";
@@ -10,13 +10,15 @@ import withFullscreen from "../../hocs/with-fullscreen";
 import withPlayerControls from "../../hocs/with-player-controls";
 import {connect} from "react-redux";
 import {promoMovieSelector} from "../../store/selectors";
+import PrivateRoute from "../private-route/private-route";
 import MovieTypes from "../../types/movies";
+import browserHistory from "../../browser-history";
 
 const App = (props) => {
   const {movie} = props;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route path="/" exact render={({history}) => (
           <Main
@@ -32,9 +34,7 @@ const App = (props) => {
         <Route path="/films/:id" exact render={({history}) => (
           <Movie onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)} />
         )} />
-        <Route path="/films/:id/review" exact>
-          <AddReview />
-        </Route>
+        <PrivateRoute path="/films/:id/review" exact render={() => <AddReview />} />
         <Route path="/player/:id" exact render={({history}) => {
           const PlayerWrapped = withFullscreen(withPlayerControls(Player));
 
