@@ -17,7 +17,7 @@ class Header extends PureComponent {
   }
 
   render() {
-    const {currentUser} = this.props;
+    const {currentUser, children} = this.props;
 
     const userBlock = currentUser ? <AuthUser currentUser={currentUser}/> : <NotAuthUser/>;
 
@@ -30,7 +30,7 @@ class Header extends PureComponent {
             <span className="logo__letter logo__letter--3">W</span>
           </Link>
         </div>
-
+        {children}
         {userBlock}
       </header>
     );
@@ -39,7 +39,8 @@ class Header extends PureComponent {
 
 Header.propTypes = {
   currentUser: UserTypes.currentUser,
-  checkAuth: PropTypes.func.isRequired
+  checkAuth: PropTypes.func.isRequired,
+  children: PropTypes.node,
 };
 
 const mapStateToProps = (state) => ({

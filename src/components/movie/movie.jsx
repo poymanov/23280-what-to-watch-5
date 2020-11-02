@@ -32,7 +32,7 @@ class Movie extends PureComponent {
     }
 
     const addReviewLink = authorizationStatus === AuthorizationStatus.AUTH ?
-      <Link to="/films/1/review" className="btn movie-card__button">Add review</Link> :
+      <Link to={`/films/${movie.id}/review`} className="btn movie-card__button">Add review</Link> :
       null;
 
     return (

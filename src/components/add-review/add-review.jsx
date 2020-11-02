@@ -1,55 +1,89 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import {Link} from "react-router-dom";
 import ReviewForm from "../review-form/review-form";
+import Header from "../header/header";
+import PropTypes from "prop-types";
+import MovieTypes from "../../types/movies";
+import {currentMovieSelector} from "../../store/selectors";
+import {fetchCurrentMovie} from "../../store/api-actions";
+import {flushCurrentMovie} from "../../store/action";
+import {connect} from "react-redux";
 
-const AddReview = () => {
-  return (
-    <section className="movie-card movie-card--full">
-      <div className="movie-card__header">
-        <div className="movie-card__bg">
-          <img src="/img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
-        </div>
+class AddReview extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
 
-        <h1 className="visually-hidden">WTW</h1>
+  componentDidMount() {
+    this.props.fetchCurrentMovie(this.props.id);
+  }
 
-        <header className="page-header">
-          <div className="logo">
-            <Link to='/' className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
+  componentWillUnmount() {
+    this.props.flushCurrentMovie();
+  }
+
+  render() {
+    const {movie, id} = this.props;
+
+    if (!movie) {
+      return null;
+    }
+
+    return (
+      <section className="movie-card movie-card--full">
+        <div className="movie-card__header">
+          <div className="movie-card__bg" style={{backgroundColor: movie.backgroundColor}}>
+            <img src={movie.backgroundImage} alt={movie.name}/>
           </div>
 
-          <nav className="breadcrumbs">
-            <ul className="breadcrumbs__list">
-              <li className="breadcrumbs__item">
-                <Link to="/films/1" className="breadcrumbs__link">The Grand Budapest Hotel</Link>
-              </li>
-              <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
-              </li>
-            </ul>
-          </nav>
+          <h1 className="visually-hidden">WTW</h1>
 
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
+          <Header>
+            <nav className="breadcrumbs">
+              <ul className="breadcrumbs__list">
+                <li className="breadcrumbs__item">
+                  <Link to={`/films/` + movie.id} className="breadcrumbs__link">{movie.name}</Link>
+                </li>
+                <li className="breadcrumbs__item">
+                  <a className="breadcrumbs__link">Add review</a>
+                </li>
+              </ul>
+            </nav>
+          </Header>
+
+          <div className="movie-card__poster movie-card__poster--small">
+            <img src={movie.posterImage} alt={movie.name} width="218" height="327"/>
           </div>
-        </header>
-
-        <div className="movie-card__poster movie-card__poster--small">
-          <img src="/img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327"/>
         </div>
-      </div>
 
-      <div className="add-review">
-        <ReviewForm />
-      </div>
+        <div className="add-review">
+          <ReviewForm id={id}/>
+        </div>
 
-    </section>
-  );
+      </section>
+    );
+  }
+}
+
+AddReview.propTypes = {
+  id: PropTypes.string.isRequired,
+  movie: MovieTypes.item,
+  fetchCurrentMovie: PropTypes.func.isRequired,
+  flushCurrentMovie: PropTypes.func.isRequired,
 };
 
-export default AddReview;
+const mapStateToProps = (state) => ({
+  movie: currentMovieSelector(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchCurrentMovie(movieId) {
+    dispatch(fetchCurrentMovie(movieId));
+  },
+  flushCurrentMovie() {
+    dispatch(flushCurrentMovie());
+  },
+});
+
+export {AddReview};
+export default connect(mapStateToProps, mapDispatchToProps)(AddReview);

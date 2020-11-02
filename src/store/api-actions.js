@@ -55,3 +55,8 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(({data}) => dispatch(loadUser(data)))
     .then(() => dispatch(redirectToRoute(AppRoute.ROOT)))
 );
+
+export const addReview = ({id, rating, comment}) => (dispatch, _getState, api) => (
+  api.post(APIRoute.MOVIE_REVIEWS + `/${id}`, {rating, comment})
+    .then(() => dispatch(redirectToRoute(AppRoute.FILMS + `/${id}`)))
+);
