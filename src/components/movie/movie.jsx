@@ -9,6 +9,7 @@ import {connect} from "react-redux";
 import {relatedMoviesSelector, currentMovieSelector} from "../../store/selectors";
 import {fetchCurrentMovie} from "../../store/api-actions";
 import {flushCurrentMovie} from "../../store/action";
+import {AuthorizationStatus} from "../../const";
 
 class Movie extends PureComponent {
   constructor(props) {
@@ -24,11 +25,15 @@ class Movie extends PureComponent {
   }
 
   render() {
-    const {relatedMovies, onPlayButtonClick, movie} = this.props;
+    const {relatedMovies, onPlayButtonClick, movie, authorizationStatus} = this.props;
 
     if (!movie) {
       return null;
     }
+
+    const addReviewLink = authorizationStatus === AuthorizationStatus.AUTH ?
+      <Link to="/films/1/review" className="btn movie-card__button">Add review</Link> :
+      null;
 
     return (
       <Fragment>
@@ -63,7 +68,7 @@ class Movie extends PureComponent {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <Link to="/films/1/review" className="btn movie-card__button">Add review</Link>
+                  {addReviewLink}
                 </div>
               </div>
             </div>
@@ -113,12 +118,14 @@ Movie.propTypes = {
   relatedMovies: MovieTypes.listWithPagination,
   onPlayButtonClick: PropTypes.func.isRequired,
   fetchCurrentMovie: PropTypes.func.isRequired,
-  flushCurrentMovie: PropTypes.func.isRequired
+  flushCurrentMovie: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   relatedMovies: relatedMoviesSelector(state),
-  movie: currentMovieSelector(state)
+  movie: currentMovieSelector(state),
+  authorizationStatus: state.USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -127,7 +134,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   flushCurrentMovie() {
     dispatch(flushCurrentMovie());
-  }
+  },
 });
 
 export {Movie};
