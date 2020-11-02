@@ -31,8 +31,8 @@ const App = (props) => {
         <Route path="/my-list" exact>
           <MyList />
         </Route>
-        <Route path="/films/:id" exact render={({history}) => (
-          <Movie onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)} />
+        <Route path="/films/:id" exact render={({history, match}) => (
+          <Movie id={match.params.id} onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)} />
         )} />
         <PrivateRoute path="/films/:id/review" exact render={() => <AddReview />} />
         <Route path="/player/:id" exact render={({history}) => {

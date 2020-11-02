@@ -16,6 +16,10 @@ export const promoMovieSelector = (state) => {
   return state[NameSpace.MOVIES].promo;
 };
 
+export const currentMovieSelector = (state) => {
+  return state[NameSpace.MOVIES].currentMovie;
+};
+
 export const currentFilterIdSelector = (state) => {
   return state[NameSpace.MOVIES].filterGenreId;
 };

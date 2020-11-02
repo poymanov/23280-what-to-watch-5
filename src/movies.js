@@ -55,3 +55,26 @@ export const initPagination = (moviesData) => {
     hasNext, lastPosition
   };
 };
+
+export const buildReviews = (reviewsData) => {
+  const reviews = [];
+
+  reviewsData.forEach((item) => {
+    reviews.push(buildReview(item));
+  });
+
+  return reviews;
+};
+
+export const buildReview = (reviewData) => {
+  return {
+    id: reviewData.id,
+    comment: reviewData.comment,
+    date: reviewData.date,
+    rating: reviewData.rating,
+    user: {
+      id: reviewData.user.id,
+      name: reviewData.user.name,
+    }
+  };
+};
