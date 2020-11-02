@@ -18,18 +18,18 @@ const movie = PropTypes.shape({
   genre: PropTypes.string.isRequired,
   released: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-}).isRequired;
+});
 
 const MovieTypes = {
   item: movie,
   promo: movie,
-  list: PropTypes.arrayOf(movie).isRequired,
+  list: PropTypes.arrayOf(movie.isRequired).isRequired,
   listWithPagination: PropTypes.shape({
-    items: PropTypes.arrayOf(movie).isRequired,
+    items: PropTypes.arrayOf(movie.isRequired).isRequired,
     pagination: PropTypes.shape({
       lastItemId: PropTypes.number.isRequired,
       hasNext: PropTypes.bool.isRequired,
-    }).isRequired,
+    }),
   }),
 };
 

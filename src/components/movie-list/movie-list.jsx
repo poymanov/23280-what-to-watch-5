@@ -7,6 +7,10 @@ import withActiveItem from "../../hocs/with-active-item";
 const MovieItemWrapped = withActiveItem(MovieItem);
 
 const MovieList = ({movies}) => {
+  if (!movies) {
+    return null;
+  }
+
   let showMore = null;
 
   if (movies.pagination.hasNext) {

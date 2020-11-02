@@ -1,22 +1,56 @@
-import React from "react";
+import React, {PureComponent} from "react";
+import {connect} from "react-redux";
+import UserTypes from "../../types/user";
+import AuthUser from "../auth-user/auth-user";
+import NotAuthUser from "../not-auth-user/not-auth-user";
 import {Link} from "react-router-dom";
+import {checkAuth} from "../../store/api-actions";
+import PropTypes from "prop-types";
 
-const Header = () => {
-  return (
-    <header className="page-header movie-card__head">
-      <div className="logo">
-        <Link to="/" className="logo__link">
-          <span className="logo__letter logo__letter--1">W</span>
-          <span className="logo__letter logo__letter--2">T</span>
-          <span className="logo__letter logo__letter--3">W</span>
-        </Link>
-      </div>
+class Header extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
 
-      <div className="user-block">
-        <Link to="/login" className="user-block__link">Sign in</Link>
-      </div>
-    </header>
-  );
+  componentDidMount() {
+    this.props.checkAuth();
+  }
+
+  render() {
+    const {currentUser} = this.props;
+
+    const userBlock = currentUser ? <AuthUser currentUser={currentUser}/> : <NotAuthUser/>;
+
+    return (
+      <header className="page-header movie-card__head">
+        <div className="logo">
+          <Link to="/" className="logo__link">
+            <span className="logo__letter logo__letter--1">W</span>
+            <span className="logo__letter logo__letter--2">T</span>
+            <span className="logo__letter logo__letter--3">W</span>
+          </Link>
+        </div>
+
+        {userBlock}
+      </header>
+    );
+  }
+}
+
+Header.propTypes = {
+  currentUser: UserTypes.currentUser,
+  checkAuth: PropTypes.func.isRequired
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  currentUser: state.USER.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  checkAuth() {
+    dispatch(checkAuth());
+  },
+});
+
+export {Header};
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
