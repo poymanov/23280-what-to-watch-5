@@ -20,7 +20,20 @@ const movie = PropTypes.shape({
   isFavorite: PropTypes.bool.isRequired,
 });
 
+const review = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  comment: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  })
+});
+
 const MovieTypes = {
+  reviewItem: review,
+  reviewsList: PropTypes.arrayOf(review.isRequired),
   item: movie,
   promo: movie,
   list: PropTypes.arrayOf(movie.isRequired).isRequired,

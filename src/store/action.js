@@ -4,6 +4,9 @@ export const ActionType = {
   LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
   LOAD_USER: `LOAD_USER`,
   LOAD_MOVIES_PAGINATION: `LOAD_MOVIES_PAGINATION`,
+  LOAD_CURRENT_MOVIE: `LOAD_CURRENT_MOVIE`,
+  LOAD_MOVIE_REVIEWS: `LOAD_MOVIE_REVIEWS`,
+  FLUSH_CURRENT_MOVIE: `FLUSH_CURRENT_MOVIE`,
   CHANGE_GENRE_FILTER: `CHANGE_GENRE_FILTER`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
@@ -23,6 +26,20 @@ export const loadGenres = (movies) => ({
 export const loadPromoMovie = (movie) => ({
   type: ActionType.LOAD_PROMO_MOVIE,
   payload: movie,
+});
+
+export const loadCurrentMovie = (movie) => ({
+  type: ActionType.LOAD_CURRENT_MOVIE,
+  payload: movie,
+});
+
+export const loadMovieReviews = (reviews) => ({
+  type: ActionType.LOAD_MOVIE_REVIEWS,
+  payload: reviews,
+});
+
+export const flushCurrentMovie = () => ({
+  type: ActionType.FLUSH_CURRENT_MOVIE,
 });
 
 export const changeGenreFilter = (genreId) => ({
