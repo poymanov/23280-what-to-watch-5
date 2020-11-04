@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Player render correctly Paused 1`] = `
+<video
+  className="player__video"
+  onEnded={[Function]}
+  onTimeUpdate={[Function]}
+/>
+`;
+
+exports[`Should Player render correctly Playing 1`] = `
+<video
+  className="player__video"
+  onEnded={[Function]}
+  onTimeUpdate={[Function]}
+/>
+`;

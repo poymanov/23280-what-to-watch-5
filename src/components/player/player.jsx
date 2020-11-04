@@ -12,6 +12,10 @@ class Player extends PureComponent {
   componentDidUpdate() {
     const video = this.videoRef.current;
 
+    if (!video) {
+      return;
+    }
+
     if (this.props.isPlaying) {
       video.play();
     } else {
@@ -22,6 +26,10 @@ class Player extends PureComponent {
   componentDidMount() {
     const {movie, initVideo} = this.props;
     const player = this.videoRef.current;
+
+    if (!player) {
+      return;
+    }
 
     player.src = movie.videoLink;
     player.poster = movie.previewImage;
