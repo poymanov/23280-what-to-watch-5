@@ -42,7 +42,7 @@ const MovieTypes = {
     pagination: PropTypes.shape({
       lastItemId: PropTypes.number.isRequired,
       hasNext: PropTypes.bool.isRequired,
-    }),
+    }).isRequired,
   }),
 };
 

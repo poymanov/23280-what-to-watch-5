@@ -56,7 +56,7 @@ class Movie extends PureComponent {
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button" onClick={() => onPlayButtonClick(1)}>
+                  <button className="btn btn--play movie-card__button" type="button" onClick={() => onPlayButtonClick(movie.id)}>
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use href="#play-s"/>
                     </svg>
