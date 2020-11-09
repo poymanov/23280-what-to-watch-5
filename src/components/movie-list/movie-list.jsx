@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import MovieItem from "../movie-item/movie-item";
 import MovieTypes from "../../types/movies";
 import ShowMoreMovies from "../show-more-movies/show-more-movies";
-import withActiveItem from "../../hocs/with-active-item";
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
 
 const MovieItemWrapped = withActiveItem(MovieItem);
 

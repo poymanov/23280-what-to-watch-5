@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should PromoMovie render correctly With movie 1`] = `
+Array [
+  <div
+    className="movie-card__bg"
+    style={
+      Object {
+        "backgroundColor": "test",
+      }
+    }
+  >
+    <img
+      alt="test"
+      src="test"
+    />
+  </div>,
+  <div
+    className="movie-card__wrap"
+  >
+    <div
+      className="movie-card__info"
+    >
+      <div
+        className="movie-card__poster"
+      >
+        <img
+          alt="test poster"
+          height="327"
+          src="test"
+          width="218"
+        />
+      </div>
+      <div
+        className="movie-card__desc"
+      >
+        <h2
+          className="movie-card__title"
+        >
+          test
+        </h2>
+        <p
+          className="movie-card__meta"
+        >
+          <span
+            className="movie-card__genre"
+          >
+            test
+          </span>
+          <span
+            className="movie-card__year"
+          >
+            1
+          </span>
+        </p>
+        <div
+          className="movie-card__buttons"
+        >
+          <button
+            className="btn btn--play movie-card__button"
+            onClick={[Function]}
+            type="button"
+          >
+            <svg
+              height="19"
+              viewBox="0 0 19 19"
+              width="19"
+            >
+              <use
+                href="#play-s"
+              />
+            </svg>
+            <span>
+              Play
+            </span>
+          </button>
+          <button
+            className="btn btn--list movie-card__button"
+            type="button"
+          >
+            <svg
+              height="20"
+              viewBox="0 0 19 20"
+              width="19"
+            >
+              <use
+                href="#add"
+              />
+            </svg>
+            <span>
+              My list
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`Should PromoMovie render correctly Without movie 1`] = `null`;

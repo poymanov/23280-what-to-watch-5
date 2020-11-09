@@ -1,8 +1,8 @@
 import React, {PureComponent, Fragment} from "react";
-import {calculateTimeData, calculatePlayingPosition, calculateElapsedData} from "../player";
-import MovieTypes from "../types/movies";
+import {calculateTimeData, calculatePlayingPosition, calculateElapsedData} from "../../player";
+import MovieTypes from "../../types/movies";
 import PropTypes from "prop-types";
-import PlayerPlayingControls from "../components/player-playing-controls/player-playing-controls";
+import PlayerPlayingControls from "../../components/player-playing-controls/player-playing-controls";
 
 const withPlayerControls = (Component) => {
   class WithPlayerControls extends PureComponent {

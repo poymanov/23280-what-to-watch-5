@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should PreviewPlayer render correctly 1`] = `
+<video
+  autoPlay={true}
+  height="175"
+  muted={true}
+  poster="test"
+  src="test"
+  width="336"
+/>
+`;

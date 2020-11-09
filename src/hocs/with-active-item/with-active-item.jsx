@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import MovieTypes from "../types/movies";
+import MovieTypes from "../../types/movies";
 
 const withActiveItem = (Component) => {
   class WithActiveItem extends PureComponent {
