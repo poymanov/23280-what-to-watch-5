@@ -7,7 +7,6 @@ import App from "./components/app/app";
 import rootReducer from "./store/reducers/root-reducer";
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
-
 import {requireAuthorization} from "./store/action";
 import {AuthorizationStatus} from "./const";
 import {redirect} from "./store/middlewares/redirect";

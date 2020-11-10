@@ -43,3 +43,9 @@ export const authFormErrorSelector = (state) => {
 export const reviewFormErrorSelector = (state) => {
   return state[NameSpace.MOVIES].reviewFormError;
 };
+
+export const playingMovieSelector = (state) => {
+  const currentMovie = state[NameSpace.MOVIES].currentMovie;
+  const promoMovie = state[NameSpace.MOVIES].promo;
+  return currentMovie ? currentMovie : promoMovie;
+};

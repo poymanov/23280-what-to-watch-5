@@ -8,7 +8,6 @@ import {
   fetchMoviesList, fetchPromoMovie, fetchCurrentMovie,
   fetchMovieReviews, fetchUserFavorites, addReview, addMovieToFavorite
 } from "../../api-actions";
-import {user} from "../user/user";
 
 const api = createAPI(() => {});
 
