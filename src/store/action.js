@@ -7,6 +7,7 @@ export const ActionType = {
   LOAD_CURRENT_MOVIE: `LOAD_CURRENT_MOVIE`,
   LOAD_MOVIE_REVIEWS: `LOAD_MOVIE_REVIEWS`,
   LOAD_USER_FAVORITES: `LOAD_USER_FAVORITES`,
+  LOAD_MOVIE_RELATED: `LOAD_MOVIE_RELATED`,
   FLUSH_CURRENT_MOVIE: `FLUSH_CURRENT_MOVIE`,
   CHANGE_GENRE_FILTER: `CHANGE_GENRE_FILTER`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
@@ -36,6 +37,11 @@ export const loadCurrentMovie = (movie) => ({
 export const loadMovieReviews = (reviews) => ({
   type: ActionType.LOAD_MOVIE_REVIEWS,
   payload: reviews,
+});
+
+export const loadMovieRelated = (movies) => ({
+  type: ActionType.LOAD_MOVIE_RELATED,
+  payload: movies,
 });
 
 export const loadUserFavorites = (movies) => ({

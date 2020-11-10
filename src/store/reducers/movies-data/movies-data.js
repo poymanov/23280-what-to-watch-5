@@ -1,6 +1,6 @@
 import {ActionType} from "../../action";
 import {extend} from "../../../utils";
-import {buildMovie, buildMovies, buildReviews} from "../../../movies";
+import {buildMovie, buildMovies, buildReviews, buildRelatedMovies} from "../../../movies";
 
 const initialState = {
   promo: null,
@@ -8,6 +8,7 @@ const initialState = {
   filterGenreId: `All`,
   currentMovie: null,
   currentMovieReviews: [],
+  currentMovieRelated: [],
   userFavorites: [],
 };
 
@@ -36,6 +37,10 @@ const moviesData = (state = initialState, action) => {
     case ActionType.LOAD_MOVIE_REVIEWS:
       return extend(state, {
         currentMovieReviews: buildReviews(action.payload),
+      });
+    case ActionType.LOAD_MOVIE_RELATED:
+      return extend(state, {
+        currentMovieRelated: buildRelatedMovies(state.currentMovie, action.payload),
       });
     case ActionType.CHANGE_GENRE_FILTER:
       return extend(state, {filterGenreId: action.payload});

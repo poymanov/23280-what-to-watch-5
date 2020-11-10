@@ -79,6 +79,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     filterGenreId: `All`,
     currentMovie: null,
     currentMovieReviews: [],
+    currentMovieRelated: [],
     userFavorites: []
   });
 });
@@ -133,6 +134,16 @@ it(`Reducer should update movie reviews`, () => {
     payload: reviews
   })).toEqual({
     currentMovieReviews: reviews,
+  });
+});
+
+it(`Reducer should update current movie related`, () => {
+  expect(moviesData({currentMovie: movie2}, {
+    type: ActionType.LOAD_MOVIE_RELATED,
+    payload: rawMovies
+  })).toEqual({
+    currentMovie: movie2,
+    currentMovieRelated: [movie3],
   });
 });
 
@@ -196,6 +207,10 @@ describe(`Async operation work correctly`, () => {
 
     apiMock
       .onGet(APIRoute.FILMS + `/1`)
+      .reply(200, [{fake: true}]);
+
+    apiMock
+      .onGet(APIRoute.FILMS)
       .reply(200, [{fake: true}]);
 
     return currentMovieLoader(dispatch, () => {}, api)

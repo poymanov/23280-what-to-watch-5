@@ -9,7 +9,7 @@ import {
   changeGenreFilter,
   requireAuthorization,
   loadUser,
-  redirectToRoute, ActionType
+  redirectToRoute, ActionType, loadMovieRelated
 } from "./action";
 import {AuthorizationStatus} from "../const";
 
@@ -69,6 +69,13 @@ describe(`Action creators work correctly`, () => {
     expect(loadMovieReviews(movie)).toEqual({
       type: ActionType.LOAD_MOVIE_REVIEWS,
       payload: reviews,
+    });
+  });
+
+  it(`Action creator for load movie related returns correct action`, () => {
+    expect(loadMovieRelated(movies)).toEqual({
+      type: ActionType.LOAD_MOVIE_RELATED,
+      payload: movies,
     });
   });
 

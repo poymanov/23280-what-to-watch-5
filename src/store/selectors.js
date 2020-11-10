@@ -21,7 +21,7 @@ export const myListMoviesSelector = (state) => {
 };
 
 export const relatedMoviesSelector = (state) => {
-  return state[NameSpace.MOVIES].list;
+  return state[NameSpace.MOVIES].currentMovieRelated;
 };
 
 export const promoMovieSelector = (state) => {

@@ -19,6 +19,12 @@ class Movie extends PureComponent {
     this.props.fetchCurrentMovie(this.props.id);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.movie !== this.props.movie) {
+      this.props.fetchCurrentMovie(this.props.id);
+    }
+  }
+
   componentWillUnmount() {
     this.props.flushCurrentMovie();
   }
@@ -142,7 +148,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addToFavorite(movieId) {
     dispatch(addMovieToFavorite(movieId));
-  }
+  },
 });
 
 export {Movie};

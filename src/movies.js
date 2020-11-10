@@ -1,5 +1,3 @@
-const MOVIES_PER_PAGE = 8;
-
 export const buildMovie = (movieData) => {
   return {
     id: movieData.id,
@@ -32,15 +30,6 @@ export const buildMovies = (moviesData) => {
   return movies;
 };
 
-export const initPagination = (moviesData) => {
-  const hasNext = moviesData.length > MOVIES_PER_PAGE;
-  const lastPosition = hasNext ? MOVIES_PER_PAGE : 0;
-
-  return {
-    hasNext, lastPosition
-  };
-};
-
 export const buildReviews = (reviewsData) => {
   const reviews = [];
 
@@ -62,4 +51,12 @@ export const buildReview = (reviewData) => {
       name: reviewData.user.name,
     }
   };
+};
+
+export const buildRelatedMovies = (currentMovie, movies) => {
+  movies = movies.filter((movie) => {
+    return movie.genre === currentMovie.genre && movie.id !== currentMovie.id;
+  });
+
+  return buildMovies(movies.slice(0, 4));
 };
