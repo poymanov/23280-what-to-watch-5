@@ -9,6 +9,8 @@ export const ActionType = {
   LOAD_MOVIE_REVIEWS: `LOAD_MOVIE_REVIEWS`,
   LOAD_USER_FAVORITES: `LOAD_USER_FAVORITES`,
   LOAD_MOVIE_RELATED: `LOAD_MOVIE_RELATED`,
+  LOAD_REVIEW_FORM_ERROR: `LOAD_REVIEW_FORM_ERROR`,
+  FLUSH_REVIEW_FORM_ERROR: `FLUSH_REVIEW_FORM_ERROR`,
   FLUSH_CURRENT_MOVIE: `FLUSH_CURRENT_MOVIE`,
   CHANGE_GENRE_FILTER: `CHANGE_GENRE_FILTER`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
@@ -50,8 +52,17 @@ export const loadUserFavorites = (movies) => ({
   payload: movies,
 });
 
+export const loadReviewFormError = (error) => ({
+  type: ActionType.LOAD_REVIEW_FORM_ERROR,
+  payload: error,
+});
+
 export const flushCurrentMovie = () => ({
   type: ActionType.FLUSH_CURRENT_MOVIE,
+});
+
+export const flushReviewFormError = () => ({
+  type: ActionType.FLUSH_REVIEW_FORM_ERROR,
 });
 
 export const changeGenreFilter = (genreId) => ({

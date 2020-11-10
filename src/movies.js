@@ -54,6 +54,10 @@ export const buildReview = (reviewData) => {
 };
 
 export const buildRelatedMovies = (currentMovie, movies) => {
+  if (!currentMovie || !movies) {
+    return [];
+  }
+
   movies = movies.filter((movie) => {
     return movie.genre === currentMovie.genre && movie.id !== currentMovie.id;
   });

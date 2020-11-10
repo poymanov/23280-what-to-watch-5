@@ -9,7 +9,7 @@ import {
   changeGenreFilter,
   requireAuthorization,
   loadUser,
-  redirectToRoute, ActionType, loadMovieRelated, loadAuthFormError
+  redirectToRoute, ActionType, loadMovieRelated, loadAuthFormError, loadReviewFormError, flushReviewFormError
 } from "./action";
 import {AuthorizationStatus} from "../const";
 
@@ -79,6 +79,13 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
+  it(`Action creator for load review form error returns correct action`, () => {
+    expect(loadReviewFormError(`error`)).toEqual({
+      type: ActionType.LOAD_REVIEW_FORM_ERROR,
+      payload: `error`,
+    });
+  });
+
   it(`Action creator for load user favorites returns correct action`, () => {
     expect(loadUserFavorites(movies)).toEqual({
       type: ActionType.LOAD_USER_FAVORITES,
@@ -89,6 +96,12 @@ describe(`Action creators work correctly`, () => {
   it(`Action creator for flush current movie returns correct action`, () => {
     expect(flushCurrentMovie()).toEqual({
       type: ActionType.FLUSH_CURRENT_MOVIE,
+    });
+  });
+
+  it(`Action creator for flush review form error returns correct action`, () => {
+    expect(flushReviewFormError()).toEqual({
+      type: ActionType.FLUSH_REVIEW_FORM_ERROR,
     });
   });
 

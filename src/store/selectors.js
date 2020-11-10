@@ -39,3 +39,7 @@ export const isUserAuthSelector = (state) => {
 export const authFormErrorSelector = (state) => {
   return state[NameSpace.USER].authFormError;
 };
+
+export const reviewFormErrorSelector = (state) => {
+  return state[NameSpace.MOVIES].reviewFormError;
+};

@@ -8,6 +8,7 @@ import {
   fetchMoviesList, fetchPromoMovie, fetchCurrentMovie,
   fetchMovieReviews, fetchUserFavorites, addReview, addMovieToFavorite
 } from "../../api-actions";
+import {user} from "../user/user";
 
 const api = createAPI(() => {});
 
@@ -80,7 +81,8 @@ it(`Reducer without additional parameters should return initial state`, () => {
     currentMovie: null,
     currentMovieReviews: [],
     currentMovieRelated: [],
-    userFavorites: []
+    userFavorites: [],
+    reviewFormError: null,
   });
 });
 
@@ -107,6 +109,14 @@ it(`Reducer should flush current movie`, () => {
     type: ActionType.FLUSH_CURRENT_MOVIE,
   })).toEqual({
     currentMovie: null,
+  });
+});
+
+it(`Reducer should flush review form error`, () => {
+  expect(moviesData({reviewFormError: `error`}, {
+    type: ActionType.FLUSH_REVIEW_FORM_ERROR,
+  })).toEqual({
+    reviewFormError: null,
   });
 });
 
@@ -144,6 +154,15 @@ it(`Reducer should update current movie related`, () => {
   })).toEqual({
     currentMovie: movie2,
     currentMovieRelated: [movie3],
+  });
+});
+
+it(`Reducer should update review form error to user data`, () => {
+  expect(moviesData({}, {
+    type: ActionType.LOAD_REVIEW_FORM_ERROR,
+    payload: `error`
+  })).toEqual({
+    reviewFormError: `error`,
   });
 });
 
