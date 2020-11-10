@@ -35,3 +35,7 @@ export const currentMovieSelector = (state) => {
 export const isUserAuthSelector = (state) => {
   return state[NameSpace.USER].authorizationStatus === AuthorizationStatus.AUTH;
 };
+
+export const authFormErrorSelector = (state) => {
+  return state[NameSpace.USER].authFormError;
+};

@@ -47,6 +47,11 @@ exports[`Should SignIn render correctly 1`] = `
       onSubmit={[Function]}
     >
       <div
+        className="sign-in__message"
+      >
+        <p />
+      </div>
+      <div
         className="sign-in__fields"
       >
         <div

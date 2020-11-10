@@ -3,6 +3,7 @@ export const ActionType = {
   LOAD_GENRES: `LOAD_GENRES`,
   LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
   LOAD_USER: `LOAD_USER`,
+  LOAD_AUTH_FORM_ERROR: `LOAD_AUTH_FORM_ERROR`,
   LOAD_MOVIES_PAGINATION: `LOAD_MOVIES_PAGINATION`,
   LOAD_CURRENT_MOVIE: `LOAD_CURRENT_MOVIE`,
   LOAD_MOVIE_REVIEWS: `LOAD_MOVIE_REVIEWS`,
@@ -66,6 +67,11 @@ export const requireAuthorization = (status) => ({
 export const loadUser = (user) => ({
   type: ActionType.LOAD_USER,
   payload: user,
+});
+
+export const loadAuthFormError = (error) => ({
+  type: ActionType.LOAD_AUTH_FORM_ERROR,
+  payload: error,
 });
 
 export const redirectToRoute = (url) => ({

@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
+import {authFormErrorSelector} from "../../store/selectors";
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -26,6 +27,8 @@ class SignIn extends PureComponent {
   }
 
   render() {
+    const {error} = this.props;
+
     return (
       <div className="user-page">
         <header className="page-header user-page__head">
@@ -42,6 +45,9 @@ class SignIn extends PureComponent {
 
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form" onSubmit={this.handleSubmit}>
+            <div className="sign-in__message">
+              <p>{error}</p>
+            </div>
             <div className="sign-in__fields">
               <div className="sign-in__field">
                 <input ref={this.loginRef} className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email"/>
@@ -78,7 +84,12 @@ class SignIn extends PureComponent {
 
 SignIn.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  error: PropTypes.string.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  error: authFormErrorSelector(state)
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
@@ -87,4 +98,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {SignIn};
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

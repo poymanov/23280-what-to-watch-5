@@ -10,7 +10,8 @@ const api = createAPI(() => {});
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(user(void 0, {})).toEqual({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
-    currentUser: null
+    currentUser: null,
+    authFormError: null
   });
 });
 
@@ -41,6 +42,15 @@ it(`Reducer should update currentUser to user data`, () => {
       name: `Oliver.conner`,
       avatarUrl: `img/1.png`
     },
+  });
+});
+
+it(`Reducer should update auth form error to user data`, () => {
+  expect(user({}, {
+    type: ActionType.LOAD_AUTH_FORM_ERROR,
+    payload: `error`
+  })).toEqual({
+    authFormError: `error`,
   });
 });
 

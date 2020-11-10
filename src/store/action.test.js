@@ -9,7 +9,7 @@ import {
   changeGenreFilter,
   requireAuthorization,
   loadUser,
-  redirectToRoute, ActionType, loadMovieRelated
+  redirectToRoute, ActionType, loadMovieRelated, loadAuthFormError
 } from "./action";
 import {AuthorizationStatus} from "../const";
 
@@ -110,6 +110,13 @@ describe(`Action creators work correctly`, () => {
     expect(loadUser(user)).toEqual({
       type: ActionType.LOAD_USER,
       payload: user,
+    });
+  });
+
+  it(`Action creator for load auth form error returns correct action`, () => {
+    expect(loadAuthFormError(`error`)).toEqual({
+      type: ActionType.LOAD_AUTH_FORM_ERROR,
+      payload: `error`,
     });
   });
 

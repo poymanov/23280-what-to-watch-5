@@ -1,7 +1,7 @@
 import {
   loadGenres, loadMovies, loadPromoMovie, loadCurrentMovie,
   requireAuthorization, redirectToRoute,
-  loadUser, loadMovieReviews, loadUserFavorites, loadMovieRelated
+  loadUser, loadMovieReviews, loadUserFavorites, loadMovieRelated, loadAuthFormError
 } from "./action";
 import {AuthorizationStatus, AppRoute, APIRoute} from "../const";
 
@@ -62,6 +62,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     })
     .then(({data}) => dispatch(loadUser(data)))
     .then(() => dispatch(redirectToRoute(AppRoute.ROOT)))
+    .catch(({response}) => dispatch(loadAuthFormError(response.data.error)))
 );
 
 export const addReview = ({id, rating, comment}) => (dispatch, _getState, api) => (
