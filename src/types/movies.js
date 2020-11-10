@@ -36,14 +36,7 @@ const MovieTypes = {
   reviewsList: PropTypes.arrayOf(review.isRequired),
   item: movie,
   promo: movie,
-  list: PropTypes.arrayOf(movie.isRequired).isRequired,
-  listWithPagination: PropTypes.shape({
-    items: PropTypes.arrayOf(movie.isRequired).isRequired,
-    pagination: PropTypes.shape({
-      lastItemId: PropTypes.number.isRequired,
-      hasNext: PropTypes.bool.isRequired,
-    }).isRequired,
-  }),
+  list: PropTypes.arrayOf(movie.isRequired),
 };
 
 export default MovieTypes;

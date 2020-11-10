@@ -26,13 +26,7 @@ const movie = {
   isFavorite: false,
 };
 
-const relatedMovies = {
-  items: [movie],
-  pagination: {
-    lastItemId: 0,
-    hasNext: false
-  }
-};
+const relatedMovies = [movie];
 
 const noop = () => {};
 

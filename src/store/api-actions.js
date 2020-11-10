@@ -1,6 +1,6 @@
 import {
   loadGenres, loadMovies, loadPromoMovie, loadCurrentMovie,
-  changeGenreFilter, requireAuthorization, redirectToRoute,
+  requireAuthorization, redirectToRoute,
   loadUser, loadMovieReviews
 } from "./action";
 import {AuthorizationStatus, AppRoute, APIRoute} from "../const";
@@ -14,9 +14,6 @@ export const fetchMoviesList = () => (dispatch, _getState, api) => (
     .then(({data}) => {
       dispatch(loadGenres(data));
       return {data};
-    })
-    .then(() => {
-      dispatch(changeGenreFilter(`All`));
     })
 );
 

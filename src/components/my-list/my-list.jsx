@@ -50,7 +50,7 @@ const MyList = (props) => {
 };
 
 MyList.propTypes = {
-  movies: MovieTypes.listWithPagination,
+  movies: MovieTypes.list,
 };
 
 const mapStateToProps = (state) => ({

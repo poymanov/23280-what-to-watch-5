@@ -9,7 +9,6 @@ export const ActionType = {
   FLUSH_CURRENT_MOVIE: `FLUSH_CURRENT_MOVIE`,
   CHANGE_GENRE_FILTER: `CHANGE_GENRE_FILTER`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
-  SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
@@ -45,11 +44,6 @@ export const flushCurrentMovie = () => ({
 export const changeGenreFilter = (genreId) => ({
   type: ActionType.CHANGE_GENRE_FILTER,
   payload: genreId,
-});
-
-export const showMoreMovies = (genreId, nextItemId) => ({
-  type: ActionType.SHOW_MORE_MOVIES,
-  payload: {genreId, nextItemId}
 });
 
 export const requireAuthorization = (status) => ({

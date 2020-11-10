@@ -6,7 +6,6 @@ import {
   loadMovieReviews,
   flushCurrentMovie,
   changeGenreFilter,
-  showMoreMovies,
   requireAuthorization,
   loadUser,
   redirectToRoute, ActionType
@@ -82,13 +81,6 @@ describe(`Action creators work correctly`, () => {
     expect(changeGenreFilter(genreId)).toEqual({
       type: ActionType.CHANGE_GENRE_FILTER,
       payload: genreId,
-    });
-  });
-
-  it(`Action creator for show more movies returns correct action`, () => {
-    expect(showMoreMovies(genreId, 1)).toEqual({
-      type: ActionType.SHOW_MORE_MOVIES,
-      payload: {genreId, nextItemId: 1},
     });
   });
 

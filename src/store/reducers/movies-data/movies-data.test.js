@@ -74,7 +74,6 @@ it(`Reducer without additional parameters should return initial state`, () => {
     promo: null,
     list: [],
     filterGenreId: `All`,
-    main: null,
     currentMovie: null,
     currentMovieReviews: [],
   });
@@ -131,17 +130,6 @@ it(`Reducer should filter movies by genre`, () => {
   })).toEqual({
     filterGenreId: `test2`,
     list: movies,
-    main: {items: [movie2, movie3], pagination: {hasNext: false, lastItemId: 8}},
-  });
-});
-
-it(`Reducer should filter movies by genre and show another films`, () => {
-  expect(moviesData({list: movies}, {
-    type: ActionType.SHOW_MORE_MOVIES,
-    payload: {genreId: `test2`, nextItemId: 3}
-  })).toEqual({
-    list: movies,
-    main: {items: [movie2, movie3], pagination: {hasNext: false, lastItemId: 11}},
   });
 });
 
@@ -157,7 +145,7 @@ describe(`Async operation work correctly`, () => {
 
     return moviesLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_MOVIES,
           payload: [{"fake": true}],
@@ -165,10 +153,6 @@ describe(`Async operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.LOAD_GENRES,
           payload: [{"fake": true}],
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(3, {
-          type: ActionType.CHANGE_GENRE_FILTER,
-          payload: `All`,
         });
       });
   });

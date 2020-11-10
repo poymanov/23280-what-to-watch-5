@@ -115,7 +115,7 @@ class Movie extends PureComponent {
 Movie.propTypes = {
   movie: MovieTypes.item,
   id: PropTypes.string.isRequired,
-  relatedMovies: MovieTypes.listWithPagination,
+  relatedMovies: MovieTypes.list,
   onPlayButtonClick: PropTypes.func.isRequired,
   fetchCurrentMovie: PropTypes.func.isRequired,
   flushCurrentMovie: PropTypes.func.isRequired,

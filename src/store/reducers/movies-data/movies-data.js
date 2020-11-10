@@ -1,12 +1,11 @@
 import {ActionType} from "../../action";
 import {extend} from "../../../utils";
-import {buildMovie, buildMovies, filterMoviesByGenreId, paginateMovies, buildReviews} from "../../../movies";
+import {buildMovie, buildMovies, buildReviews} from "../../../movies";
 
 const initialState = {
   promo: null,
   list: [],
   filterGenreId: `All`,
-  main: null,
   currentMovie: null,
   currentMovieReviews: [],
 };
@@ -34,18 +33,7 @@ const moviesData = (state = initialState, action) => {
         currentMovieReviews: buildReviews(action.payload),
       });
     case ActionType.CHANGE_GENRE_FILTER:
-      const filterGenreId = action.payload;
-      return extend(state, {
-        filterGenreId,
-        main: paginateMovies(filterMoviesByGenreId(state.list, filterGenreId), 0)
-      });
-    case ActionType.SHOW_MORE_MOVIES:
-      const {genreId, nextItemId} = action.payload;
-      const nextMovies = paginateMovies(filterMoviesByGenreId(state.list, genreId), nextItemId);
-
-      return extend(state, {
-        main: nextMovies
-      });
+      return extend(state, {filterGenreId: action.payload});
   }
 
   return state;

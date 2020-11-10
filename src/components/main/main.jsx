@@ -6,8 +6,11 @@ import GenreList from "../genre-list/genre-list";
 import Header from "../header/header";
 import PropTypes from 'prop-types';
 import PromoMovie from "../promo-movie/promo-movie";
-import {mainMoviesSelector} from "../../store/selectors";
+import {moviesByGenreSelector} from "../../store/selectors";
 import {fetchMoviesList} from "../../store/api-actions";
+import withPagination from "../../hocs/with-pagination/with-pagination";
+
+const MovieListWrapped = withPagination(MovieList);
 
 class Main extends PureComponent {
   constructor(props) {
@@ -33,7 +36,7 @@ class Main extends PureComponent {
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
             <GenreList/>
-            <MovieList movies={movies}/>
+            <MovieListWrapped movies={movies}/>
           </section>
 
           <footer className="page-footer">
@@ -56,13 +59,13 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  movies: MovieTypes.listWithPagination,
+  movies: MovieTypes.list,
   onPlayButtonClick: PropTypes.func.isRequired,
   fetchMoviesList: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  movies: mainMoviesSelector(state),
+  movies: moviesByGenreSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

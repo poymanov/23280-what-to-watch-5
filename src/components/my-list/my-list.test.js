@@ -24,18 +24,10 @@ const movies = [{
   isFavorite: false,
 }];
 
-const moviesWithoutPagination = {
-  items: movies,
-  pagination: {
-    lastItemId: 0,
-    hasNext: false
-  }
-};
-
 describe(`Should MyList render correctly`, () => {
   it(`Without pagination`, () => {
     const tree = renderer
-      .create(<BrowserRouter history={browserHistory}><MyList movies={moviesWithoutPagination}/></BrowserRouter>)
+      .create(<BrowserRouter history={browserHistory}><MyList movies={movies}/></BrowserRouter>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
