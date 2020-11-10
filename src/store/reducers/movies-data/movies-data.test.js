@@ -4,7 +4,10 @@ import {ActionType} from "../../action";
 import {moviesData} from "./movies-data";
 import {APIRoute, AppRoute} from "../../../const";
 import {extend} from "../../../utils";
-import {fetchMoviesList, fetchPromoMovie, fetchCurrentMovie, fetchMovieReviews, addReview} from "../../api-actions";
+import {
+  fetchMoviesList, fetchPromoMovie, fetchCurrentMovie,
+  fetchMovieReviews, fetchUserFavorites, addReview, addMovieToFavorite
+} from "../../api-actions";
 
 const api = createAPI(() => {});
 
@@ -76,6 +79,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     filterGenreId: `All`,
     currentMovie: null,
     currentMovieReviews: [],
+    userFavorites: []
   });
 });
 
@@ -111,6 +115,15 @@ it(`Reducer should update movies`, () => {
     payload: rawMovies
   })).toEqual({
     list: movies,
+  });
+});
+
+it(`Reducer should update user favorites`, () => {
+  expect(moviesData({}, {
+    type: ActionType.LOAD_USER_FAVORITES,
+    payload: rawMovies
+  })).toEqual({
+    userFavorites: movies,
   });
 });
 
@@ -229,6 +242,44 @@ describe(`Async operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.REDIRECT_TO_ROUTE,
           payload: AppRoute.FILMS + `/1`,
+        });
+      });
+  });
+
+  it(`Should make a correct API call to add movie to favourite`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const movieFavoriteLoader = addMovieToFavorite(1);
+
+    apiMock
+      .onPost(APIRoute.FAVORITE + `/1/1`)
+      .reply(200);
+
+    return movieFavoriteLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.REDIRECT_TO_ROUTE,
+          payload: AppRoute.FILMS + `/1`,
+        });
+      });
+  });
+
+  it(`Should make a correct API call to load user favorites`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const userFavoritesLoader = fetchUserFavorites();
+
+    apiMock
+      .onGet(APIRoute.FAVORITE)
+      .reply(200, [{fake: true}]);
+
+    return userFavoritesLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_USER_FAVORITES,
+          payload: [{"fake": true}],
         });
       });
   });

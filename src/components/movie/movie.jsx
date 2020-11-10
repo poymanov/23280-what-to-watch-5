@@ -6,10 +6,9 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs";
 import {connect} from "react-redux";
-import {relatedMoviesSelector, currentMovieSelector} from "../../store/selectors";
-import {fetchCurrentMovie} from "../../store/api-actions";
+import {relatedMoviesSelector, currentMovieSelector, isUserAuthSelector} from "../../store/selectors";
+import {fetchCurrentMovie, addMovieToFavorite} from "../../store/api-actions";
 import {flushCurrentMovie} from "../../store/action";
-import {AuthorizationStatus} from "../../const";
 
 class Movie extends PureComponent {
   constructor(props) {
@@ -25,15 +24,25 @@ class Movie extends PureComponent {
   }
 
   render() {
-    const {relatedMovies, onPlayButtonClick, movie, authorizationStatus} = this.props;
+    const {relatedMovies, onPlayButtonClick, movie, isUserAuth, addToFavorite} = this.props;
 
     if (!movie) {
       return null;
     }
 
-    const addReviewLink = authorizationStatus === AuthorizationStatus.AUTH ?
-      <Link to={`/films/${movie.id}/review`} className="btn movie-card__button">Add review</Link> :
-      null;
+    let addReviewLink = null;
+    let addToListButton = null;
+
+    if (isUserAuth) {
+      addReviewLink = <Link to={`/films/${movie.id}/review`} className="btn movie-card__button">Add review</Link>;
+
+      addToListButton = <button className="btn btn--list movie-card__button" type="button" onClick={() => addToFavorite(movie.id)}>
+        <svg viewBox="0 0 19 20" width="19" height="20">
+          <use href="#add"/>
+        </svg>
+        <span>My list</span>
+      </button>;
+    }
 
     return (
       <Fragment>
@@ -62,12 +71,7 @@ class Movie extends PureComponent {
                     </svg>
                     <span>Play</span>
                   </button>
-                  <button className="btn btn--list movie-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use href="#add"/>
-                    </svg>
-                    <span>My list</span>
-                  </button>
+                  {addToListButton}
                   {addReviewLink}
                 </div>
               </div>
@@ -119,13 +123,14 @@ Movie.propTypes = {
   onPlayButtonClick: PropTypes.func.isRequired,
   fetchCurrentMovie: PropTypes.func.isRequired,
   flushCurrentMovie: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
+  addToFavorite: PropTypes.func.isRequired,
+  isUserAuth: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   relatedMovies: relatedMoviesSelector(state),
   movie: currentMovieSelector(state),
-  authorizationStatus: state.USER.authorizationStatus,
+  isUserAuth: isUserAuthSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -135,6 +140,9 @@ const mapDispatchToProps = (dispatch) => ({
   flushCurrentMovie() {
     dispatch(flushCurrentMovie());
   },
+  addToFavorite(movieId) {
+    dispatch(addMovieToFavorite(movieId));
+  }
 });
 
 export {Movie};

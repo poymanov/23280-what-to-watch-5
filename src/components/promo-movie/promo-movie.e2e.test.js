@@ -30,7 +30,7 @@ const movie = {
 it(`Fetch promo movie`, () => {
   const fetchCurrentMovie = jest.fn();
 
-  shallow(<PromoMovie promo={movie} fetchPromoMovie={fetchCurrentMovie} onPlayButtonClick={noop} />);
+  shallow(<PromoMovie isUserAuth={false} addToFavorite={noop} promo={movie} fetchPromoMovie={fetchCurrentMovie} onPlayButtonClick={noop} />);
 
   expect(fetchCurrentMovie).toHaveBeenCalledTimes(1);
 });
@@ -38,7 +38,7 @@ it(`Fetch promo movie`, () => {
 it(`Click play button`, () => {
   const onPlayButtonClick = jest.fn();
 
-  const wrapper = shallow(<PromoMovie promo={movie} fetchPromoMovie={noop} onPlayButtonClick={onPlayButtonClick} />);
+  const wrapper = shallow(<PromoMovie isUserAuth={false} addToFavorite={noop} promo={movie} fetchPromoMovie={noop} onPlayButtonClick={onPlayButtonClick} />);
 
   const playButton = wrapper.find(`button.btn--play`);
   playButton.simulate(`click`);

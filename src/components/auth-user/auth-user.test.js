@@ -1,6 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import AuthUser from "./auth-user";
+import {Router as BrowserRouter} from "react-router-dom";
+import browserHistory from "../../browser-history";
 
 const currentUser = {
   id: 1,
@@ -11,7 +13,7 @@ const currentUser = {
 
 it(`Should AuthUser render correctly`, () => {
   const tree = renderer
-    .create(<AuthUser currentUser={currentUser} />)
+    .create(<BrowserRouter history={browserHistory}><AuthUser currentUser={currentUser} /></BrowserRouter>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

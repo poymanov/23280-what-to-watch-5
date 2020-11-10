@@ -8,6 +8,7 @@ const initialState = {
   filterGenreId: `All`,
   currentMovie: null,
   currentMovieReviews: [],
+  userFavorites: [],
 };
 
 const moviesData = (state = initialState, action) => {
@@ -27,6 +28,10 @@ const moviesData = (state = initialState, action) => {
     case ActionType.LOAD_MOVIES:
       return extend(state, {
         list: buildMovies(action.payload),
+      });
+    case ActionType.LOAD_USER_FAVORITES:
+      return extend(state, {
+        userFavorites: buildMovies(action.payload),
       });
     case ActionType.LOAD_MOVIE_REVIEWS:
       return extend(state, {

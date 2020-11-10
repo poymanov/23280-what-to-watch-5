@@ -9,6 +9,8 @@ describe(`Should Movie render correctly`, () => {
     const tree = renderer
       .create(
           <Movie
+            isUserAuth={false}
+            addToFavorite={noop}
             id={`1`}
             authorizationStatus={``}
             fetchCurrentMovie={noop}

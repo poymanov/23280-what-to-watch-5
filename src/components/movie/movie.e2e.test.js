@@ -41,6 +41,8 @@ it(`Fetch current movie`, () => {
     onPlayButtonClick={noop}
     authorizationStatus={AuthorizationStatus.AUTH}
     relatedMovies={relatedMovies}
+    isUserAuth={false}
+    addToFavorite={noop}
   />);
 
   expect(fetchCurrentMovie).toHaveBeenCalledTimes(1);
@@ -57,6 +59,8 @@ it(`Flush current movie on on unmount`, () => {
     onPlayButtonClick={noop}
     authorizationStatus={AuthorizationStatus.AUTH}
     relatedMovies={relatedMovies}
+    isUserAuth={false}
+    addToFavorite={noop}
   />);
 
   wrapper.unmount();
@@ -75,6 +79,8 @@ it(`Click play button`, () => {
     onPlayButtonClick={onPlayButtonClick}
     authorizationStatus={AuthorizationStatus.AUTH}
     relatedMovies={relatedMovies}
+    isUserAuth={false}
+    addToFavorite={noop}
   />);
 
   const playButton = wrapper.find(`button.btn--play`);

@@ -1,7 +1,7 @@
 import {
   loadGenres, loadMovies, loadPromoMovie, loadCurrentMovie,
   requireAuthorization, redirectToRoute,
-  loadUser, loadMovieReviews
+  loadUser, loadMovieReviews, loadUserFavorites
 } from "./action";
 import {AuthorizationStatus, AppRoute, APIRoute} from "../const";
 
@@ -32,6 +32,11 @@ export const fetchMovieReviews = (movieId) => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(loadMovieReviews(data)))
 );
 
+export const fetchUserFavorites = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.FAVORITE)
+    .then(({data}) => dispatch(loadUserFavorites(data)))
+);
+
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then(({data}) => {
@@ -55,5 +60,10 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 
 export const addReview = ({id, rating, comment}) => (dispatch, _getState, api) => (
   api.post(APIRoute.MOVIE_REVIEWS + `/${id}`, {rating, comment})
+    .then(() => dispatch(redirectToRoute(AppRoute.FILMS + `/${id}`)))
+);
+
+export const addMovieToFavorite = (id) => (dispatch, _getState, api) => (
+  api.post(APIRoute.FAVORITE + `/${id}/1`)
     .then(() => dispatch(redirectToRoute(AppRoute.FILMS + `/${id}`)))
 );

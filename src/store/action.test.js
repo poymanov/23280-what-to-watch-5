@@ -4,6 +4,7 @@ import {
   loadPromoMovie,
   loadCurrentMovie,
   loadMovieReviews,
+  loadUserFavorites,
   flushCurrentMovie,
   changeGenreFilter,
   requireAuthorization,
@@ -68,6 +69,13 @@ describe(`Action creators work correctly`, () => {
     expect(loadMovieReviews(movie)).toEqual({
       type: ActionType.LOAD_MOVIE_REVIEWS,
       payload: reviews,
+    });
+  });
+
+  it(`Action creator for load user favorites returns correct action`, () => {
+    expect(loadUserFavorites(movies)).toEqual({
+      type: ActionType.LOAD_USER_FAVORITES,
+      payload: movies,
     });
   });
 

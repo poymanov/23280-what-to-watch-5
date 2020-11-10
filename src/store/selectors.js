@@ -1,5 +1,6 @@
 import {NameSpace} from "./reducers/root-reducer";
 import {createSelector} from 'reselect';
+import {AuthorizationStatus} from "../const";
 
 export const moviesSelector = (state) => {
   return state[NameSpace.MOVIES].list;
@@ -16,7 +17,7 @@ export const moviesByGenreSelector = createSelector(
 );
 
 export const myListMoviesSelector = (state) => {
-  return state[NameSpace.MOVIES].list;
+  return state[NameSpace.MOVIES].userFavorites;
 };
 
 export const relatedMoviesSelector = (state) => {
@@ -29,4 +30,8 @@ export const promoMovieSelector = (state) => {
 
 export const currentMovieSelector = (state) => {
   return state[NameSpace.MOVIES].currentMovie;
+};
+
+export const isUserAuthSelector = (state) => {
+  return state[NameSpace.USER].authorizationStatus === AuthorizationStatus.AUTH;
 };

@@ -2,7 +2,8 @@ import React, {Fragment, PureComponent} from "react";
 import MovieTypes from "../../types/movies";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {fetchPromoMovie} from "../../store/api-actions";
+import {fetchPromoMovie, addMovieToFavorite} from "../../store/api-actions";
+import {isUserAuthSelector, promoMovieSelector} from "../../store/selectors";
 
 class PromoMovie extends PureComponent {
   constructor(props) {
@@ -14,10 +15,21 @@ class PromoMovie extends PureComponent {
   }
 
   render() {
-    const {promo, onPlayButtonClick} = this.props;
+    const {promo, onPlayButtonClick, isUserAuth, addToFavorite} = this.props;
 
     if (!promo) {
       return null;
+    }
+
+    let addToListButton = null;
+
+    if (isUserAuth) {
+      addToListButton = <button className="btn btn--list movie-card__button" type="button" onClick={() => addToFavorite(promo.id)}>
+        <svg viewBox="0 0 19 20" width="19" height="20">
+          <use href="#add"/>
+        </svg>
+        <span>My list</span>
+      </button>;
     }
 
     return (
@@ -46,12 +58,7 @@ class PromoMovie extends PureComponent {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use href="#add"/>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                {addToListButton}
               </div>
             </div>
           </div>
@@ -64,17 +71,23 @@ class PromoMovie extends PureComponent {
 PromoMovie.propTypes = {
   promo: MovieTypes.promo,
   onPlayButtonClick: PropTypes.func.isRequired,
-  fetchPromoMovie: PropTypes.func.isRequired
+  fetchPromoMovie: PropTypes.func.isRequired,
+  isUserAuth: PropTypes.bool.isRequired,
+  addToFavorite: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({MOVIES}) => ({
-  promo: MOVIES.promo,
+const mapStateToProps = (state) => ({
+  promo: promoMovieSelector(state),
+  isUserAuth: isUserAuthSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchPromoMovie() {
     dispatch(fetchPromoMovie());
   },
+  addToFavorite(movieId) {
+    dispatch(addMovieToFavorite(movieId));
+  }
 });
 
 export {PromoMovie};

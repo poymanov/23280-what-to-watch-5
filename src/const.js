@@ -13,5 +13,6 @@ export const APIRoute = {
   LOGIN: `/login`,
   FILMS: `/films`,
   FILMS_PROMO: `/films/promo`,
-  MOVIE_REVIEWS: `/comments`
+  MOVIE_REVIEWS: `/comments`,
+  FAVORITE: `/favorite`
 };

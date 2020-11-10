@@ -27,7 +27,7 @@ const movie = {
 describe(`Should PromoMovie render correctly`, () => {
   it(`Without movie`, () => {
     const tree = renderer
-      .create(<PromoMovie fetchPromoMovie={noop} onPlayButtonClick={noop}/>)
+      .create(<PromoMovie isUserAuth={false} addToFavorite={noop} fetchPromoMovie={noop} onPlayButtonClick={noop}/>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -35,7 +35,15 @@ describe(`Should PromoMovie render correctly`, () => {
 
   it(`With movie`, () => {
     const tree = renderer
-      .create(<PromoMovie promo={movie} fetchPromoMovie={noop} onPlayButtonClick={noop}/>)
+      .create(<PromoMovie isUserAuth={false} addToFavorite={noop} promo={movie} fetchPromoMovie={noop} onPlayButtonClick={noop}/>)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`With auth user`, () => {
+    const tree = renderer
+      .create(<PromoMovie isUserAuth={true} addToFavorite={noop} promo={movie} fetchPromoMovie={noop} onPlayButtonClick={noop}/>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
