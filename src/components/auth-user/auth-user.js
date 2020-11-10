@@ -8,7 +8,7 @@ const AuthUser = (props) => {
   return (
     <div className="user-block">
       <div className="user-block__avatar">
-        <Link to="/my-list">
+        <Link to="/mylist">
           <img src={currentUser.avatarUrl} alt={currentUser.name} width="63" height="63"/>
         </Link>
       </div>
