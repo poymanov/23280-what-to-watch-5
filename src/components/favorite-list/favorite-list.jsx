@@ -8,7 +8,7 @@ import {fetchUserFavorites} from "../../store/api-actions";
 import PropTypes from "prop-types";
 import Footer from "../footer/footer";
 
-class MyList extends PureComponent {
+class FavoriteList extends PureComponent {
   constructor(props) {
     super(props);
   }
@@ -34,7 +34,7 @@ class MyList extends PureComponent {
   }
 }
 
-MyList.propTypes = {
+FavoriteList.propTypes = {
   movies: MovieTypes.list,
   fetchUserFavorites: PropTypes.func.isRequired,
 };
@@ -49,5 +49,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {MyList};
-export default connect(mapStateToProps, mapDispatchToProps)(MyList);
+export {FavoriteList};
+export default connect(mapStateToProps, mapDispatchToProps)(FavoriteList);

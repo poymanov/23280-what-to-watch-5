@@ -2,7 +2,7 @@ import React from "react";
 import {Route, Switch, Router as BrowserRouter} from "react-router-dom";
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
-import MyList from "../my-list/my-list";
+import FavoriteList from "../favorite-list/favorite-list";
 import Movie from "../movie/movie";
 import AddReview from "../add-review/add-review";
 import Player from "../player/player";
@@ -28,7 +28,7 @@ const App = (props) => {
         <Route path="/login" exact>
           <SignIn />
         </Route>
-        <PrivateRoute path="/mylist" exact render={() => <MyList />} />
+        <PrivateRoute path="/mylist" exact render={() => <FavoriteList />} />
         <Route path="/films/:id" exact render={({history, match}) => (
           <Movie id={match.params.id} onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)} />
         )} />

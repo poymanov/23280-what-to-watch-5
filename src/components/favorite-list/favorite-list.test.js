@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {MyList} from "./my-list";
+import {FavoriteList} from "./favorite-list";
 import {Router as BrowserRouter} from "react-router-dom";
 import browserHistory from "../../etc/browser-history";
 
@@ -30,7 +30,7 @@ it.skip(`Should MyList render correctly`, () => {
   const tree = renderer
     .create(
         <BrowserRouter history={browserHistory}>
-          <MyList fetchUserFavorites={noop} movies={movies}/>
+          <FavoriteList fetchUserFavorites={noop} movies={movies}/>
         </BrowserRouter>
     )
     .toJSON();
