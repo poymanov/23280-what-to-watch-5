@@ -2,8 +2,8 @@ import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../../services/api";
 import {ActionType} from "../../action";
 import {moviesData} from "./movies-data";
-import {APIRoute, AppRoute} from "../../../const";
-import {extend} from "../../../utils";
+import {APIRoute, AppRoute} from "../../../constants/const";
+import {extend} from "../../../utils/utils";
 import {
   fetchMoviesList, fetchPromoMovie, fetchCurrentMovie,
   fetchMovieReviews, fetchUserFavorites, addReview, addMovieToFavorite

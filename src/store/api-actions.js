@@ -3,7 +3,7 @@ import {
   requireAuthorization, redirectToRoute,
   loadUser, loadMovieReviews, loadUserFavorites, loadMovieRelated, loadAuthFormError, loadReviewFormError
 } from "./action";
-import {AuthorizationStatus, AppRoute, APIRoute} from "../const";
+import {AuthorizationStatus, AppRoute, APIRoute} from "../constants/const";
 
 export const fetchMoviesList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FILMS)

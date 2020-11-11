@@ -1,6 +1,6 @@
 import {NameSpace} from "./reducers/root-reducer";
 import {createSelector} from 'reselect';
-import {AuthorizationStatus} from "../const";
+import {AuthorizationStatus} from "../constants/const";
 
 export const moviesSelector = (state) => {
   return state[NameSpace.MOVIES].list;

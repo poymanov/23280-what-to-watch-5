@@ -11,7 +11,7 @@ import {
   loadUser,
   redirectToRoute, ActionType, loadMovieRelated, loadAuthFormError, loadReviewFormError, flushReviewFormError
 } from "./action";
-import {AuthorizationStatus} from "../const";
+import {AuthorizationStatus} from "../constants/const";
 
 const movie = {
   id: 1,

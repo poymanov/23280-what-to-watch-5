@@ -1,7 +1,7 @@
-import {AuthorizationStatus} from "../../../const";
-import {extend} from "../../../utils";
+import {AuthorizationStatus} from "../../../constants/const";
+import {extend} from "../../../utils/utils";
 import {ActionType} from "../../action";
-import {buildUser} from "../../../user";
+import {buildUser} from "../../../etc/user";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,

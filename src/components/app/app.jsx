@@ -12,7 +12,7 @@ import {connect} from "react-redux";
 import {playingMovieSelector} from "../../store/selectors";
 import PrivateRoute from "../private-route/private-route";
 import MovieTypes from "../../types/movies";
-import browserHistory from "../../browser-history";
+import browserHistory from "../../etc/browser-history";
 
 const App = (props) => {
   const {movie} = props;

@@ -1,6 +1,6 @@
 import {ActionType} from "../../action";
-import {extend} from "../../../utils";
-import {buildMovie, buildMovies, buildReviews, buildRelatedMovies} from "../../../movies";
+import {extend} from "../../../utils/utils";
+import {buildMovie, buildMovies, buildReviews, buildRelatedMovies} from "../../../etc/movies";
 
 const initialState = {
   promo: null,
