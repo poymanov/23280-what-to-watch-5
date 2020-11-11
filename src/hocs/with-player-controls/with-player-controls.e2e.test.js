@@ -79,19 +79,6 @@ it(`Handle video end`, () => {
   expect(wrapper.state().isPlaying).toEqual(false);
 });
 
-it(`Check playing status`, () => {
-  const wrapper = shallow(
-      <MockComponentWrapped movie={movie} onChangeFullscreen={noop} onPlayerClose={noop}>
-        <React.Fragment />
-      </MockComponentWrapped>
-  );
-
-  wrapper.state().isPlaying = true;
-  wrapper.instance().getIsPlaying();
-
-  expect(wrapper.state().isPlaying).toEqual(true);
-});
-
 it(`Init video`, () => {
   const wrapper = shallow(
       <MockComponentWrapped movie={movie} onChangeFullscreen={noop} onPlayerClose={noop}>

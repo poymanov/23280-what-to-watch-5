@@ -27,7 +27,6 @@ const withPlayerControls = (Component) => {
       };
 
       this.handleEnded = this.handleEnded.bind(this);
-      this.getIsPlaying = this.getIsPlaying.bind(this);
       this.initVideo = this.initVideo.bind(this);
       this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
       this.handleClickOnPlayingControls = this.handleClickOnPlayingControls.bind(this);
@@ -37,10 +36,6 @@ const withPlayerControls = (Component) => {
       this.setState((state) => ({
         isPlaying: !state.isPlaying,
       }));
-    }
-
-    getIsPlaying() {
-      return this.state.isPlaying;
     }
 
     initVideo(player) {
