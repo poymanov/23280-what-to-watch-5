@@ -1,7 +1,7 @@
 import {
   loadGenres, loadMovies, loadPromoMovie, loadCurrentMovie,
   requireAuthorization, redirectToRoute,
-  loadUser, loadMovieReviews, loadUserFavorites, loadMovieRelated, loadAuthFormError, loadReviewFormError
+  loadUser, loadMovieReviews, loadUserFavorites, loadMovieRelated, loadAuthFormError, loadReviewFormError, loadCurrentPlayerMovie
 } from "./action";
 import {AuthorizationStatus, AppRoute, APIRoute} from "../constants/const";
 
@@ -19,12 +19,22 @@ export const fetchMoviesList = () => (dispatch, _getState, api) => (
 
 export const fetchPromoMovie = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FILMS_PROMO)
-    .then(({data}) => dispatch(loadPromoMovie(data)))
+    .then(({data}) => {
+      dispatch(loadPromoMovie(data));
+
+      return {data};
+    })
+    .then(({data}) => dispatch(loadCurrentPlayerMovie(data)))
 );
 
 export const fetchCurrentMovie = (movieId) => (dispatch, _getState, api) => (
   api.get(APIRoute.FILMS + `/${movieId}`)
-    .then(({data}) => dispatch(loadCurrentMovie(data)))
+    .then(({data}) => {
+      dispatch(loadCurrentMovie(data));
+
+      return {data};
+    })
+    .then(({data}) => dispatch(loadCurrentPlayerMovie(data)))
     .then(() => {
       api.get(APIRoute.FILMS)
         .then(({data}) => {

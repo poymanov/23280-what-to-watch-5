@@ -9,7 +9,7 @@ import {
   changeGenreFilter,
   requireAuthorization,
   loadUser,
-  redirectToRoute, ActionType, loadMovieRelated, loadAuthFormError, loadReviewFormError, flushReviewFormError
+  redirectToRoute, ActionType, loadMovieRelated, loadAuthFormError, loadReviewFormError, flushReviewFormError, loadCurrentPlayerMovie
 } from "./action";
 import {AuthorizationStatus} from "../constants/const";
 
@@ -61,6 +61,13 @@ describe(`Action creators work correctly`, () => {
   it(`Action creator for load current movie returns correct action`, () => {
     expect(loadCurrentMovie(movie)).toEqual({
       type: ActionType.LOAD_CURRENT_MOVIE,
+      payload: movie,
+    });
+  });
+
+  it(`Action creator for load current player movie returns correct action`, () => {
+    expect(loadCurrentPlayerMovie(movie)).toEqual({
+      type: ActionType.LOAD_CURRENT_PLAYER_MOVIE,
       payload: movie,
     });
   });

@@ -9,7 +9,7 @@ import Player from "../player/player";
 import withFullscreen from "../../hocs/with-fullscreen/with-fullscreen";
 import withPlayerControls from "../../hocs/with-player-controls/with-player-controls";
 import {connect} from "react-redux";
-import {playingMovieSelector} from "../../store/selectors";
+import {currentPlayerMovieSelector} from "../../store/selectors";
 import PrivateRoute from "../private-route/private-route";
 import MovieTypes from "../../types/movies";
 import browserHistory from "../../etc/browser-history";
@@ -51,7 +51,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  movie: playingMovieSelector(state)
+  movie: currentPlayerMovieSelector(state)
 });
 
 export {App};

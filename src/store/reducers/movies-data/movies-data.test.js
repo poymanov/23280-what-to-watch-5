@@ -80,6 +80,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     currentMovie: null,
     currentMovieReviews: [],
     currentMovieRelated: [],
+    currentPlayerMovie: null,
     userFavorites: [],
     reviewFormError: null,
   });
@@ -100,6 +101,15 @@ it(`Reducer should update current movie`, () => {
     payload: rawMovie1
   })).toEqual({
     currentMovie: movie1,
+  });
+});
+
+it(`Reducer should update current player movie`, () => {
+  expect(moviesData({}, {
+    type: ActionType.LOAD_CURRENT_PLAYER_MOVIE,
+    payload: rawMovie1
+  })).toEqual({
+    currentPlayerMovie: movie1,
   });
 });
 
@@ -210,9 +220,13 @@ describe(`Async operation work correctly`, () => {
 
     return promoMovieLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_PROMO_MOVIE,
+          payload: [{"fake": true}],
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.LOAD_CURRENT_PLAYER_MOVIE,
           payload: [{"fake": true}],
         });
       });
@@ -233,9 +247,13 @@ describe(`Async operation work correctly`, () => {
 
     return currentMovieLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_CURRENT_MOVIE,
+          payload: [{"fake": true}],
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.LOAD_CURRENT_PLAYER_MOVIE,
           payload: [{"fake": true}],
         });
       });

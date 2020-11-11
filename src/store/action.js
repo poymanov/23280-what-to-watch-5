@@ -6,6 +6,7 @@ export const ActionType = {
   LOAD_AUTH_FORM_ERROR: `LOAD_AUTH_FORM_ERROR`,
   LOAD_MOVIES_PAGINATION: `LOAD_MOVIES_PAGINATION`,
   LOAD_CURRENT_MOVIE: `LOAD_CURRENT_MOVIE`,
+  LOAD_CURRENT_PLAYER_MOVIE: `LOAD_CURRENT_PLAYER_MOVIE`,
   LOAD_MOVIE_REVIEWS: `LOAD_MOVIE_REVIEWS`,
   LOAD_USER_FAVORITES: `LOAD_USER_FAVORITES`,
   LOAD_MOVIE_RELATED: `LOAD_MOVIE_RELATED`,
@@ -34,6 +35,11 @@ export const loadPromoMovie = (movie) => ({
 
 export const loadCurrentMovie = (movie) => ({
   type: ActionType.LOAD_CURRENT_MOVIE,
+  payload: movie,
+});
+
+export const loadCurrentPlayerMovie = (movie) => ({
+  type: ActionType.LOAD_CURRENT_PLAYER_MOVIE,
   payload: movie,
 });
 

@@ -9,6 +9,7 @@ const initialState = {
   currentMovie: null,
   currentMovieReviews: [],
   currentMovieRelated: [],
+  currentPlayerMovie: null,
   userFavorites: [],
   reviewFormError: null,
 };
@@ -22,6 +23,10 @@ const moviesData = (state = initialState, action) => {
     case ActionType.LOAD_CURRENT_MOVIE:
       return extend(state, {
         currentMovie: buildMovie(action.payload),
+      });
+    case ActionType.LOAD_CURRENT_PLAYER_MOVIE:
+      return extend(state, {
+        currentPlayerMovie: buildMovie(action.payload),
       });
     case ActionType.FLUSH_CURRENT_MOVIE:
       return extend(state, {
