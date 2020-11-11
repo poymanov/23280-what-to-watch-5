@@ -9,7 +9,7 @@ exports[`Should GenreList render correctly 1`] = `
   >
     <a
       className="catalog__genres-link"
-      href="#"
+      href="/"
       onClick={[Function]}
     >
       All
@@ -20,7 +20,7 @@ exports[`Should GenreList render correctly 1`] = `
   >
     <a
       className="catalog__genres-link"
-      href="#"
+      href="/"
       onClick={[Function]}
     >
       Comedy

@@ -1,6 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import GenreItem from "./genre-item";
+import {Router as BrowserRouter} from "react-router-dom";
+import browserHistory from "../../etc/browser-history";
 
 const noop = () => {};
 
@@ -12,7 +14,11 @@ const genre = {
 describe(`Should GenreItem render correctly`, () => {
   it(`Not active item`, () => {
     const tree = renderer
-      .create(<GenreItem genre={genre} isActive={false} handleGenreClick={noop} />)
+      .create(
+          <BrowserRouter history={browserHistory}>
+            <GenreItem genre={genre} isActive={false} handleGenreClick={noop} />
+          </BrowserRouter>
+      )
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -20,7 +26,11 @@ describe(`Should GenreItem render correctly`, () => {
 
   it(`Active item`, () => {
     const tree = renderer
-      .create(<GenreItem genre={genre} isActive={true} handleGenreClick={noop} />)
+      .create(
+          <BrowserRouter history={browserHistory}>
+            <GenreItem genre={genre} isActive={true} handleGenreClick={noop} />
+          </BrowserRouter>
+      )
       .toJSON();
 
     expect(tree).toMatchSnapshot();
