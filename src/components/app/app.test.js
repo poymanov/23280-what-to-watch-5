@@ -1,14 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {FavoriteList} from "./favorite-list";
+import {Router as BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {initStore} from "../../store/bootstrap";
 import browserHistory from "../../etc/browser-history";
-import {Router as BrowserRouter} from "react-router-dom";
+import {App} from "./app";
 
-const noop = () => {};
-
-const movies = [{
+const movie = {
   id: 1,
   name: `test`,
   posterImage: `test`,
@@ -26,14 +24,14 @@ const movies = [{
   genre: `test`,
   released: 1,
   isFavorite: false,
-}];
+};
 
-it(`Should MyList render correctly`, () => {
+it(`Should App render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={initStore()}>
           <BrowserRouter history={browserHistory}>
-            <FavoriteList fetchUserFavorites={noop} movies={movies}/>
+            <App movie={movie} />
           </BrowserRouter>
         </Provider>
     )
