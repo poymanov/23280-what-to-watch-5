@@ -1,15 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {PrivateRoute} from "./private-route";
+import {GuestRoute} from "./guest-route";
 import {Router as BrowserRouter} from "react-router-dom";
 import browserHistory from "../../etc/browser-history";
 
 const noop = () => {};
 
-it(`Should PrivateRoute render correctly`, () => {
+it(`Should GuestRoute render correctly`, () => {
   const tree = renderer
     .create(<BrowserRouter history={browserHistory}>
-      <PrivateRoute isUserAuth={true} authorizationStatus={``} exact={true} path={`/`} render={noop} />
+      <GuestRoute isUserAuth={false} authorizationStatus={``} exact={true} path={`/`} render={noop} checkAuth={noop} />
     </BrowserRouter>)
     .toJSON();
 

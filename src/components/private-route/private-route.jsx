@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Route, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {AuthorizationStatus, AppRoute} from "../../constants/const";
-
+import {AppRoute} from "../../constants/const";
+import {isUserAuthSelector} from "../../store/selectors";
 
 const PrivateRoute = (props) => {
-  const {render, path, exact, authorizationStatus} = props;
+  const {render, path, exact, isUserAuth} = props;
 
   return (
     <Route
@@ -14,9 +14,7 @@ const PrivateRoute = (props) => {
       exact={exact}
       render={(routeProps) => {
         return (
-          authorizationStatus === AuthorizationStatus.AUTH
-            ? render(routeProps)
-            : <Redirect to={AppRoute.LOGIN} />
+          isUserAuth ? render(routeProps) : <Redirect to={AppRoute.LOGIN} />
         );
       }}
     />
@@ -24,14 +22,14 @@ const PrivateRoute = (props) => {
 };
 
 PrivateRoute.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
+  isUserAuth: PropTypes.bool.isRequired,
   exact: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
   render: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.USER.authorizationStatus,
+  isUserAuth: isUserAuthSelector(state),
 });
 
 
