@@ -1,5 +1,6 @@
 import React from "react";
 import UserTypes from "../../types/user";
+import {Link} from "react-router-dom";
 
 const AuthUser = (props) => {
   const {currentUser} = props;
@@ -7,7 +8,9 @@ const AuthUser = (props) => {
   return (
     <div className="user-block">
       <div className="user-block__avatar">
-        <img src={currentUser.avatarUrl} alt={currentUser.name} width="63" height="63"/>
+        <Link to="/mylist">
+          <img src={currentUser.avatarUrl} alt={currentUser.name} width="63" height="63"/>
+        </Link>
       </div>
     </div>
   );

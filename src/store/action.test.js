@@ -4,14 +4,14 @@ import {
   loadPromoMovie,
   loadCurrentMovie,
   loadMovieReviews,
+  loadUserFavorites,
   flushCurrentMovie,
   changeGenreFilter,
-  showMoreMovies,
   requireAuthorization,
   loadUser,
-  redirectToRoute, ActionType
+  redirectToRoute, ActionType, loadMovieRelated, loadAuthFormError, loadReviewFormError, flushReviewFormError, loadCurrentPlayerMovie
 } from "./action";
-import {AuthorizationStatus} from "../const";
+import {AuthorizationStatus} from "../constants/const";
 
 const movie = {
   id: 1,
@@ -65,10 +65,38 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
+  it(`Action creator for load current player movie returns correct action`, () => {
+    expect(loadCurrentPlayerMovie(movie)).toEqual({
+      type: ActionType.LOAD_CURRENT_PLAYER_MOVIE,
+      payload: movie,
+    });
+  });
+
   it(`Action creator for load movie reviews returns correct action`, () => {
     expect(loadMovieReviews(movie)).toEqual({
       type: ActionType.LOAD_MOVIE_REVIEWS,
       payload: reviews,
+    });
+  });
+
+  it(`Action creator for load movie related returns correct action`, () => {
+    expect(loadMovieRelated(movies)).toEqual({
+      type: ActionType.LOAD_MOVIE_RELATED,
+      payload: movies,
+    });
+  });
+
+  it(`Action creator for load review form error returns correct action`, () => {
+    expect(loadReviewFormError(`error`)).toEqual({
+      type: ActionType.LOAD_REVIEW_FORM_ERROR,
+      payload: `error`,
+    });
+  });
+
+  it(`Action creator for load user favorites returns correct action`, () => {
+    expect(loadUserFavorites(movies)).toEqual({
+      type: ActionType.LOAD_USER_FAVORITES,
+      payload: movies,
     });
   });
 
@@ -78,17 +106,16 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
+  it(`Action creator for flush review form error returns correct action`, () => {
+    expect(flushReviewFormError()).toEqual({
+      type: ActionType.FLUSH_REVIEW_FORM_ERROR,
+    });
+  });
+
   it(`Action creator for change genre filter returns correct action`, () => {
     expect(changeGenreFilter(genreId)).toEqual({
       type: ActionType.CHANGE_GENRE_FILTER,
       payload: genreId,
-    });
-  });
-
-  it(`Action creator for show more movies returns correct action`, () => {
-    expect(showMoreMovies(genreId, 1)).toEqual({
-      type: ActionType.SHOW_MORE_MOVIES,
-      payload: {genreId, nextItemId: 1},
     });
   });
 
@@ -103,6 +130,13 @@ describe(`Action creators work correctly`, () => {
     expect(loadUser(user)).toEqual({
       type: ActionType.LOAD_USER,
       payload: user,
+    });
+  });
+
+  it(`Action creator for load auth form error returns correct action`, () => {
+    expect(loadAuthFormError(`error`)).toEqual({
+      type: ActionType.LOAD_AUTH_FORM_ERROR,
+      payload: `error`,
     });
   });
 

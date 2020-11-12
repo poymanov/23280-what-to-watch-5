@@ -2,7 +2,7 @@ import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {Movie} from "./movie";
-import {AuthorizationStatus} from "../../const";
+import {AuthorizationStatus} from "../../constants/const";
 
 configure({adapter: new Adapter()});
 
@@ -26,13 +26,7 @@ const movie = {
   isFavorite: false,
 };
 
-const relatedMovies = {
-  items: [movie],
-  pagination: {
-    lastItemId: 0,
-    hasNext: false
-  }
-};
+const relatedMovies = [movie];
 
 const noop = () => {};
 
@@ -47,6 +41,8 @@ it(`Fetch current movie`, () => {
     onPlayButtonClick={noop}
     authorizationStatus={AuthorizationStatus.AUTH}
     relatedMovies={relatedMovies}
+    isUserAuth={false}
+    addToFavorite={noop}
   />);
 
   expect(fetchCurrentMovie).toHaveBeenCalledTimes(1);
@@ -63,6 +59,8 @@ it(`Flush current movie on on unmount`, () => {
     onPlayButtonClick={noop}
     authorizationStatus={AuthorizationStatus.AUTH}
     relatedMovies={relatedMovies}
+    isUserAuth={false}
+    addToFavorite={noop}
   />);
 
   wrapper.unmount();
@@ -81,6 +79,8 @@ it(`Click play button`, () => {
     onPlayButtonClick={onPlayButtonClick}
     authorizationStatus={AuthorizationStatus.AUTH}
     relatedMovies={relatedMovies}
+    isUserAuth={false}
+    addToFavorite={noop}
   />);
 
   const playButton = wrapper.find(`button.btn--play`);

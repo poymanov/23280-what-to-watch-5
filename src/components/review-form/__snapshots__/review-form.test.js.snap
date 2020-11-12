@@ -14,6 +14,7 @@ exports[`Should ReviewForm render correctly 1`] = `
       <input
         checked={false}
         className="rating__input"
+        disabled={false}
         id="star-1"
         name="rating"
         onChange={[Function]}
@@ -29,6 +30,7 @@ exports[`Should ReviewForm render correctly 1`] = `
       <input
         checked={false}
         className="rating__input"
+        disabled={false}
         id="star-2"
         name="rating"
         onChange={[Function]}
@@ -44,6 +46,7 @@ exports[`Should ReviewForm render correctly 1`] = `
       <input
         checked={true}
         className="rating__input"
+        disabled={false}
         id="star-3"
         name="rating"
         onChange={[Function]}
@@ -59,6 +62,7 @@ exports[`Should ReviewForm render correctly 1`] = `
       <input
         checked={false}
         className="rating__input"
+        disabled={false}
         id="star-4"
         name="rating"
         onChange={[Function]}
@@ -74,6 +78,7 @@ exports[`Should ReviewForm render correctly 1`] = `
       <input
         checked={false}
         className="rating__input"
+        disabled={false}
         id="star-5"
         name="rating"
         onChange={[Function]}
@@ -88,11 +93,15 @@ exports[`Should ReviewForm render correctly 1`] = `
       </label>
     </div>
   </div>
+  <div>
+    <p />
+  </div>
   <div
     className="add-review__text"
   >
     <textarea
       className="add-review__textarea"
+      disabled={false}
       id="review-text"
       name="text"
       onChange={[Function]}
@@ -103,6 +112,7 @@ exports[`Should ReviewForm render correctly 1`] = `
     >
       <button
         className="add-review__btn"
+        disabled={true}
         type="submit"
       >
         Post

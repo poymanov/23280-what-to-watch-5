@@ -2,9 +2,12 @@ import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../../services/api";
 import {ActionType} from "../../action";
 import {moviesData} from "./movies-data";
-import {APIRoute, AppRoute} from "../../../const";
-import {extend} from "../../../utils";
-import {fetchMoviesList, fetchPromoMovie, fetchCurrentMovie, fetchMovieReviews, addReview} from "../../api-actions";
+import {APIRoute, AppRoute} from "../../../constants/const";
+import {extend} from "../../../utils/utils";
+import {
+  fetchMoviesList, fetchPromoMovie, fetchCurrentMovie,
+  fetchMovieReviews, fetchUserFavorites, addReview, addMovieToFavorite
+} from "../../api-actions";
 
 const api = createAPI(() => {});
 
@@ -74,9 +77,12 @@ it(`Reducer without additional parameters should return initial state`, () => {
     promo: null,
     list: [],
     filterGenreId: `All`,
-    main: null,
     currentMovie: null,
     currentMovieReviews: [],
+    currentMovieRelated: [],
+    currentPlayerMovie: null,
+    userFavorites: [],
+    reviewFormError: null,
   });
 });
 
@@ -98,11 +104,28 @@ it(`Reducer should update current movie`, () => {
   });
 });
 
+it(`Reducer should update current player movie`, () => {
+  expect(moviesData({}, {
+    type: ActionType.LOAD_CURRENT_PLAYER_MOVIE,
+    payload: rawMovie1
+  })).toEqual({
+    currentPlayerMovie: movie1,
+  });
+});
+
 it(`Reducer should flush current movie`, () => {
   expect(moviesData({}, {
     type: ActionType.FLUSH_CURRENT_MOVIE,
   })).toEqual({
     currentMovie: null,
+  });
+});
+
+it(`Reducer should flush review form error`, () => {
+  expect(moviesData({reviewFormError: `error`}, {
+    type: ActionType.FLUSH_REVIEW_FORM_ERROR,
+  })).toEqual({
+    reviewFormError: null,
   });
 });
 
@@ -115,12 +138,40 @@ it(`Reducer should update movies`, () => {
   });
 });
 
+it(`Reducer should update user favorites`, () => {
+  expect(moviesData({}, {
+    type: ActionType.LOAD_USER_FAVORITES,
+    payload: rawMovies
+  })).toEqual({
+    userFavorites: movies,
+  });
+});
+
 it(`Reducer should update movie reviews`, () => {
   expect(moviesData({}, {
     type: ActionType.LOAD_MOVIE_REVIEWS,
     payload: reviews
   })).toEqual({
     currentMovieReviews: reviews,
+  });
+});
+
+it(`Reducer should update current movie related`, () => {
+  expect(moviesData({currentMovie: movie2}, {
+    type: ActionType.LOAD_MOVIE_RELATED,
+    payload: rawMovies
+  })).toEqual({
+    currentMovie: movie2,
+    currentMovieRelated: [movie3],
+  });
+});
+
+it(`Reducer should update review form error to user data`, () => {
+  expect(moviesData({}, {
+    type: ActionType.LOAD_REVIEW_FORM_ERROR,
+    payload: `error`
+  })).toEqual({
+    reviewFormError: `error`,
   });
 });
 
@@ -131,17 +182,6 @@ it(`Reducer should filter movies by genre`, () => {
   })).toEqual({
     filterGenreId: `test2`,
     list: movies,
-    main: {items: [movie2, movie3], pagination: {hasNext: false, lastItemId: 8}},
-  });
-});
-
-it(`Reducer should filter movies by genre and show another films`, () => {
-  expect(moviesData({list: movies}, {
-    type: ActionType.SHOW_MORE_MOVIES,
-    payload: {genreId: `test2`, nextItemId: 3}
-  })).toEqual({
-    list: movies,
-    main: {items: [movie2, movie3], pagination: {hasNext: false, lastItemId: 11}},
   });
 });
 
@@ -157,7 +197,7 @@ describe(`Async operation work correctly`, () => {
 
     return moviesLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_MOVIES,
           payload: [{"fake": true}],
@@ -165,10 +205,6 @@ describe(`Async operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.LOAD_GENRES,
           payload: [{"fake": true}],
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(3, {
-          type: ActionType.CHANGE_GENRE_FILTER,
-          payload: `All`,
         });
       });
   });
@@ -184,9 +220,13 @@ describe(`Async operation work correctly`, () => {
 
     return promoMovieLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_PROMO_MOVIE,
+          payload: [{"fake": true}],
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.LOAD_CURRENT_PLAYER_MOVIE,
           payload: [{"fake": true}],
         });
       });
@@ -201,11 +241,19 @@ describe(`Async operation work correctly`, () => {
       .onGet(APIRoute.FILMS + `/1`)
       .reply(200, [{fake: true}]);
 
+    apiMock
+      .onGet(APIRoute.FILMS)
+      .reply(200, [{fake: true}]);
+
     return currentMovieLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_CURRENT_MOVIE,
+          payload: [{"fake": true}],
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.LOAD_CURRENT_PLAYER_MOVIE,
           payload: [{"fake": true}],
         });
       });
@@ -245,6 +293,44 @@ describe(`Async operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.REDIRECT_TO_ROUTE,
           payload: AppRoute.FILMS + `/1`,
+        });
+      });
+  });
+
+  it(`Should make a correct API call to add movie to favourite`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const movieFavoriteLoader = addMovieToFavorite(1);
+
+    apiMock
+      .onPost(APIRoute.FAVORITE + `/1/1`)
+      .reply(200);
+
+    return movieFavoriteLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.REDIRECT_TO_ROUTE,
+          payload: AppRoute.FILMS + `/1`,
+        });
+      });
+  });
+
+  it(`Should make a correct API call to load user favorites`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const userFavoritesLoader = fetchUserFavorites();
+
+    apiMock
+      .onGet(APIRoute.FAVORITE)
+      .reply(200, [{fake: true}]);
+
+    return userFavoritesLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_USER_FAVORITES,
+          payload: [{"fake": true}],
         });
       });
   });

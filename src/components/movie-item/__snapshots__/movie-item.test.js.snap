@@ -6,14 +6,23 @@ exports[`Should MovieItem render correctly With trailer 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <video
-    autoPlay={true}
-    height="175"
-    muted={true}
-    poster="test"
-    src="test"
-    width="336"
-  />
+  <div
+    className="small-movie-card__image"
+  >
+    <a
+      href="/films/1"
+      onClick={[Function]}
+    >
+      <video
+        autoPlay={true}
+        height="175"
+        muted={true}
+        poster="test"
+        src="test"
+        width="280"
+      />
+    </a>
+  </div>
   <h3
     className="small-movie-card__title"
   >
@@ -37,12 +46,17 @@ exports[`Should MovieItem render correctly Without trailer 1`] = `
   <div
     className="small-movie-card__image"
   >
-    <img
-      alt="test"
-      height="175"
-      src="test"
-      width="280"
-    />
+    <a
+      href="/films/1"
+      onClick={[Function]}
+    >
+      <img
+        alt="test"
+        height="175"
+        src="test"
+        width="280"
+      />
+    </a>
   </div>
   <h3
     className="small-movie-card__title"

@@ -3,7 +3,7 @@ import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {SignIn} from "./sign-in";
 import {Router as BrowserRouter} from "react-router-dom";
-import browserHistory from "../../browser-history";
+import browserHistory from "../../etc/browser-history";
 
 configure({adapter: new Adapter()});
 

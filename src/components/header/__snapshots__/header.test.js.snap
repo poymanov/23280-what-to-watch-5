@@ -2,7 +2,7 @@
 
 exports[`Should Header render correctly Auth 1`] = `
 <header
-  className="page-header movie-card__head"
+  className="page-header user-page__head"
 >
   <div
     className="logo"
@@ -35,12 +35,17 @@ exports[`Should Header render correctly Auth 1`] = `
     <div
       className="user-block__avatar"
     >
-      <img
-        alt="test"
-        height="63"
-        src="test"
-        width="63"
-      />
+      <a
+        href="/mylist"
+        onClick={[Function]}
+      >
+        <img
+          alt="test"
+          height="63"
+          src="test"
+          width="63"
+        />
+      </a>
     </div>
   </div>
 </header>
@@ -48,7 +53,7 @@ exports[`Should Header render correctly Auth 1`] = `
 
 exports[`Should Header render correctly Not auth 1`] = `
 <header
-  className="page-header movie-card__head"
+  className="page-header user-page__head"
 >
   <div
     className="logo"
@@ -91,7 +96,7 @@ exports[`Should Header render correctly Not auth 1`] = `
 
 exports[`Should Header render correctly With content 1`] = `
 <header
-  className="page-header movie-card__head"
+  className="page-header user-page__head"
 >
   <div
     className="logo"

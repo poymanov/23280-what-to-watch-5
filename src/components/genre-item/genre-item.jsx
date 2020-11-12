@@ -1,16 +1,12 @@
 import React from "react";
 import GenreTypes from "../../types/genres";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const GenreItem = ({genre, isActive, handleGenreClick}) => {
-  function clickGenre(evt, genreId) {
-    evt.preventDefault();
-    handleGenreClick(genreId);
-  }
-
   return (
     <li key={genre.id} className={`catalog__genres-item ` + (isActive ? `catalog__genres-item--active` : ``)}>
-      <a href="#" className="catalog__genres-link" onClick={(evt) => clickGenre(evt, genre.id)}>{genre.title}</a>
+      <Link to={`#`} className="catalog__genres-link" onClick={() => handleGenreClick(genre.id)}>{genre.title}</Link>
     </li>
   );
 };

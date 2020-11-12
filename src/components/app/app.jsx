@@ -2,17 +2,17 @@ import React from "react";
 import {Route, Switch, Router as BrowserRouter} from "react-router-dom";
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
-import MyList from "../my-list/my-list";
+import FavoriteList from "../favorite-list/favorite-list";
 import Movie from "../movie/movie";
 import AddReview from "../add-review/add-review";
 import Player from "../player/player";
 import withFullscreen from "../../hocs/with-fullscreen/with-fullscreen";
 import withPlayerControls from "../../hocs/with-player-controls/with-player-controls";
 import {connect} from "react-redux";
-import {promoMovieSelector} from "../../store/selectors";
+import {currentPlayerMovieSelector} from "../../store/selectors";
 import PrivateRoute from "../private-route/private-route";
 import MovieTypes from "../../types/movies";
-import browserHistory from "../../browser-history";
+import browserHistory from "../../etc/browser-history";
 
 const App = (props) => {
   const {movie} = props;
@@ -28,9 +28,7 @@ const App = (props) => {
         <Route path="/login" exact>
           <SignIn />
         </Route>
-        <Route path="/my-list" exact>
-          <MyList />
-        </Route>
+        <PrivateRoute path="/mylist" exact render={() => <FavoriteList />} />
         <Route path="/films/:id" exact render={({history, match}) => (
           <Movie id={match.params.id} onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)} />
         )} />
@@ -53,7 +51,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  movie: promoMovieSelector(state)
+  movie: currentPlayerMovieSelector(state)
 });
 
 export {App};

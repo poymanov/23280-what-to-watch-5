@@ -6,7 +6,7 @@ const noop = () => {};
 
 it(`Should ReviewForm render correctly`, () => {
   const tree = renderer
-    .create(<ReviewForm id={`1`} onSubmit={noop}/>)
+    .create(<ReviewForm flushReviewFormError={noop} id={`1`} onSubmit={noop}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

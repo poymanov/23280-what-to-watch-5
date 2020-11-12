@@ -1,5 +1,5 @@
 import React, {PureComponent, Fragment} from "react";
-import {calculateTimeData, calculatePlayingPosition, calculateElapsedData} from "../../player";
+import {calculateTimeData, calculatePlayingPosition, calculateElapsedData} from "../../etc/player";
 import MovieTypes from "../../types/movies";
 import PropTypes from "prop-types";
 import PlayerPlayingControls from "../../components/player-playing-controls/player-playing-controls";
@@ -27,7 +27,6 @@ const withPlayerControls = (Component) => {
       };
 
       this.handleEnded = this.handleEnded.bind(this);
-      this.getIsPlaying = this.getIsPlaying.bind(this);
       this.initVideo = this.initVideo.bind(this);
       this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
       this.handleClickOnPlayingControls = this.handleClickOnPlayingControls.bind(this);
@@ -37,10 +36,6 @@ const withPlayerControls = (Component) => {
       this.setState((state) => ({
         isPlaying: !state.isPlaying,
       }));
-    }
-
-    getIsPlaying() {
-      return this.state.isPlaying;
     }
 
     initVideo(player) {

@@ -7,12 +7,17 @@ exports[`Should AuthUser render correctly 1`] = `
   <div
     className="user-block__avatar"
   >
-    <img
-      alt="test"
-      height="63"
-      src="test"
-      width="63"
-    />
+    <a
+      href="/mylist"
+      onClick={[Function]}
+    >
+      <img
+        alt="test"
+        height="63"
+        src="test"
+        width="63"
+      />
+    </a>
   </div>
 </div>
 `;

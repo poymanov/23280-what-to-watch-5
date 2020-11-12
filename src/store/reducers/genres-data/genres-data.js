@@ -1,6 +1,6 @@
 import {ActionType} from "../../action";
-import {extend} from "../../../utils";
-import {getByMovies} from "../../../genres";
+import {extend} from "../../../utils/utils";
+import {getByMovies} from "../../../etc/genres";
 
 const initialState = {
   genres: []

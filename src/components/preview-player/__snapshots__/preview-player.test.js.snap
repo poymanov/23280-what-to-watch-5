@@ -7,6 +7,6 @@ exports[`Should PreviewPlayer render correctly 1`] = `
   muted={true}
   poster="test"
   src="test"
-  width="336"
+  width="280"
 />
 `;

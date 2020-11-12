@@ -1,15 +1,27 @@
 import {NameSpace} from "./reducers/root-reducer";
+import {createSelector} from 'reselect';
+import {AuthorizationStatus} from "../constants/const";
 
-export const mainMoviesSelector = (state) => {
-  return state[NameSpace.MOVIES].main;
+export const moviesSelector = (state) => {
+  return state[NameSpace.MOVIES].list;
 };
 
+export const currentFilterIdSelector = (state) => {
+  return state[NameSpace.MOVIES].filterGenreId;
+};
+
+export const moviesByGenreSelector = createSelector(
+    moviesSelector, currentFilterIdSelector, (movies, genreId) => {
+      return genreId === `All` ? movies : movies.filter((movie) => movie.genre === genreId);
+    }
+);
+
 export const myListMoviesSelector = (state) => {
-  return state[NameSpace.MOVIES].main;
+  return state[NameSpace.MOVIES].userFavorites;
 };
 
 export const relatedMoviesSelector = (state) => {
-  return state[NameSpace.MOVIES].main;
+  return state[NameSpace.MOVIES].currentMovieRelated;
 };
 
 export const promoMovieSelector = (state) => {
@@ -20,7 +32,18 @@ export const currentMovieSelector = (state) => {
   return state[NameSpace.MOVIES].currentMovie;
 };
 
-export const currentFilterIdSelector = (state) => {
-  return state[NameSpace.MOVIES].filterGenreId;
+export const isUserAuthSelector = (state) => {
+  return state[NameSpace.USER].authorizationStatus === AuthorizationStatus.AUTH;
 };
 
+export const authFormErrorSelector = (state) => {
+  return state[NameSpace.USER].authFormError;
+};
+
+export const reviewFormErrorSelector = (state) => {
+  return state[NameSpace.MOVIES].reviewFormError;
+};
+
+export const currentPlayerMovieSelector = (state) => {
+  return state[NameSpace.MOVIES].currentPlayerMovie;
+};

@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MovieOverview from "./movie-overview";
-import {extend} from "../../utils";
+import {extend} from "../../utils/utils";
 
 const movie = {
   id: 1,

@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import MovieList from "./movie-list";
 import {Router as BrowserRouter} from "react-router-dom";
-import browserHistory from "../../browser-history";
+import browserHistory from "../../etc/browser-history";
 
 const movies = [{
   id: 1,
@@ -24,18 +24,10 @@ const movies = [{
   isFavorite: false,
 }];
 
-const moviesWithoutPagination = {
-  items: movies,
-  pagination: {
-    lastItemId: 0,
-    hasNext: false
-  }
-};
-
 describe(`Should MovieList render correctly`, () => {
   it(`Without pagination`, () => {
     const tree = renderer
-      .create(<BrowserRouter history={browserHistory}><MovieList movies={moviesWithoutPagination}/></BrowserRouter>)
+      .create(<BrowserRouter history={browserHistory}><MovieList movies={movies}/></BrowserRouter>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

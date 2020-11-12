@@ -3,13 +3,18 @@ export const ActionType = {
   LOAD_GENRES: `LOAD_GENRES`,
   LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
   LOAD_USER: `LOAD_USER`,
+  LOAD_AUTH_FORM_ERROR: `LOAD_AUTH_FORM_ERROR`,
   LOAD_MOVIES_PAGINATION: `LOAD_MOVIES_PAGINATION`,
   LOAD_CURRENT_MOVIE: `LOAD_CURRENT_MOVIE`,
+  LOAD_CURRENT_PLAYER_MOVIE: `LOAD_CURRENT_PLAYER_MOVIE`,
   LOAD_MOVIE_REVIEWS: `LOAD_MOVIE_REVIEWS`,
+  LOAD_USER_FAVORITES: `LOAD_USER_FAVORITES`,
+  LOAD_MOVIE_RELATED: `LOAD_MOVIE_RELATED`,
+  LOAD_REVIEW_FORM_ERROR: `LOAD_REVIEW_FORM_ERROR`,
+  FLUSH_REVIEW_FORM_ERROR: `FLUSH_REVIEW_FORM_ERROR`,
   FLUSH_CURRENT_MOVIE: `FLUSH_CURRENT_MOVIE`,
   CHANGE_GENRE_FILTER: `CHANGE_GENRE_FILTER`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
-  SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
@@ -33,23 +38,42 @@ export const loadCurrentMovie = (movie) => ({
   payload: movie,
 });
 
+export const loadCurrentPlayerMovie = (movie) => ({
+  type: ActionType.LOAD_CURRENT_PLAYER_MOVIE,
+  payload: movie,
+});
+
 export const loadMovieReviews = (reviews) => ({
   type: ActionType.LOAD_MOVIE_REVIEWS,
   payload: reviews,
+});
+
+export const loadMovieRelated = (movies) => ({
+  type: ActionType.LOAD_MOVIE_RELATED,
+  payload: movies,
+});
+
+export const loadUserFavorites = (movies) => ({
+  type: ActionType.LOAD_USER_FAVORITES,
+  payload: movies,
+});
+
+export const loadReviewFormError = (error) => ({
+  type: ActionType.LOAD_REVIEW_FORM_ERROR,
+  payload: error,
 });
 
 export const flushCurrentMovie = () => ({
   type: ActionType.FLUSH_CURRENT_MOVIE,
 });
 
+export const flushReviewFormError = () => ({
+  type: ActionType.FLUSH_REVIEW_FORM_ERROR,
+});
+
 export const changeGenreFilter = (genreId) => ({
   type: ActionType.CHANGE_GENRE_FILTER,
   payload: genreId,
-});
-
-export const showMoreMovies = (genreId, nextItemId) => ({
-  type: ActionType.SHOW_MORE_MOVIES,
-  payload: {genreId, nextItemId}
 });
 
 export const requireAuthorization = (status) => ({
@@ -60,6 +84,11 @@ export const requireAuthorization = (status) => ({
 export const loadUser = (user) => ({
   type: ActionType.LOAD_USER,
   payload: user,
+});
+
+export const loadAuthFormError = (error) => ({
+  type: ActionType.LOAD_AUTH_FORM_ERROR,
+  payload: error,
 });
 
 export const redirectToRoute = (url) => ({
