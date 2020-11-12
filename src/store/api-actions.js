@@ -15,6 +15,7 @@ export const fetchMoviesList = () => (dispatch, _getState, api) => (
       dispatch(loadGenres(data));
       return {data};
     })
+    .catch(() => {})
 );
 
 export const fetchPromoMovie = () => (dispatch, _getState, api) => (
@@ -25,6 +26,7 @@ export const fetchPromoMovie = () => (dispatch, _getState, api) => (
       return {data};
     })
     .then(({data}) => dispatch(loadCurrentPlayerMovie(data)))
+    .catch(() => {})
 );
 
 export const fetchCurrentMovie = (movieId) => (dispatch, _getState, api) => (
@@ -41,16 +43,19 @@ export const fetchCurrentMovie = (movieId) => (dispatch, _getState, api) => (
           dispatch(loadMovieRelated(data));
         });
     })
+    .catch(() => {})
 );
 
 export const fetchMovieReviews = (movieId) => (dispatch, _getState, api) => (
   api.get(APIRoute.MOVIE_REVIEWS + `/${movieId}`)
     .then(({data}) => dispatch(loadMovieReviews(data)))
+    .catch(() => {})
 );
 
 export const fetchUserFavorites = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FAVORITE)
     .then(({data}) => dispatch(loadUserFavorites(data)))
+    .catch(() => {})
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
