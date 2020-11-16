@@ -11,6 +11,7 @@ import withPlayerControls from "../../hocs/with-player-controls/with-player-cont
 import {connect} from "react-redux";
 import {currentPlayerMovieSelector} from "../../store/selectors";
 import PrivateRoute from "../private-route/private-route";
+import GuestRoute from "../guest-route/guest-route";
 import MovieTypes from "../../types/movies";
 import browserHistory from "../../etc/browser-history";
 
@@ -25,9 +26,7 @@ const App = (props) => {
             onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)}
           />
         )} />
-        <Route path="/login" exact>
-          <SignIn />
-        </Route>
+        <GuestRoute path="/login" exact render={() => <SignIn />}/>
         <PrivateRoute path="/mylist" exact render={() => <FavoriteList />} />
         <Route path="/films/:id" exact render={({history, match}) => (
           <Movie id={match.params.id} onPlayButtonClick={(movieId) => history.push(`/player/` + movieId)} />
