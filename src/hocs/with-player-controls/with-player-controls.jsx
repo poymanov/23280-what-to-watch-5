@@ -30,12 +30,19 @@ const withPlayerControls = (Component) => {
       this.initVideo = this.initVideo.bind(this);
       this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
       this.handleClickOnPlayingControls = this.handleClickOnPlayingControls.bind(this);
+      this.handleChangeFullscreen = this.handleChangeFullscreen.bind(this);
     }
 
     handleClickOnPlayingControls() {
       this.setState((state) => ({
         isPlaying: !state.isPlaying,
       }));
+    }
+
+    handleChangeFullscreen() {
+      const {video} = this.state;
+
+      video.requestFullscreen()();
     }
 
     initVideo(player) {
@@ -70,7 +77,7 @@ const withPlayerControls = (Component) => {
 
     renderControls() {
       const {isLoading, playingPosition, elapsed, isPlaying} = this.state;
-      const {movie, onChangeFullscreen, onPlayerClose} = this.props;
+      const {movie, onPlayerClose} = this.props;
 
       if (isLoading) {
         return null;
@@ -87,7 +94,7 @@ const withPlayerControls = (Component) => {
         <div className="player__controls-row">
           <PlayerPlayingControls isPlaying={isPlaying} handleOnClick={this.handleClickOnPlayingControls} />
           <div className="player__name">{movie.name}</div>
-          <button type="button" className="player__full-screen" onClick={() => onChangeFullscreen(true)}>
+          <button type="button" className="player__full-screen" onClick={() => this.handleChangeFullscreen()}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use href="#full-screen" />
             </svg>
@@ -118,7 +125,6 @@ const withPlayerControls = (Component) => {
 
   WithPlayerControls.propTypes = {
     movie: MovieTypes.item,
-    onChangeFullscreen: PropTypes.func.isRequired,
     onPlayerClose: PropTypes.func.isRequired
   };
 

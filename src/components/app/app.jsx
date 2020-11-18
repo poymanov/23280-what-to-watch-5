@@ -6,7 +6,6 @@ import FavoriteList from "../favorite-list/favorite-list";
 import Movie from "../movie/movie";
 import AddReview from "../add-review/add-review";
 import Player from "../player/player";
-import withFullscreen from "../../hocs/with-fullscreen/with-fullscreen";
 import withPlayerControls from "../../hocs/with-player-controls/with-player-controls";
 import {connect} from "react-redux";
 import {currentPlayerMovieSelector} from "../../store/selectors";
@@ -33,7 +32,7 @@ const App = (props) => {
         )} />
         <PrivateRoute path="/films/:id/review" exact render={({match}) => <AddReview id={match.params.id}/>} />
         <Route path="/player/:id" exact render={({history}) => {
-          const PlayerWrapped = withFullscreen(withPlayerControls(Player));
+          const PlayerWrapped = withPlayerControls(Player);
 
           return <PlayerWrapped
             movie={movie}
