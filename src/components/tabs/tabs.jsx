@@ -1,5 +1,5 @@
 import React, {Fragment, PureComponent} from "react";
-import {TabsData, TabsList} from "./tabs.data";
+import {TabsData, TabsList} from "../../etc/tabs.data";
 import MovieOverview from "../movie-overview/movie-overview";
 import MovieDetails from "../movie-details/movie-details";
 import MovieReviews from "../movie-reviews/movie-reviews";
