@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 const GenreItem = ({genre, isActive, handleGenreClick}) => {
   return (
     <li key={genre.id} className={`catalog__genres-item ` + (isActive ? `catalog__genres-item--active` : ``)}>
-      <Link to={`#`} className="catalog__genres-link" onClick={() => handleGenreClick(genre.id)}>{genre.title}</Link>
+      <Link to={`/`} className="catalog__genres-link" onClick={() => handleGenreClick(genre.id)}>{genre.title}</Link>
     </li>
   );
 };

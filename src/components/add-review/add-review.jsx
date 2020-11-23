@@ -45,7 +45,7 @@ class AddReview extends PureComponent {
                   <Link to={`/films/` + movie.id} className="breadcrumbs__link">{movie.name}</Link>
                 </li>
                 <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link">Add review</a>
+                  <Link to={`/films/` + movie.id + `/review`} className="breadcrumbs__link">Add review</Link>
                 </li>
               </ul>
             </nav>

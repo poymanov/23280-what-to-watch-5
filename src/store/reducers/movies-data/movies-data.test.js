@@ -118,6 +118,8 @@ it(`Reducer should flush current movie`, () => {
     type: ActionType.FLUSH_CURRENT_MOVIE,
   })).toEqual({
     currentMovie: null,
+    currentMovieReviews: [],
+    currentMovieRelated: [],
   });
 });
 

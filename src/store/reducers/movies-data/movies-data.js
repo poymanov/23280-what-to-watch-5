@@ -31,6 +31,8 @@ const moviesData = (state = initialState, action) => {
     case ActionType.FLUSH_CURRENT_MOVIE:
       return extend(state, {
         currentMovie: null,
+        currentMovieReviews: [],
+        currentMovieRelated: [],
       });
     case ActionType.FLUSH_REVIEW_FORM_ERROR:
       return extend(state, {

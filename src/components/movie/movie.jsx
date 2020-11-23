@@ -21,7 +21,7 @@ class Movie extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.movie !== this.props.movie) {
+    if ((this.props.id && !prevProps.id) || (this.props.id && prevProps.id && prevProps.id !== this.props.id)) {
       this.props.fetchCurrentMovie(this.props.id);
     }
   }

@@ -4,8 +4,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import PreviewPlayer from "../preview-player/preview-player";
 
-const MovieItem = (props) => {
-  const {movie, onMovieHover, onMovieLeave, isShowTrailer} = props;
+const MovieItem = ({movie, onMovieHover, onMovieLeave, isShowTrailer}) => {
   return (
     <article key={movie.id} className="small-movie-card catalog__movies-card" onMouseEnter={() => onMovieHover(movie.id)} onMouseLeave={() => onMovieLeave(movie.id)}>
       <div className="small-movie-card__image">

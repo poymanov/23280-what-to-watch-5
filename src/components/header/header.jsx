@@ -47,11 +47,9 @@ const mapStateToProps = (state) => ({
   currentUser: state.USER.currentUser,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  checkAuth() {
-    dispatch(checkAuth());
-  },
-});
+const mapDispatchToProps = {
+  checkAuth
+};
 
 export {Header};
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

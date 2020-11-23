@@ -11,10 +11,7 @@ export const fetchMoviesList = () => (dispatch, _getState, api) => (
       dispatch(loadMovies(data));
       return {data};
     })
-    .then(({data}) => {
-      dispatch(loadGenres(data));
-      return {data};
-    })
+    .then(({data}) => dispatch(loadGenres(data)))
     .catch(() => {})
 );
 

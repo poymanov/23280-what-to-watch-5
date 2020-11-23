@@ -23,9 +23,7 @@ export const buildMovie = (movieData) => {
 export const buildMovies = (moviesData) => {
   const movies = [];
 
-  moviesData.forEach((item) => {
-    movies.push(buildMovie(item));
-  });
+  moviesData.forEach((item) => movies.push(buildMovie(item)));
 
   return movies;
 };
@@ -33,9 +31,7 @@ export const buildMovies = (moviesData) => {
 export const buildReviews = (reviewsData) => {
   const reviews = [];
 
-  reviewsData.forEach((item) => {
-    reviews.push(item);
-  });
+  reviewsData.forEach((item) => reviews.push(item));
 
   return reviews;
 };

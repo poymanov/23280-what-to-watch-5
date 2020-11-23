@@ -5,9 +5,7 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item";
 
 const MovieItemWrapped = withActiveItem(MovieItem);
 
-const MovieList = (props) => {
-  const {movies} = props;
-
+const MovieList = ({movies}) => {
   return (
     <div className="catalog__movies-list">
       {movies.map((movie) => <MovieItemWrapped key={movie.id} movie={movie}/>)}

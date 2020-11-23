@@ -1,9 +1,7 @@
 import React from "react";
 import MovieTypes from "../../types/movies";
 
-const MovieDetails = (props) => {
-  const {movie} = props;
-
+const MovieDetails = ({movie}) => {
   return (
     <div className="movie-card__text movie-card__row">
       <div className="movie-card__text-col">
