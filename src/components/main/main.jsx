@@ -57,11 +57,9 @@ const mapStateToProps = (state) => ({
   movies: moviesByGenreSelector(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchMoviesList() {
-    dispatch(fetchMoviesList());
-  },
-});
+const mapDispatchToProps = {
+  fetchMoviesList
+};
 
 export {Main};
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

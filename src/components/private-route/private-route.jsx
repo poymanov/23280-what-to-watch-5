@@ -5,17 +5,21 @@ import {connect} from "react-redux";
 import {AppRoute} from "../../constants/const";
 import {isUserAuthSelector} from "../../store/selectors";
 
-const PrivateRoute = (props) => {
-  const {render, path, exact, isUserAuth} = props;
-
+const PrivateRoute = ({render, path, exact, isUserAuth, component: Component}) => {
   return (
     <Route
       path={path}
       exact={exact}
       render={(routeProps) => {
-        return (
-          isUserAuth ? render(routeProps) : <Redirect to={AppRoute.LOGIN} />
-        );
+        if (isUserAuth) {
+          if (render) {
+            return render(routeProps);
+          } else {
+            return <Component />;
+          }
+        } else {
+          return <Redirect to={AppRoute.LOGIN} />;
+        }
       }}
     />
   );
@@ -25,7 +29,8 @@ PrivateRoute.propTypes = {
   isUserAuth: PropTypes.bool.isRequired,
   exact: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
-  render: PropTypes.func.isRequired,
+  render: PropTypes.func,
+  component: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({

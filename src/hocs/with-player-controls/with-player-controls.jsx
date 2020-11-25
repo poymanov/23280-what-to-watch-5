@@ -92,7 +92,7 @@ const withPlayerControls = (Component) => {
           <div className="player__time-value">{elapsed.hours}:{elapsed.minutes}:{elapsed.seconds}</div>
         </div>
         <div className="player__controls-row">
-          <PlayerPlayingControls isPlaying={isPlaying} handleOnClick={this.handleClickOnPlayingControls} />
+          <PlayerPlayingControls isPlaying={isPlaying} onClick={this.handleClickOnPlayingControls} />
           <div className="player__name">{movie.name}</div>
           <button type="button" className="player__full-screen" onClick={() => this.handleChangeFullscreen()}>
             <svg viewBox="0 0 27 27" width="27" height="27">
@@ -112,8 +112,8 @@ const withPlayerControls = (Component) => {
       return (
         <div className="player">
           <Component {...this.props}
-            handleTimeUpdate={this.handleTimeUpdate}
-            handleEnded={this.handleEnded}
+            onTimeUpdate={this.handleTimeUpdate}
+            onEnded={this.handleEnded}
             isPlaying={isPlaying}
             initVideo={this.initVideo}
           />

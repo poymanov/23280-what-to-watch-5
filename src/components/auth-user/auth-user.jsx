@@ -2,9 +2,7 @@ import React from "react";
 import UserTypes from "../../types/user";
 import {Link} from "react-router-dom";
 
-const AuthUser = (props) => {
-  const {currentUser} = props;
-
+const AuthUser = ({currentUser}) => {
   return (
     <div className="user-block">
       <div className="user-block__avatar">

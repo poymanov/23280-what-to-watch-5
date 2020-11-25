@@ -5,11 +5,10 @@ import {connect} from "react-redux";
 import {changeGenreFilter} from "../../store/action";
 import PropTypes from "prop-types";
 
-const GenreList = (props) => {
-  const {genres, activeGenreId, changeGenre} = props;
+const GenreList = ({genres, activeGenreId, changeGenre}) => {
   return (
     <ul className="catalog__genres-list">
-      {genres.map((genre) => <GenreItem key={genre.id} genre={genre} isActive={genre.id === activeGenreId} handleGenreClick={changeGenre}/>)}
+      {genres.map((genre) => <GenreItem key={genre.id} genre={genre} isActive={genre.id === activeGenreId} onGenreClick={changeGenre}/>)}
     </ul>
   );
 };

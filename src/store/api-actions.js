@@ -11,10 +11,7 @@ export const fetchMoviesList = () => (dispatch, _getState, api) => (
       dispatch(loadMovies(data));
       return {data};
     })
-    .then(({data}) => {
-      dispatch(loadGenres(data));
-      return {data};
-    })
+    .then(({data}) => dispatch(loadGenres(data)))
     .catch(() => {})
 );
 
@@ -88,5 +85,10 @@ export const addReview = ({id, rating, comment}) => (dispatch, _getState, api) =
 
 export const addMovieToFavorite = (id) => (dispatch, _getState, api) => (
   api.post(APIRoute.FAVORITE + `/${id}/1`)
+    .then(() => dispatch(redirectToRoute(AppRoute.FILMS + `/${id}`)))
+);
+
+export const removeMovieFromFavorite = (id) => (dispatch, _getState, api) => (
+  api.post(APIRoute.FAVORITE + `/${id}/0`)
     .then(() => dispatch(redirectToRoute(AppRoute.FILMS + `/${id}`)))
 );

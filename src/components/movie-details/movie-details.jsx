@@ -1,8 +1,9 @@
 import React from "react";
 import MovieTypes from "../../types/movies";
+import {calculateMovieRunTime} from "../../etc/movies";
 
-const MovieDetails = (props) => {
-  const {movie} = props;
+const MovieDetails = ({movie}) => {
+  const runTime = calculateMovieRunTime(movie.runTime);
 
   return (
     <div className="movie-card__text movie-card__row">
@@ -20,7 +21,7 @@ const MovieDetails = (props) => {
       <div className="movie-card__text-col">
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Run Time</strong>
-          <span className="movie-card__details-value">{movie.runTime}</span>
+          <span className="movie-card__details-value">{runTime.hours}h {runTime.minutes}m</span>
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Genre</strong>

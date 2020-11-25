@@ -9,13 +9,6 @@ class ReviewForm extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      rating: `3`,
-      text: ``,
-      formValid: false,
-      isSending: false,
-    };
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
   }
@@ -26,29 +19,19 @@ class ReviewForm extends PureComponent {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    const {id} = this.props;
-    const {rating, text} = this.state;
-    this.setState({isSending: true});
-    this.props.onSubmit({id, rating, comment: text});
-    this.setState({isSending: false});
+    const {onSubmit, addNewReview} = this.props;
+    onSubmit(addNewReview);
   }
 
   handleFieldChange(evt) {
     const {name, value} = evt.target;
-    this.setState({[name]: value});
+    const {onFieldChange} = this.props;
 
-    if (name === `text`) {
-      if (value.length >= 50 && value.length <= 400) {
-        this.setState({formValid: true});
-      } else {
-        this.setState({formValid: false});
-      }
-    }
+    onFieldChange(name, value);
   }
 
   render() {
-    const {rating, formValid, isSending} = this.state;
-    const {error} = this.props;
+    const {error, rating, formValid, isSending, text} = this.props;
 
     return (
       <form className="add-review__form" onSubmit={this.handleSubmit}>
@@ -73,7 +56,7 @@ class ReviewForm extends PureComponent {
 
         <div><p>{error}</p></div>
         <div className="add-review__text">
-          <textarea className="add-review__textarea" name="text" id="review-text" placeholder="Review text" onChange={this.handleFieldChange} disabled={isSending === true} />
+          <textarea className="add-review__textarea" name="text" value={text} id="review-text" placeholder="Review text" onChange={this.handleFieldChange} disabled={isSending === true} />
           <div className="add-review__submit">
             <button className="add-review__btn" type="submit" disabled={formValid === false || isSending === true}>Post</button>
           </div>
@@ -85,9 +68,15 @@ class ReviewForm extends PureComponent {
 
 ReviewForm.propTypes = {
   id: PropTypes.string.isRequired,
+  addNewReview: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  onFieldChange: PropTypes.func.isRequired,
   flushReviewFormError: PropTypes.func.isRequired,
   error: PropTypes.string,
+  rating: PropTypes.string.isRequired,
+  text: PropTypes.string,
+  formValid: PropTypes.bool.isRequired,
+  isSending: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -95,7 +84,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit(reviewData) {
+  addNewReview(reviewData) {
     dispatch(addReview(reviewData));
   },
   flushReviewFormError() {

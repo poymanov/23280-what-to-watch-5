@@ -2,9 +2,7 @@ import React from "react";
 import MovieTypes from "../../types/movies";
 import moment from 'moment';
 
-const MovieReview = (props) => {
-  const {review} = props;
-
+const MovieReview = ({review}) => {
   function formatDate(date) {
     return moment(date).format(`MMMM D, YYYY`);
   }

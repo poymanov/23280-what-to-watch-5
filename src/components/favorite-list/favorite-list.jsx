@@ -43,11 +43,9 @@ const mapStateToProps = (state) => ({
   movies: myListMoviesSelector(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchUserFavorites() {
-    dispatch(fetchUserFavorites());
-  },
-});
+const mapDispatchToProps = {
+  fetchUserFavorites
+};
 
 export {FavoriteList};
 export default connect(mapStateToProps, mapDispatchToProps)(FavoriteList);

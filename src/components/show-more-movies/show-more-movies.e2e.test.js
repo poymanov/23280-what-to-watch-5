@@ -8,7 +8,7 @@ configure({adapter: new Adapter()});
 it(`Click show more movies button`, () => {
   const handleShowMore = jest.fn();
 
-  const wrapper = shallow(<ShowMoreMovies handleShowMore={handleShowMore}/>);
+  const wrapper = shallow(<ShowMoreMovies onShowMore={handleShowMore}/>);
 
   const showMoreButton = wrapper.find(`button.catalog__button`);
   showMoreButton.simulate(`click`);

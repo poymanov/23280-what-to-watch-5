@@ -46,14 +46,14 @@ class Player extends PureComponent {
   }
 
   render() {
-    const {handleTimeUpdate, handleEnded} = this.props;
+    const {onTimeUpdate, onEnded} = this.props;
 
     return (
       <video
         className="player__video"
         ref={this.videoRef}
-        onTimeUpdate={handleTimeUpdate}
-        onEnded={handleEnded}
+        onTimeUpdate={onTimeUpdate}
+        onEnded={onEnded}
       />
     );
   }
@@ -63,8 +63,8 @@ Player.propTypes = {
   movie: MovieTypes.item,
   isPlaying: PropTypes.bool.isRequired,
   initVideo: PropTypes.func.isRequired,
-  handleTimeUpdate: PropTypes.func.isRequired,
-  handleEnded: PropTypes.func.isRequired
+  onTimeUpdate: PropTypes.func.isRequired,
+  onEnded: PropTypes.func.isRequired
 };
 
 export default Player;

@@ -10,7 +10,18 @@ const noop = () => {};
 it(`Submit review form`, () => {
   const onSubmit = jest.fn();
 
-  const wrapper = mount(<ReviewForm flushReviewFormError={noop} id={`1`} onSubmit={onSubmit} />);
+  const wrapper = mount(
+      <ReviewForm
+        flushReviewFormError={noop}
+        id={`1`}
+        onSubmit={onSubmit}
+        addNewReview={noop}
+        onFieldChange={noop}
+        formValid={false}
+        isSending={false}
+        rating="3"
+      />
+  );
 
   const playButton = wrapper.find(`.add-review__form`);
   playButton.simulate(`submit`);

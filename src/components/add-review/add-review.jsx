@@ -8,12 +8,11 @@ import {currentMovieSelector} from "../../store/selectors";
 import {fetchCurrentMovie} from "../../store/api-actions";
 import {flushCurrentMovie} from "../../store/action";
 import {connect} from "react-redux";
+import withNewReviewData from "../../hocs/with-new-review-data/with-new-review-data";
+
+const ReviewFormWrapped = withNewReviewData(ReviewForm);
 
 class AddReview extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.fetchCurrentMovie(this.props.id);
   }
@@ -45,7 +44,7 @@ class AddReview extends PureComponent {
                   <Link to={`/films/` + movie.id} className="breadcrumbs__link">{movie.name}</Link>
                 </li>
                 <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link">Add review</a>
+                  <Link to={`/films/` + movie.id + `/review`} className="breadcrumbs__link">Add review</Link>
                 </li>
               </ul>
             </nav>
@@ -57,7 +56,7 @@ class AddReview extends PureComponent {
         </div>
 
         <div className="add-review">
-          <ReviewForm id={id}/>
+          <ReviewFormWrapped id={id}/>
         </div>
 
       </section>

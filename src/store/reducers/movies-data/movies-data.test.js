@@ -6,7 +6,7 @@ import {APIRoute, AppRoute} from "../../../constants/const";
 import {extend} from "../../../utils/utils";
 import {
   fetchMoviesList, fetchPromoMovie, fetchCurrentMovie,
-  fetchMovieReviews, fetchUserFavorites, addReview, addMovieToFavorite
+  fetchMovieReviews, fetchUserFavorites, addReview, addMovieToFavorite, removeMovieFromFavorite
 } from "../../api-actions";
 
 const api = createAPI(() => {});
@@ -118,6 +118,8 @@ it(`Reducer should flush current movie`, () => {
     type: ActionType.FLUSH_CURRENT_MOVIE,
   })).toEqual({
     currentMovie: null,
+    currentMovieReviews: [],
+    currentMovieRelated: [],
   });
 });
 
@@ -304,6 +306,25 @@ describe(`Async operation work correctly`, () => {
 
     apiMock
       .onPost(APIRoute.FAVORITE + `/1/1`)
+      .reply(200);
+
+    return movieFavoriteLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.REDIRECT_TO_ROUTE,
+          payload: AppRoute.FILMS + `/1`,
+        });
+      });
+  });
+
+  it(`Should make a correct API call to remove movie from favourite`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const movieFavoriteLoader = removeMovieFromFavorite(1);
+
+    apiMock
+      .onPost(APIRoute.FAVORITE + `/1/0`)
       .reply(200);
 
     return movieFavoriteLoader(dispatch, () => {}, api)

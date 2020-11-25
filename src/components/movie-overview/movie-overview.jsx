@@ -1,9 +1,7 @@
 import React, {Fragment} from "react";
 import MovieTypes from "../../types/movies";
 
-const MovieOverview = (props) => {
-  const {movie} = props;
-
+const MovieOverview = ({movie}) => {
   function ratingLabel(rating) {
     switch (true) {
       case (rating <= 3):

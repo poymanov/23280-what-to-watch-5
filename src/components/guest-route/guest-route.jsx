@@ -16,16 +16,22 @@ class GuestRoute extends PureComponent {
   }
 
   render() {
-    const {render, path, exact, isUserAuth} = this.props;
+    const {render, path, exact, isUserAuth, component: Component} = this.props;
 
     return (
       <Route
         path={path}
         exact={exact}
         render={(routeProps) => {
-          return (
-            isUserAuth ? <Redirect to={AppRoute.ROOT}/> : render(routeProps)
-          );
+          if (isUserAuth) {
+            return <Redirect to={AppRoute.ROOT}/>;
+          } else {
+            if (render) {
+              return render(routeProps);
+            } else {
+              return <Component />;
+            }
+          }
         }}
       />
     );
@@ -37,19 +43,18 @@ GuestRoute.propTypes = {
   isUserAuth: PropTypes.bool.isRequired,
   exact: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
-  render: PropTypes.func.isRequired,
+  render: PropTypes.func,
   checkAuth: PropTypes.func.isRequired,
+  component: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
   isUserAuth: isUserAuthSelector(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  checkAuth() {
-    dispatch(checkAuth());
-  },
-});
+const mapDispatchToProps = {
+  checkAuth
+};
 
 export {GuestRoute};
 export default connect(mapStateToProps, mapDispatchToProps)(GuestRoute);

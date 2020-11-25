@@ -41,7 +41,7 @@ const withPagination = (Component) => {
       let showMore = null;
 
       if (movies.length > paginateMovies.length) {
-        showMore = <ShowMoreMovies handleShowMore={this.handleShowMore} />;
+        showMore = <ShowMoreMovies onShowMore={this.handleShowMore} />;
       }
 
       return (

@@ -23,9 +23,7 @@ export const buildMovie = (movieData) => {
 export const buildMovies = (moviesData) => {
   const movies = [];
 
-  moviesData.forEach((item) => {
-    movies.push(buildMovie(item));
-  });
+  moviesData.forEach((item) => movies.push(buildMovie(item)));
 
   return movies;
 };
@@ -33,24 +31,9 @@ export const buildMovies = (moviesData) => {
 export const buildReviews = (reviewsData) => {
   const reviews = [];
 
-  reviewsData.forEach((item) => {
-    reviews.push(buildReview(item));
-  });
+  reviewsData.forEach((item) => reviews.push(item));
 
   return reviews;
-};
-
-export const buildReview = (reviewData) => {
-  return {
-    id: reviewData.id,
-    comment: reviewData.comment,
-    date: reviewData.date,
-    rating: reviewData.rating,
-    user: {
-      id: reviewData.user.id,
-      name: reviewData.user.name,
-    }
-  };
 };
 
 export const buildRelatedMovies = (currentMovie, movies) => {
@@ -63,4 +46,11 @@ export const buildRelatedMovies = (currentMovie, movies) => {
   });
 
   return buildMovies(movies.slice(0, 4));
+};
+
+export const calculateMovieRunTime = (minutes) => {
+  return {
+    hours: Math.floor(minutes / 60),
+    minutes: minutes % 60
+  };
 };
