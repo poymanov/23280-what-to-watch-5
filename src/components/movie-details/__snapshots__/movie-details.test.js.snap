@@ -50,7 +50,10 @@ exports[`Should MovieDetails render correctly 1`] = `
       <span
         className="movie-card__details-value"
       >
+        0
+        h 
         1
+        m
       </span>
     </p>
     <p

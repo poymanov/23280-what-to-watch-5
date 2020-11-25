@@ -47,3 +47,10 @@ export const buildRelatedMovies = (currentMovie, movies) => {
 
   return buildMovies(movies.slice(0, 4));
 };
+
+export const calculateMovieRunTime = (minutes) => {
+  return {
+    hours: Math.floor(minutes / 60),
+    minutes: minutes % 60
+  };
+};

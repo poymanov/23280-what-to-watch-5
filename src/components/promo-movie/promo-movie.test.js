@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {PromoMovie} from "./promo-movie";
+import {extend} from "../../utils/utils";
 
 const noop = () => {};
 
@@ -24,10 +25,12 @@ const movie = {
   isFavorite: false,
 };
 
+const favoritedMovie = extend(movie, {isFavorite: true});
+
 describe(`Should PromoMovie render correctly`, () => {
   it(`Without movie`, () => {
     const tree = renderer
-      .create(<PromoMovie isUserAuth={false} addToFavorite={noop} fetchPromoMovie={noop} onPlayButtonClick={noop}/>)
+      .create(<PromoMovie isUserAuth={false} addToFavorite={noop} removeFromFavorite={noop} fetchPromoMovie={noop} onPlayButtonClick={noop}/>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -35,7 +38,7 @@ describe(`Should PromoMovie render correctly`, () => {
 
   it(`With movie`, () => {
     const tree = renderer
-      .create(<PromoMovie isUserAuth={false} addToFavorite={noop} promo={movie} fetchPromoMovie={noop} onPlayButtonClick={noop}/>)
+      .create(<PromoMovie isUserAuth={false} addToFavorite={noop} removeFromFavorite={noop} promo={movie} fetchPromoMovie={noop} onPlayButtonClick={noop}/>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -43,7 +46,15 @@ describe(`Should PromoMovie render correctly`, () => {
 
   it(`With auth user`, () => {
     const tree = renderer
-      .create(<PromoMovie isUserAuth={true} addToFavorite={noop} promo={movie} fetchPromoMovie={noop} onPlayButtonClick={noop}/>)
+      .create(<PromoMovie isUserAuth={true} addToFavorite={noop} removeFromFavorite={noop} promo={movie} fetchPromoMovie={noop} onPlayButtonClick={noop}/>)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`With auth user and favorited movie`, () => {
+    const tree = renderer
+      .create(<PromoMovie isUserAuth={true} addToFavorite={noop} removeFromFavorite={noop} promo={favoritedMovie} fetchPromoMovie={noop} onPlayButtonClick={noop}/>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

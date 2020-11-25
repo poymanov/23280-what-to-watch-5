@@ -87,3 +87,8 @@ export const addMovieToFavorite = (id) => (dispatch, _getState, api) => (
   api.post(APIRoute.FAVORITE + `/${id}/1`)
     .then(() => dispatch(redirectToRoute(AppRoute.FILMS + `/${id}`)))
 );
+
+export const removeMovieFromFavorite = (id) => (dispatch, _getState, api) => (
+  api.post(APIRoute.FAVORITE + `/${id}/0`)
+    .then(() => dispatch(redirectToRoute(AppRoute.FILMS + `/${id}`)))
+);

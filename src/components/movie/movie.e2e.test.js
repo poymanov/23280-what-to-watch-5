@@ -43,6 +43,7 @@ it(`Fetch current movie`, () => {
     relatedMovies={relatedMovies}
     isUserAuth={false}
     addToFavorite={noop}
+    removeFromFavorite={noop}
   />);
 
   expect(fetchCurrentMovie).toHaveBeenCalledTimes(1);
@@ -61,6 +62,7 @@ it(`Flush current movie on on unmount`, () => {
     relatedMovies={relatedMovies}
     isUserAuth={false}
     addToFavorite={noop}
+    removeFromFavorite={noop}
   />);
 
   wrapper.unmount();
@@ -81,6 +83,7 @@ it(`Click play button`, () => {
     relatedMovies={relatedMovies}
     isUserAuth={false}
     addToFavorite={noop}
+    removeFromFavorite={noop}
   />);
 
   const playButton = wrapper.find(`button.btn--play`);

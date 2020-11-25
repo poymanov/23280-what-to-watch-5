@@ -16,7 +16,7 @@ describe(`Should GenreItem render correctly`, () => {
     const tree = renderer
       .create(
           <BrowserRouter history={browserHistory}>
-            <GenreItem genre={genre} isActive={false} handleGenreClick={noop} />
+            <GenreItem genre={genre} isActive={false} onGenreClick={noop} />
           </BrowserRouter>
       )
       .toJSON();
@@ -28,7 +28,7 @@ describe(`Should GenreItem render correctly`, () => {
     const tree = renderer
       .create(
           <BrowserRouter history={browserHistory}>
-            <GenreItem genre={genre} isActive={true} handleGenreClick={noop} />
+            <GenreItem genre={genre} isActive={true} onGenreClick={noop} />
           </BrowserRouter>
       )
       .toJSON();

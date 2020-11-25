@@ -7,9 +7,12 @@ import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs";
 import {connect} from "react-redux";
 import {relatedMoviesSelector, currentMovieSelector, isUserAuthSelector} from "../../store/selectors";
-import {fetchCurrentMovie, addMovieToFavorite} from "../../store/api-actions";
+import {fetchCurrentMovie, addMovieToFavorite, removeMovieFromFavorite} from "../../store/api-actions";
 import {flushCurrentMovie} from "../../store/action";
 import Footer from "../footer/footer";
+import withActiveTab from "../../hocs/with-active-tab/with-active-tab";
+
+const TabsWrapped = withActiveTab(Tabs);
 
 class Movie extends PureComponent {
   constructor(props) {
@@ -31,24 +34,33 @@ class Movie extends PureComponent {
   }
 
   render() {
-    const {relatedMovies, onPlayButtonClick, movie, isUserAuth, addToFavorite} = this.props;
+    const {relatedMovies, onPlayButtonClick, movie, isUserAuth, addToFavorite, removeFromFavorite} = this.props;
 
     if (!movie) {
       return null;
     }
 
     let addReviewLink = null;
-    let addToListButton = null;
+    let listButton = null;
 
     if (isUserAuth) {
       addReviewLink = <Link to={`/films/${movie.id}/review`} className="btn movie-card__button">Add review</Link>;
 
-      addToListButton = <button className="btn btn--list movie-card__button" type="button" onClick={() => addToFavorite(movie.id)}>
-        <svg viewBox="0 0 19 20" width="19" height="20">
-          <use href="#add"/>
-        </svg>
-        <span>My list</span>
-      </button>;
+      if (movie.isFavorite) {
+        listButton = <button className="btn btn--list movie-card__button" type="button" onClick={() => removeFromFavorite(movie.id)}>
+          <svg viewBox="0 0 19 20" width="19" height="20">
+            <use href="#in-list"/>
+          </svg>
+          <span>My list</span>
+        </button>;
+      } else {
+        listButton = <button className="btn btn--list movie-card__button" type="button" onClick={() => addToFavorite(movie.id)}>
+          <svg viewBox="0 0 19 20" width="19" height="20">
+            <use href="#add"/>
+          </svg>
+          <span>My list</span>
+        </button>;
+      }
     }
 
     return (
@@ -78,7 +90,7 @@ class Movie extends PureComponent {
                     </svg>
                     <span>Play</span>
                   </button>
-                  {addToListButton}
+                  {listButton}
                   {addReviewLink}
                 </div>
               </div>
@@ -92,7 +104,7 @@ class Movie extends PureComponent {
               </div>
 
               <div className="movie-card__desc">
-                <Tabs movie={movie}/>
+                <TabsWrapped movie={movie}/>
               </div>
             </div>
           </div>
@@ -119,6 +131,7 @@ Movie.propTypes = {
   fetchCurrentMovie: PropTypes.func.isRequired,
   flushCurrentMovie: PropTypes.func.isRequired,
   addToFavorite: PropTypes.func.isRequired,
+  removeFromFavorite: PropTypes.func.isRequired,
   isUserAuth: PropTypes.bool.isRequired,
 };
 
@@ -137,7 +150,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addToFavorite(movieId) {
     dispatch(addMovieToFavorite(movieId));
+    dispatch(fetchCurrentMovie(movieId));
   },
+  removeFromFavorite(movieId) {
+    dispatch(removeMovieFromFavorite(movieId));
+    dispatch(fetchCurrentMovie(movieId));
+  }
 });
 
 export {Movie};

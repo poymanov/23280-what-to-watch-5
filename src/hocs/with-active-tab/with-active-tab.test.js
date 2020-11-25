@@ -1,11 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Tabs from "./tabs";
-import {Router as BrowserRouter} from "react-router-dom";
-import browserHistory from "../../etc/browser-history";
-import {TabsData} from "../../etc/tabs.data";
+import withActiveTab from "./with-active-tab";
 
-const noop = () => {};
+const MockComponent = () => {
+  return (
+    <div />
+  );
+};
+
+const MockComponentWrapped = withActiveTab(MockComponent);
 
 const movie = {
   id: 1,
@@ -27,10 +30,12 @@ const movie = {
   isFavorite: false,
 };
 
-it(`Should Tabs render correctly`, () => {
-  const tree = renderer
-    .create(<BrowserRouter history={browserHistory}><Tabs activeTab={TabsData.DETAILS} movie={movie} onClickTab={noop}/></BrowserRouter>)
-    .toJSON();
+it(`withActiveTab is rendered correctly`, () => {
+  const tree = renderer.create((
+    <MockComponentWrapped movie={movie}>
+      <React.Fragment />
+    </MockComponentWrapped>
+  )).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

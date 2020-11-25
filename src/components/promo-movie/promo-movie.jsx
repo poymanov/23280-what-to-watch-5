@@ -2,7 +2,7 @@ import React, {Fragment, PureComponent} from "react";
 import MovieTypes from "../../types/movies";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {fetchPromoMovie, addMovieToFavorite} from "../../store/api-actions";
+import {fetchPromoMovie, addMovieToFavorite, removeMovieFromFavorite} from "../../store/api-actions";
 import {isUserAuthSelector, promoMovieSelector} from "../../store/selectors";
 
 class PromoMovie extends PureComponent {
@@ -15,21 +15,30 @@ class PromoMovie extends PureComponent {
   }
 
   render() {
-    const {promo, onPlayButtonClick, isUserAuth, addToFavorite} = this.props;
+    const {promo, onPlayButtonClick, isUserAuth, addToFavorite, removeFromFavorite} = this.props;
 
     if (!promo) {
       return null;
     }
 
-    let addToListButton = null;
+    let listButton = null;
 
     if (isUserAuth) {
-      addToListButton = <button className="btn btn--list movie-card__button" type="button" onClick={() => addToFavorite(promo.id)}>
-        <svg viewBox="0 0 19 20" width="19" height="20">
-          <use href="#add"/>
-        </svg>
-        <span>My list</span>
-      </button>;
+      if (promo.isFavorite) {
+        listButton = <button className="btn btn--list movie-card__button" type="button" onClick={() => removeFromFavorite(promo.id)}>
+          <svg viewBox="0 0 19 20" width="19" height="20">
+            <use href="#in-list"/>
+          </svg>
+          <span>My list</span>
+        </button>;
+      } else {
+        listButton = <button className="btn btn--list movie-card__button" type="button" onClick={() => addToFavorite(promo.id)}>
+          <svg viewBox="0 0 19 20" width="19" height="20">
+            <use href="#add"/>
+          </svg>
+          <span>My list</span>
+        </button>;
+      }
     }
 
     return (
@@ -58,7 +67,7 @@ class PromoMovie extends PureComponent {
                   </svg>
                   <span>Play</span>
                 </button>
-                {addToListButton}
+                {listButton}
               </div>
             </div>
           </div>
@@ -73,7 +82,8 @@ PromoMovie.propTypes = {
   onPlayButtonClick: PropTypes.func.isRequired,
   fetchPromoMovie: PropTypes.func.isRequired,
   isUserAuth: PropTypes.bool.isRequired,
-  addToFavorite: PropTypes.func.isRequired
+  addToFavorite: PropTypes.func.isRequired,
+  removeFromFavorite: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -87,6 +97,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addToFavorite(movieId) {
     dispatch(addMovieToFavorite(movieId));
+  },
+  removeFromFavorite(movieId) {
+    dispatch(removeMovieFromFavorite(movieId));
   }
 });
 

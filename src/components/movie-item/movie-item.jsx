@@ -7,14 +7,12 @@ import PreviewPlayer from "../preview-player/preview-player";
 const MovieItem = ({movie, onMovieHover, onMovieLeave, isShowTrailer}) => {
   return (
     <article key={movie.id} className="small-movie-card catalog__movies-card" onMouseEnter={() => onMovieHover(movie.id)} onMouseLeave={() => onMovieLeave(movie.id)}>
-      <div className="small-movie-card__image">
-        <Link to={`/films/` + movie.id}>
+      <Link to={`/films/` + movie.id} className="small-movie-card__link">
+        <div className="small-movie-card__image">
           {isShowTrailer ? <PreviewPlayer movie={movie} /> : <img src={movie.previewImage} alt={movie.name} width="280" height="175" />}
-        </Link>
-      </div>
-      <h3 className="small-movie-card__title">
-        <Link to={`/films/` + movie.id} className="small-movie-card__link">{movie.name}</Link>
-      </h3>
+        </div>
+        <h3 className="small-movie-card__title">{movie.name}</h3>
+      </Link>
     </article>
   );
 };

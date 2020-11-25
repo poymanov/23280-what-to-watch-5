@@ -6,12 +6,13 @@ exports[`Should MovieItem render correctly With trailer 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <div
-    className="small-movie-card__image"
+  <a
+    className="small-movie-card__link"
+    href="/films/1"
+    onClick={[Function]}
   >
-    <a
-      href="/films/1"
-      onClick={[Function]}
+    <div
+      className="small-movie-card__image"
     >
       <video
         autoPlay={true}
@@ -21,19 +22,13 @@ exports[`Should MovieItem render correctly With trailer 1`] = `
         src="test"
         width="280"
       />
-    </a>
-  </div>
-  <h3
-    className="small-movie-card__title"
-  >
-    <a
-      className="small-movie-card__link"
-      href="/films/1"
-      onClick={[Function]}
+    </div>
+    <h3
+      className="small-movie-card__title"
     >
       test
-    </a>
-  </h3>
+    </h3>
+  </a>
 </article>
 `;
 
@@ -43,12 +38,13 @@ exports[`Should MovieItem render correctly Without trailer 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <div
-    className="small-movie-card__image"
+  <a
+    className="small-movie-card__link"
+    href="/films/1"
+    onClick={[Function]}
   >
-    <a
-      href="/films/1"
-      onClick={[Function]}
+    <div
+      className="small-movie-card__image"
     >
       <img
         alt="test"
@@ -56,18 +52,12 @@ exports[`Should MovieItem render correctly Without trailer 1`] = `
         src="test"
         width="280"
       />
-    </a>
-  </div>
-  <h3
-    className="small-movie-card__title"
-  >
-    <a
-      className="small-movie-card__link"
-      href="/films/1"
-      onClick={[Function]}
+    </div>
+    <h3
+      className="small-movie-card__title"
     >
       test
-    </a>
-  </h3>
+    </h3>
+  </a>
 </article>
 `;

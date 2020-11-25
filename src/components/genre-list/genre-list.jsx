@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 const GenreList = ({genres, activeGenreId, changeGenre}) => {
   return (
     <ul className="catalog__genres-list">
-      {genres.map((genre) => <GenreItem key={genre.id} genre={genre} isActive={genre.id === activeGenreId} handleGenreClick={changeGenre}/>)}
+      {genres.map((genre) => <GenreItem key={genre.id} genre={genre} isActive={genre.id === activeGenreId} onGenreClick={changeGenre}/>)}
     </ul>
   );
 };

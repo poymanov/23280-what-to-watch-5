@@ -7,7 +7,7 @@ const noop = () => {};
 describe(`Should PlayerPlayingControls render correctly`, () => {
   it(`Playing`, () => {
     const tree = renderer
-      .create(<PlayerPlayingControls isPlaying={true} handleOnClick={noop}/>)
+      .create(<PlayerPlayingControls isPlaying={true} onClick={noop}/>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -15,7 +15,7 @@ describe(`Should PlayerPlayingControls render correctly`, () => {
 
   it(`Paused`, () => {
     const tree = renderer
-      .create(<PlayerPlayingControls isPlaying={false} handleOnClick={noop}/>)
+      .create(<PlayerPlayingControls isPlaying={false} onClick={noop}/>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

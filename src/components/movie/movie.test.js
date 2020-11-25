@@ -37,6 +37,7 @@ describe(`Should Movie render correctly`, () => {
           <Movie
             isUserAuth={false}
             addToFavorite={noop}
+            removeFromFavorite={noop}
             id={`1`}
             authorizationStatus={``}
             fetchCurrentMovie={noop}
@@ -56,6 +57,7 @@ describe(`Should Movie render correctly`, () => {
                 movie={movie}
                 isUserAuth={false}
                 addToFavorite={noop}
+                removeFromFavorite={noop}
                 id={`1`}
                 authorizationStatus={``}
                 fetchCurrentMovie={noop}

@@ -31,8 +31,8 @@ describe(`Should Player render correctly`, () => {
         movie={movie}
         isPlaying={true}
         initVideo={noop}
-        handleTimeUpdate={noop}
-        handleEnded={noop}
+        onTimeUpdate={noop}
+        onEnded={noop}
       />)
       .toJSON();
 
@@ -45,8 +45,8 @@ describe(`Should Player render correctly`, () => {
         movie={movie}
         isPlaying={false}
         initVideo={noop}
-        handleTimeUpdate={noop}
-        handleEnded={noop}
+        onTimeUpdate={noop}
+        onEnded={noop}
       />)
       .toJSON();
 

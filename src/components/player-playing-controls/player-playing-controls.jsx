@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 
 const PlayerPlayingControls = (props) => {
-  const {isPlaying, handleOnClick} = props;
+  const {isPlaying, onClick} = props;
 
   let controlsLabel = null;
 
@@ -23,13 +23,13 @@ const PlayerPlayingControls = (props) => {
   }
 
   return (
-    <button type="button" className="player__play" onClick={handleOnClick}>{controlsLabel}</button>
+    <button type="button" className="player__play" onClick={onClick}>{controlsLabel}</button>
   );
 };
 
 PlayerPlayingControls.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
-  handleOnClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 export default PlayerPlayingControls;

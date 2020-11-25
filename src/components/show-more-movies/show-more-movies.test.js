@@ -6,7 +6,7 @@ const noop = () => {};
 
 it(`Should ShowMoreMovies render correctly`, () => {
   const tree = renderer
-    .create(<ShowMoreMovies handleShowMore={noop}/>)
+    .create(<ShowMoreMovies onShowMore={noop}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

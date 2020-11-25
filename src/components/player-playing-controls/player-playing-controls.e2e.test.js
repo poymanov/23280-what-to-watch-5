@@ -8,7 +8,7 @@ configure({adapter: new Adapter()});
 it(`Click playing controls button`, () => {
   const handleOnClick = jest.fn();
 
-  const wrapper = shallow(<PlayerPlayingControls isPlaying={false} handleOnClick={handleOnClick} />);
+  const wrapper = shallow(<PlayerPlayingControls isPlaying={false} onClick={handleOnClick} />);
 
   const button = wrapper.find(`button.player__play`);
   button.simulate(`click`);

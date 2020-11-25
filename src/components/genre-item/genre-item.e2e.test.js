@@ -13,16 +13,16 @@ const genre = {
 };
 
 it(`Change genre`, () => {
-  const handleGenreClick = jest.fn();
+  const onGenreClick = jest.fn();
 
   const wrapper = mount(
       <BrowserRouter history={browserHistory}>
-        <GenreItem isActive={false} genre={genre} handleGenreClick={handleGenreClick} />
+        <GenreItem isActive={false} genre={genre} onGenreClick={onGenreClick} />
       </BrowserRouter>
   );
 
   const genreLink = wrapper.find(`a.catalog__genres-link`);
   genreLink.simulate(`click`);
 
-  expect(handleGenreClick).toHaveBeenCalledTimes(1);
+  expect(onGenreClick).toHaveBeenCalledTimes(1);
 });
